@@ -71,15 +71,10 @@
     background: rgba(244, 239, 230, 0.8);
     border-bottom: 1px solid var(--line);
   }
-  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; }
-  .logo { display: flex; align-items: center; gap: 11px; font-family: 'Fraunces', serif; font-size: 1.3rem; letter-spacing: 0.02em; }
-  .logo-mark {
-    width: 34px; height: 34px; border-radius: 50%;
-    border: 1.5px solid var(--forest);
-    display: grid; place-items: center; color: var(--forest);
-    font-size: 1rem; font-family: 'Fraunces', serif;
-  }
-  .logo small { display: block; font-family: 'Inter', sans-serif; font-size: 0.56rem; letter-spacing: 0.34em; text-transform: uppercase; color: var(--muted); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 13px 0; }
+  .logo { display: flex; align-items: center; }
+  .logo img { height: 44px; width: auto; display: block; transition: opacity 0.2s; }
+  .logo:hover img { opacity: 0.8; }
   .nav-links { display: flex; gap: 30px; font-size: 0.86rem; color: var(--ink-soft); }
   .nav-links a { transition: color 0.2s; }
   .nav-links a:hover { color: var(--forest); }
@@ -349,8 +344,7 @@
 <nav>
   <div class="wrap nav-inner">
     <a class="logo" href="#top">
-      <span class="logo-mark">O</span>
-      <span>Oakly<small>Modern Furnica</small></span>
+      <img src="logo.svg" alt="Oakly Modern Furnica" />
     </a>
     <div class="nav-links">
       <a href="#rooms">Rooms</a>
@@ -597,9 +591,8 @@
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <a class="logo" href="#top">
-          <span class="logo-mark">O</span>
-          <span>Oakly<small>Modern Furnica</small></span>
+        <a class="logo" href="#top" style="display:inline-block;">
+          <img src="logo.svg" alt="Oakly Modern Furnica" style="height:64px;" />
         </a>
         <p>Thoughtfully designed furniture for the way you live. Browse on Instagram, order on WhatsApp.</p>
       </div>
