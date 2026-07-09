@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Oak Lounge — Oakly®</title>
+  <meta name="description" content="The Oak Lounge — a sculptural bouclé swivel chair, handmade to order by Oakly® Modern Furnica." />
+  <link rel="preload" href="assets/fonts/poppins-500.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="fonts.css" />
+  <link rel="stylesheet" href="product.css" />
+</head>
+<body>
+
+  <div class="canvas" aria-hidden="true"></div>
+  <div class="canvas__tint" aria-hidden="true"></div>
+
+  <div class="cursor" aria-hidden="true">
+    <div class="cursor__dot"></div>
+    <div class="cursor__ring"></div>
+  </div>
+
+  <main class="stage">
+
+    <!-- ============ LEFT · Product card ============ -->
+    <section class="card card--light" data-float="1" aria-label="The Oak Lounge product">
+      <figure class="photo">
+        <img src="assets/chair.jpg" alt="The Oak Lounge — sculptural bouclé swivel chair on a brushed brass base" fetchpriority="high" />
+        <span class="photo__badge"><span class="dot"></span>Signature Piece</span>
+        <figcaption class="photo__title">
+          The Oak Lounge
+          <svg class="check" viewBox="0 0 24 24" aria-label="Verified" role="img"><path d="M12 2 14.9 4.2 18.5 4 19.8 7.4 22.8 9.4 21.6 12.9 22.8 16.4 19.8 18.4 18.5 21.8 14.9 21.6 12 23.8 9.1 21.6 5.5 21.8 4.2 18.4 1.2 16.4 2.4 12.9 1.2 9.4 4.2 7.4 5.5 4 9.1 4.2Z" fill="currentColor"/><path d="m8.5 12 2.4 2.4 4.6-4.8" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </figcaption>
+      </figure>
+
+      <div class="plans">
+        <p class="plans__head">Select your option</p>
+
+        <label class="plan plan--active" data-hover>
+          <span class="plan__save">Save 15%</span>
+          <span class="radio"><span class="radio__dot"></span></span>
+          <span class="plan__name">Own it</span>
+          <span class="plan__price">
+            <b>$1,290</b>
+            <small>one-time · free delivery</small>
+          </span>
+          <input type="radio" name="plan" checked hidden />
+        </label>
+
+        <label class="plan" data-hover>
+          <span class="radio"><span class="radio__dot"></span></span>
+          <span class="plan__name">Pay monthly</span>
+          <span class="plan__price">
+            <b>$110 / mo</b>
+            <small>12 months · 0% APR</small>
+          </span>
+          <input type="radio" name="plan" hidden />
+        </label>
+
+        <button class="buy" type="button" data-magnetic data-hover>
+          <span class="buy__fill" aria-hidden="true"></span>
+          <span class="buy__text">Add to Cart</span>
+        </button>
+
+        <p class="reassure">Free returns within 30 days</p>
+        <p class="fineprint">
+          <a href="#" data-hover>Care guide</a>
+          <span>·</span>
+          <a href="#" data-hover>Warranty</a>
+          <span>·</span>
+          <a href="#" data-hover>Delivery</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ RIGHT · Collection card ============ -->
+    <section class="card card--dark" data-float="2" aria-label="The Oak Series collection">
+      <header class="profile">
+        <button class="back" type="button" aria-label="Back" data-hover>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg>
+        </button>
+
+        <div class="stat stat--left">
+          <b>1.2k</b>
+          <span>sold</span>
+        </div>
+
+        <div class="avatar">
+          <img src="assets/chair.jpg" alt="The Oak Series" />
+        </div>
+
+        <div class="stat stat--right">
+          <b>4.9</b>
+          <span>rating</span>
+        </div>
+
+        <p class="profile__name">
+          The Oak Series
+          <svg class="check check--sm" viewBox="0 0 24 24" role="img" aria-label="Verified"><path d="M12 2 14.9 4.2 18.5 4 19.8 7.4 22.8 9.4 21.6 12.9 22.8 16.4 19.8 18.4 18.5 21.8 14.9 21.6 12 23.8 9.1 21.6 5.5 21.8 4.2 18.4 1.2 16.4 2.4 12.9 1.2 9.4 4.2 7.4 5.5 4 9.1 4.2Z" fill="currentColor"/><path d="m8.5 12 2.4 2.4 4.6-4.8" fill="none" stroke="#181512" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </p>
+        <p class="profile__tags">Bouclé&nbsp;&nbsp;|&nbsp;&nbsp;Swivel base&nbsp;&nbsp;|&nbsp;&nbsp;Handmade</p>
+
+        <div class="profile__actions">
+          <button class="pill" type="button" data-hover>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.6-9.3-9A5 5 0 0 1 12 6a5 5 0 0 1 9.3 6C19 16.4 12 21 12 21Z"/></svg>
+            Save
+          </button>
+          <button class="pill" type="button" data-hover>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H7l-3 3Z"/></svg>
+            Enquire
+          </button>
+        </div>
+      </header>
+
+      <div class="tiles">
+        <article class="tile tile--note">
+          <div class="tile__by">
+            <span class="tile__ava"><img src="assets/chair.jpg" alt="" /></span>
+            <span class="tile__byname">Oakly Studio
+              <svg class="check check--xs" viewBox="0 0 24 24" role="img" aria-label="Verified"><path d="M12 2 14.9 4.2 18.5 4 19.8 7.4 22.8 9.4 21.6 12.9 22.8 16.4 19.8 18.4 18.5 21.8 14.9 21.6 12 23.8 9.1 21.6 5.5 21.8 4.2 18.4 1.2 16.4 2.4 12.9 1.2 9.4 4.2 7.4 5.5 4 9.1 4.2Z" fill="currentColor"/><path d="m8.5 12 2.4 2.4 4.6-4.8" fill="none" stroke="#181512" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </div>
+          <p class="tile__text">Handmade to order in Portugal. Ships in 3 weeks — only 12 left in this batch.</p>
+          <button class="tile__buy" type="button" data-hover>Swatches&nbsp;&nbsp;$5</button>
+        </article>
+
+        <article class="tile tile--media">
+          <img src="assets/room-blur.jpg" alt="The Oak Lounge styled in a living room" />
+          <span class="tile__ar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 21 7v10l-9 5-9-5V7Z"/><path d="m3.5 7 8.5 5 8.5-5M12 12v10"/></svg>
+            360° · AR
+          </span>
+        </article>
+      </div>
+
+      <article class="upsell">
+        <div class="upsell__copy">
+          <span class="upsell__eyebrow">✦ Best value</span>
+          <p class="upsell__title">Complete the<br />living set</p>
+          <span class="upsell__cta" data-hover>Explore the Oak Collection</span>
+        </div>
+        <div class="upsell__art" aria-hidden="true">
+          <span class="star"></span>
+        </div>
+      </article>
+
+      <nav class="dock" aria-label="Product sections">
+        <button class="dock__btn dock__btn--active" type="button" aria-label="Overview" data-hover>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.5 6.5L21 11l-6.5 2.5L12 20l-2.5-6.5L3 11l6.5-2.5Z"/></svg>
+        </button>
+        <button class="dock__btn" type="button" aria-label="Details" data-hover>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v12H4Z"/><path d="m4 8 8 5 8-5"/></svg>
+        </button>
+        <button class="dock__btn" type="button" aria-label="Add to room" data-hover>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <button class="dock__btn" type="button" aria-label="Reviews" data-hover>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="m9 9 5 3-5 3Z" fill="currentColor" stroke="none"/></svg>
+        </button>
+      </nav>
+    </section>
+
+  </main>
+
+  <script src="product.js"></script>
+</body>
+</html>
