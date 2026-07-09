@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Oakly — Custom Furniture Studio · Lahore</title>
+  <meta name="description" content="Oakly designs and handcrafts solid-wood furniture in Lahore — sofas, beds, dining sets and wardrobes made to your space, your style and your budget. Get a free quote today.">
+  <meta name="theme-color" content="#171310">
+  <meta property="og:title" content="Oakly — Furniture crafted for the way you live">
+  <meta property="og:description" content="Bespoke solid-wood furniture, handcrafted in Lahore. Free design consultation.">
+  <meta property="og:image" content="assets/img/hero.jpg">
+  <link rel="icon" type="image/svg+xml" href="logo.svg">
+  <link rel="preload" href="assets/fonts/cormorant-garamond.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/jost.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ═══════════ Preloader ═══════════ -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader__inner">
+      <img src="logo.svg" alt="" class="preloader__logo">
+      <div class="preloader__bar"><span class="preloader__bar-fill" id="loaderBar"></span></div>
+      <span class="preloader__count" id="loaderCount">0</span>
+    </div>
+  </div>
+
+  <!-- ═══════════ Custom cursor (desktop) ═══════════ -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+  <!-- ═══════════ Header ═══════════ -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a href="#top" class="header__logo" aria-label="Oakly — home">
+        <img src="logo.svg" alt="Oakly — Modern Furnica">
+      </a>
+      <nav class="header__nav" aria-label="Primary">
+        <a href="#collections" class="header__link" data-hover>Collections</a>
+        <a href="#craft" class="header__link" data-hover>Our Craft</a>
+        <a href="#stories" class="header__link" data-hover>Stories</a>
+        <a href="#contact" class="header__link" data-hover>Contact</a>
+      </nav>
+      <a href="https://wa.me/923005926262?text=Hi%20Oakly!%20I%27d%20like%20a%20quote%20for%20a%20custom%20piece."
+         class="header__cta magnetic" data-hover target="_blank" rel="noopener">
+        <span>Get a quote</span>
+      </a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ═══════════ Fullscreen menu ═══════════ -->
+  <div class="menu" id="menu" aria-hidden="true">
+    <div class="menu__bg"></div>
+    <div class="menu__content">
+      <nav class="menu__nav" aria-label="Menu">
+        <a href="#collections" class="menu__link"><span class="menu__num">01</span><span class="menu__word">Collections</span></a>
+        <a href="#craft" class="menu__link"><span class="menu__num">02</span><span class="menu__word">Our Craft</span></a>
+        <a href="#stories" class="menu__link"><span class="menu__num">03</span><span class="menu__word">Stories</span></a>
+        <a href="#contact" class="menu__link"><span class="menu__num">04</span><span class="menu__word">Contact</span></a>
+      </nav>
+      <div class="menu__meta">
+        <a href="tel:+923005926262" class="menu__meta-item">+92 300 5926262</a>
+        <a href="https://www.instagram.com/oakly_furnica/" target="_blank" rel="noopener" class="menu__meta-item">@oakly_furnica</a>
+        <span class="menu__meta-item">Lahore, Pakistan</span>
+      </div>
+    </div>
+  </div>
+
+  <main id="top">
+
+    <!-- ═══════════ Hero ═══════════ -->
+    <section class="hero">
+      <div class="hero__media" id="heroMedia">
+        <img src="assets/img/hero.jpg" alt="A warm, minimal living room furnished by Oakly" class="hero__img" id="heroImg" fetchpriority="high">
+        <div class="hero__shade"></div>
+      </div>
+      <div class="hero__content container">
+        <p class="hero__kicker reveal-hero"><span class="rule"></span>Bespoke furniture · Handcrafted in Lahore</p>
+        <h1 class="hero__title split-lines">Furniture crafted for the way you live</h1>
+        <p class="hero__sub reveal-hero">From a single statement chair to your whole home — we design and build
+          solid-wood pieces made to your space, your style, and your budget.</p>
+        <div class="hero__actions reveal-hero">
+          <a href="https://wa.me/923005926262?text=Hi%20Oakly!%20I%27d%20like%20a%20free%20design%20consultation."
+             class="btn btn--solid magnetic" data-hover target="_blank" rel="noopener">
+            <span class="btn__label">Start your piece</span>
+            <span class="btn__arrow" aria-hidden="true">→</span>
+          </a>
+          <a href="#collections" class="btn btn--ghost magnetic" data-hover>
+            <span class="btn__label">View collections</span>
+          </a>
+        </div>
+      </div>
+      <div class="hero__card reveal-hero" aria-hidden="false">
+        <span class="hero__card-num" data-counter="1200" data-suffix="+">0</span>
+        <span class="hero__card-label">pieces delivered<br>across Pakistan</span>
+      </div>
+      <div class="hero__scroll reveal-hero" aria-hidden="true">
+        <span class="hero__scroll-line"></span><span>Scroll</span>
+      </div>
+    </section>
+
+    <!-- ═══════════ Marquee ═══════════ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Solid Sheesham &amp; Oak</span><i>✦</i><span>Made to Measure</span><i>✦</i><span>Free Design Consultation</span><i>✦</i><span>5-Year Craft Warranty</span><i>✦</i><span>Delivered &amp; Installed</span><i>✦</i>
+        <span>Solid Sheesham &amp; Oak</span><i>✦</i><span>Made to Measure</span><i>✦</i><span>Free Design Consultation</span><i>✦</i><span>5-Year Craft Warranty</span><i>✦</i><span>Delivered &amp; Installed</span><i>✦</i>
+      </div>
+    </div>
+
+    <!-- ═══════════ Signature / About ═══════════ -->
+    <section class="signature section" id="about">
+      <div class="container">
+        <p class="eyebrow reveal"><span class="rule"></span>The Oakly signature</p>
+        <h2 class="h2 split-lines">We don't sell furniture. <em>We build yours.</em></h2>
+        <div class="signature__grid">
+          <div class="signature__media img-reveal reveal">
+            <img src="assets/img/about.jpg" alt="Cognac leather sofa in warm afternoon light" loading="lazy">
+          </div>
+          <div class="signature__body">
+            <p class="lead reveal">Every Oakly piece begins as a conversation about your room, your routine, and the
+              life you want it to hold. Then our craftsmen shape kiln-dried solid wood into furniture that fits your
+              home to the centimetre — and outlasts the trends.</p>
+            <ul class="signature__points">
+              <li class="reveal">
+                <h3>Made to measure</h3>
+                <p>Your walls, your dimensions, your fabric. Nothing off a shelf, nothing almost-right.</p>
+              </li>
+              <li class="reveal">
+                <h3>Honest materials</h3>
+                <p>Seasoned sheesham, oak and walnut. Premium foams and fabrics that age gracefully.</p>
+              </li>
+              <li class="reveal">
+                <h3>Built to keep</h3>
+                <p>Traditional joinery, modern finishes — and a 5-year warranty we rarely hear about again.</p>
+              </li>
+            </ul>
+            <div class="stats">
+              <div class="stat reveal">
+                <span class="stat__num" data-counter="10" data-suffix="+">0</span>
+                <span class="stat__label">years of craft</span>
+              </div>
+              <div class="stat reveal">
+                <span class="stat__num" data-counter="1200" data-suffix="+">0</span>
+                <span class="stat__label">pieces delivered</span>
+              </div>
+              <div class="stat reveal">
+                <span class="stat__num" data-counter="98" data-suffix="%">0</span>
+                <span class="stat__label">clients recommend us</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ Collections ═══════════ -->
+    <section class="collections section section--dark" id="collections">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow reveal"><span class="rule"></span>Collections</p>
+          <h2 class="h2 split-lines">Rooms we love to build</h2>
+          <p class="section-head__note reveal">Every piece below was made for a real home in Pakistan.
+            Yours is next.</p>
+        </div>
+        <div class="collections__grid">
+          <a href="https://wa.me/923005926262?text=Hi%20Oakly!%20I%27m%20interested%20in%20living%20room%20furniture." target="_blank" rel="noopener" class="card reveal" data-hover>
+            <div class="card__media"><img src="assets/img/living.jpg" alt="Beige sectional sofa living room" loading="lazy"></div>
+            <div class="card__body">
+              <span class="card__num">01</span>
+              <h3 class="card__title">Living</h3>
+              <p class="card__desc">Sofas, sectionals &amp; lounge chairs shaped around long conversations.</p>
+              <span class="card__go" aria-hidden="true">Build this room →</span>
+            </div>
+          </a>
+          <a href="https://wa.me/923005926262?text=Hi%20Oakly!%20I%27m%20interested%20in%20bedroom%20furniture." target="_blank" rel="noopener" class="card reveal" data-hover>
+            <div class="card__media"><img src="assets/img/bedroom.jpg" alt="Solid oak bed with linen bedding" loading="lazy"></div>
+            <div class="card__body">
+              <span class="card__num">02</span>
+              <h3 class="card__title">Bedroom</h3>
+              <p class="card__desc">Beds, side tables &amp; dressers built for the softest hour of your day.</p>
+              <span class="card__go" aria-hidden="true">Build this room →</span>
+            </div>
+          </a>
+          <a href="https://wa.me/923005926262?text=Hi%20Oakly!%20I%27m%20interested%20in%20dining%20furniture." target="_blank" rel="noopener" class="card reveal" data-hover>
+            <div class="card__media"><img src="assets/img/dining.jpg" alt="Warm dining room with oak table and upholstered chairs" loading="lazy"></div>
+            <div class="card__body">
+              <span class="card__num">03</span>
+              <h3 class="card__title">Dining</h3>
+              <p class="card__desc">Tables that seat six comfortably and hold twenty years of dinners.</p>
+              <span class="card__go" aria-hidden="true">Build this room →</span>
+            </div>
+          </a>
+          <a href="https://wa.me/923005926262?text=Hi%20Oakly!%20I%27m%20interested%20in%20wardrobes%20and%20storage." target="_blank" rel="noopener" class="card reveal" data-hover>
+            <div class="card__media"><img src="assets/img/storage.jpg" alt="Oak wardrobe and open shelving" loading="lazy"></div>
+            <div class="card__body">
+              <span class="card__num">04</span>
+              <h3 class="card__title">Wardrobes &amp; Storage</h3>
+              <p class="card__desc">Made-to-fit wardrobes, consoles &amp; wall units that use every inch.</p>
+              <span class="card__go" aria-hidden="true">Build this room →</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ Craft / Process ═══════════ -->
+    <section class="craft section" id="craft">
+      <div class="container">
+        <div class="craft__grid">
+          <div class="craft__sticky">
+            <p class="eyebrow reveal"><span class="rule"></span>Our craft</p>
+            <h2 class="h2 split-lines">From your idea to your doorstep</h2>
+            <div class="craft__media img-reveal reveal">
+              <img src="assets/img/craft.jpg" alt="Handcrafted leather sofa in the Oakly workshop showroom" loading="lazy">
+            </div>
+          </div>
+          <ol class="steps">
+            <li class="step reveal">
+              <span class="step__num">01</span>
+              <div>
+                <h3 class="step__title">Share your vision</h3>
+                <p>Send us a photo, a sketch, or just a feeling — on WhatsApp or over chai at our Lahore studio.
+                  Consultation is always free.</p>
+              </div>
+            </li>
+            <li class="step reveal">
+              <span class="step__num">02</span>
+              <div>
+                <h3 class="step__title">Design &amp; quote</h3>
+                <p>We refine dimensions, wood, fabric and finish with you — then give you one transparent,
+                  fixed price. No surprises later.</p>
+              </div>
+            </li>
+            <li class="step reveal">
+              <span class="step__num">03</span>
+              <div>
+                <h3 class="step__title">Handcrafted in our workshop</h3>
+                <p>Master carpenters cut, join, carve and finish your piece by hand — with progress photos
+                  along the way.</p>
+              </div>
+            </li>
+            <li class="step reveal">
+              <span class="step__num">04</span>
+              <div>
+                <h3 class="step__title">Delivered &amp; installed</h3>
+                <p>We deliver across Pakistan, place every piece, and don't leave until you love it.
+                  Backed by a 5-year warranty.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ Stories / Testimonials ═══════════ -->
+    <section class="stories section section--dark" id="stories">
+      <div class="container">
+        <p class="eyebrow reveal"><span class="rule"></span>Client stories</p>
+        <h2 class="h2 split-lines">Homes that came back for more</h2>
+        <div class="slider reveal" id="slider">
+          <div class="slider__track" id="sliderTrack">
+            <blockquote class="quote is-active">
+              <p>“Oakly rebuilt our lounge around one awkward wall every other store gave up on. The sofa fits
+                like it grew there — guests refuse to believe it wasn't imported.”</p>
+              <footer><strong>Ayesha R.</strong><span>DHA, Lahore — full living room</span></footer>
+            </blockquote>
+            <blockquote class="quote">
+              <p>“I sent a WhatsApp photo of a bed I liked at midnight. By morning I had a design, a wood sample
+                video and a fair price. Three weeks later it was in my room — better than the photo.”</p>
+              <footer><strong>Hassan M.</strong><span>Gulberg, Lahore — bedroom set</span></footer>
+            </blockquote>
+            <blockquote class="quote">
+              <p>“Our dining table has survived two toddlers and a hundred family dinners without a scratch.
+                We've since ordered the console, the wardrobes and my office desk.”</p>
+              <footer><strong>Sana &amp; Bilal</strong><span>Bahria Town — repeat clients ×4</span></footer>
+            </blockquote>
+          </div>
+          <div class="slider__nav" role="tablist" aria-label="Testimonials">
+            <button class="slider__dot is-active" data-slide="0" aria-label="Story 1" data-hover></button>
+            <button class="slider__dot" data-slide="1" aria-label="Story 2" data-hover></button>
+            <button class="slider__dot" data-slide="2" aria-label="Story 3" data-hover></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ Instagram ═══════════ -->
+    <section class="insta section">
+      <div class="container">
+        <div class="insta__head">
+          <div>
+            <p class="eyebrow reveal"><span class="rule"></span>Fresh from the workshop</p>
+            <h2 class="h2 split-lines">Follow the making</h2>
+          </div>
+          <a href="https://www.instagram.com/oakly_furnica/" target="_blank" rel="noopener" class="btn btn--ghost btn--dark magnetic reveal" data-hover>
+            <span class="btn__label">@oakly_furnica</span>
+            <span class="btn__arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
+        <div class="insta__grid">
+          <a href="https://www.instagram.com/oakly_furnica/" target="_blank" rel="noopener" class="insta__item reveal" data-hover><img src="assets/img/lookbook.jpg" alt="Oak wall unit detail" loading="lazy"></a>
+          <a href="https://www.instagram.com/oakly_furnica/" target="_blank" rel="noopener" class="insta__item reveal" data-hover><img src="assets/img/bedroom.jpg" alt="Oak bed with terracotta linen" loading="lazy"></a>
+          <a href="https://www.instagram.com/oakly_furnica/" target="_blank" rel="noopener" class="insta__item reveal" data-hover><img src="assets/img/about.jpg" alt="Leather sofa detail" loading="lazy"></a>
+          <a href="https://www.instagram.com/oakly_furnica/" target="_blank" rel="noopener" class="insta__item reveal" data-hover><img src="assets/img/living.jpg" alt="Living room by Oakly" loading="lazy"></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ Contact / CTA ═══════════ -->
+    <section class="contact section section--dark" id="contact">
+      <div class="container">
+        <p class="eyebrow reveal"><span class="rule"></span>Start today</p>
+        <h2 class="contact__title split-lines">Your home deserves better than mass-produced.</h2>
+        <p class="lead contact__lead reveal">Tell us about the piece you're imagining. A free consultation,
+          a clear price, and furniture your grandchildren will argue over.</p>
+        <div class="contact__actions reveal">
+          <a href="https://wa.me/923005926262?text=Hi%20Oakly!%20I%27d%20like%20a%20free%20design%20consultation."
+             class="btn btn--solid btn--big magnetic" data-hover target="_blank" rel="noopener">
+            <span class="btn__label">WhatsApp us — it's free</span>
+            <span class="btn__arrow" aria-hidden="true">→</span>
+          </a>
+          <a href="tel:+923005926262" class="btn btn--ghost btn--big magnetic" data-hover>
+            <span class="btn__label">+92 300 5926262</span>
+          </a>
+        </div>
+        <div class="contact__meta reveal">
+          <div><span class="contact__meta-label">Studio</span><span>Lahore, Pakistan</span></div>
+          <div><span class="contact__meta-label">Hours</span><span>Mon – Sat · 10am – 8pm</span></div>
+          <div><span class="contact__meta-label">Social</span><a href="https://www.instagram.com/oakly_furnica/" target="_blank" rel="noopener" data-hover>Instagram ↗</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ═══════════ Footer ═══════════ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <img src="logo.svg" alt="Oakly — Modern Furnica" class="footer__logo">
+      <p class="footer__line">Handcrafted in Lahore, at home everywhere.</p>
+      <div class="footer__links">
+        <a href="#collections" data-hover>Collections</a>
+        <a href="#craft" data-hover>Our Craft</a>
+        <a href="tel:+923005926262" data-hover>+92 300 5926262</a>
+        <a href="https://www.instagram.com/oakly_furnica/" target="_blank" rel="noopener" data-hover>@oakly_furnica</a>
+      </div>
+      <p class="footer__copy">© <span id="year">2026</span> Oakly · Modern Furnica. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ═══════════ Floating WhatsApp ═══════════ -->
+  <a href="https://wa.me/923005926262?text=Hi%20Oakly!" class="wa-fab" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" data-hover>
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.87 9.87 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.26 8.26 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 4.54 0 8.24 3.7 8.24 8.24 0 4.55-3.7 8.24-8.24 8.24Zm4.52-6.16c-.25-.13-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-2-1.23-.73-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.13-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.16 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.29Z"/></svg>
+  </a>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
