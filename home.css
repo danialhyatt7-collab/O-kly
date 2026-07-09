@@ -82,6 +82,14 @@
 .manifesto__art {
   aspect-ratio: 4 / 3.2;
   border-radius: var(--r-lg);
+  overflow: hidden;
+}
+
+.manifesto__art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 /* ============================================================
