@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Oak Lounge — Oakly®</title>
+  <meta name="description" content="The Oak Lounge — a sculptural bouclé swivel chair on a brushed-brass base, handmade to order by Oakly® Modern Furnica." />
+  <link rel="preload" href="assets/fonts/poppins-500.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="fonts.css" />
+  <link rel="stylesheet" href="shop.css" />
+  <link rel="stylesheet" href="product.css" />
+</head>
+<body>
+
+  <div class="cursor" aria-hidden="true"><div class="cursor__dot"></div><div class="cursor__ring"></div></div>
+
+  <!-- ===== Header ===== -->
+  <header class="site-header">
+    <div class="wrap site-header__row">
+      <a class="brand" href="index.html" aria-label="Oakly home"><img src="logo.svg" alt="Oakly — Modern Furnica" /></a>
+      <nav class="mainnav" aria-label="Primary">
+        <a href="store.html">Shop</a>
+        <a href="store.html">Collections</a>
+        <a href="product.html" aria-current="page">The Oak Series</a>
+        <a href="index.html">About</a>
+      </nav>
+      <div class="header-tools">
+        <button class="icon-btn" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+        <button class="icon-btn cart-btn" aria-label="Cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6 5 3H3"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg>
+          <span class="cart-count" aria-hidden="true">0</span>
+        </button>
+        <button class="icon-btn nav-toggle" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a><span>/</span>
+      <a href="store.html">Seating</a><span>/</span>
+      <b>The Oak Lounge</b>
+    </nav>
+
+    <div class="product">
+
+      <!-- ===== Gallery ===== -->
+      <div class="gallery">
+        <figure class="gallery__main">
+          <span class="gallery__badge"><span class="dot"></span>Signature Piece</span>
+          <img data-gallery-main src="assets/chair.jpg" alt="The Oak Lounge sculptural bouclé swivel chair" fetchpriority="high" />
+        </figure>
+        <div class="thumbs" data-select-group>
+          <button class="thumb is-active" data-select data-img="assets/chair.jpg" aria-label="Front view"><img src="assets/chair.jpg" alt="" /></button>
+          <button class="thumb" data-select data-img="assets/p-sofa.jpg" aria-label="In a living room"><img src="assets/p-sofa.jpg" alt="" /></button>
+          <button class="thumb" data-select data-img="assets/room-blur.jpg" aria-label="Styled setting"><img src="assets/room-blur.jpg" alt="" /></button>
+          <button class="thumb" data-select data-img="assets/p-table.jpg" aria-label="Detail"><img src="assets/p-table.jpg" alt="" /></button>
+        </div>
+      </div>
+
+      <!-- ===== Info ===== -->
+      <div class="info">
+        <p class="info__eyebrow">The Oak Series</p>
+        <h1 class="info__title">The Oak Lounge</h1>
+        <p class="info__sub">Sculptural bouclé swivel chair on a brushed-brass base</p>
+
+        <div class="rating">
+          <span class="stars" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.8 5.9 20.8 7.1 14l-5-4.8 6.9-.9z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.8 5.9 20.8 7.1 14l-5-4.8 6.9-.9z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.8 5.9 20.8 7.1 14l-5-4.8 6.9-.9z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.8 5.9 20.8 7.1 14l-5-4.8 6.9-.9z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.8 5.9 20.8 7.1 14l-5-4.8 6.9-.9z"/></svg>
+          </span>
+          4.9 · <a href="#reviews" style="text-decoration:underline">128 reviews</a>
+        </div>
+
+        <div class="price" data-buy-anchor>
+          <span class="price__now">$1,290</span>
+          <span class="price__was">$1,520</span>
+          <span class="price__off">Save 15%</span>
+        </div>
+
+        <div class="opt">
+          <div class="opt__label"><b>Upholstery</b><span>Ivory Bouclé</span></div>
+          <div class="swatches" data-select-group>
+            <button class="swatch is-active" data-select style="--c:#efe7d8" aria-label="Ivory Bouclé"></button>
+            <button class="swatch" data-select style="--c:#c9a878" aria-label="Camel"></button>
+            <button class="swatch" data-select style="--c:#b9b3a7" aria-label="Stone"></button>
+            <button class="swatch" data-select style="--c:#7d7367" aria-label="Clay"></button>
+          </div>
+        </div>
+
+        <div class="opt">
+          <div class="opt__label"><b>Base finish</b></div>
+          <div class="chips" data-select-group>
+            <button class="chip is-active" data-select>Brushed Brass</button>
+            <button class="chip" data-select>Matte Black</button>
+            <button class="chip" data-select>Polished Steel</button>
+          </div>
+        </div>
+
+        <div class="buy-row">
+          <div class="qty">
+            <button data-qty="down" aria-label="Decrease quantity">−</button>
+            <input data-qty-input type="number" value="1" min="1" max="99" aria-label="Quantity" />
+            <button data-qty="up" aria-label="Increase quantity">+</button>
+          </div>
+          <button class="btn btn--full" data-add="main"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6 5 3H3"/><circle cx="9" cy="20" r="1.2"/><circle cx="18" cy="20" r="1.2"/></svg><span>Add to Cart</span></button>
+        </div>
+        <button class="btn btn--ghost btn--full">Buy it now</button>
+
+        <ul class="reassure-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h13v8H3zM16 10h3l2 2v3h-5z"/><circle cx="7" cy="18" r="1.6"/><circle cx="18" cy="18" r="1.6"/></svg> Free white-glove delivery — ships in 3 weeks</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 5v4h4"/></svg> 30-day returns, no questions asked</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 8 9 8 9s8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg> Handmade to order · 5-year warranty</li>
+        </ul>
+
+        <!-- ===== Accordion ===== -->
+        <div class="accordion" id="reviews">
+          <div class="acc is-open">
+            <button class="acc__head">Description <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+            <div class="acc__body"><div class="acc__inner"><p>The Oak Lounge is a single, continuous gesture — a looping bouclé form that cradles you from any angle, poised on a floating brushed-brass ring. Each chair is upholstered by hand in dense, temperature-friendly bouclé and swivels a full 360° on a concealed ball bearing. A quiet centrepiece that looks sculptural from every side of the room.</p></div></div>
+          </div>
+          <div class="acc">
+            <button class="acc__head">Dimensions <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+            <div class="acc__body"><div class="acc__inner"><ul>
+              <li><span>Width</span><b>96 cm</b></li>
+              <li><span>Depth</span><b>92 cm</b></li>
+              <li><span>Height</span><b>74 cm</b></li>
+              <li><span>Seat height</span><b>40 cm</b></li>
+              <li><span>Weight</span><b>28 kg</b></li>
+            </ul></div></div>
+          </div>
+          <div class="acc">
+            <button class="acc__head">Materials &amp; care <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+            <div class="acc__body"><div class="acc__inner"><p>Shell: FSC-certified moulded foam over a hardwood frame. Cover: 82% recycled polyester bouclé, 18% wool. Base: solid brushed brass. Spot-clean with a soft, damp cloth; vacuum on low with a brush head. Removable covers available on request.</p></div></div>
+          </div>
+          <div class="acc">
+            <button class="acc__head">Delivery &amp; returns <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+            <div class="acc__body"><div class="acc__inner"><p>Made to order and dispatched within 3 weeks via free white-glove delivery — we place it in your room and take away the packaging. Return within 30 days for a full refund; we collect at no cost.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Complete the look ===== -->
+    <div class="section-head reveal">
+      <h2>Complete the look</h2>
+      <a href="store.html">View collection →</a>
+    </div>
+    <div class="rail reveal">
+      <article class="pcard">
+        <div class="pcard__media"><img src="assets/p-sofa.jpg" alt="The Dune Sofa" /><span class="pcard__tag">Bestseller</span></div>
+        <div class="pcard__body"><p class="pcard__cat">Seating</p><h3 class="pcard__name">The Dune Sofa</h3><div class="pcard__foot"><span class="pcard__price"><b>$3,480</b></span><button class="pcard__add" data-add style="width:auto;padding:.5rem 1rem">Add</button></div></div>
+      </article>
+      <article class="pcard">
+        <div class="pcard__media"><img src="assets/p-table.jpg" alt="The Pebble Table" /></div>
+        <div class="pcard__body"><p class="pcard__cat">Tables</p><h3 class="pcard__name">The Pebble Table</h3><div class="pcard__foot"><span class="pcard__price"><b>$690</b></span><button class="pcard__add" data-add style="width:auto;padding:.5rem 1rem">Add</button></div></div>
+      </article>
+      <article class="pcard">
+        <div class="pcard__media"><img src="assets/p-vase.jpg" alt="The Terra Vase" /></div>
+        <div class="pcard__body"><p class="pcard__cat">Decor</p><h3 class="pcard__name">The Terra Vase</h3><div class="pcard__foot"><span class="pcard__price"><b>$95</b></span><button class="pcard__add" data-add style="width:auto;padding:.5rem 1rem">Add</button></div></div>
+      </article>
+      <article class="pcard">
+        <div class="pcard__media"><img src="assets/p-art.jpg" alt="Gilded Horizon Print" /></div>
+        <div class="pcard__body"><p class="pcard__cat">Wall art</p><h3 class="pcard__name">Gilded Horizon</h3><div class="pcard__foot"><span class="pcard__price"><b>$220</b></span><button class="pcard__add" data-add style="width:auto;padding:.5rem 1rem">Add</button></div></div>
+      </article>
+    </div>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="wrap site-footer__grid">
+      <div class="site-footer__brand">
+        <img src="logo.svg" alt="Oakly" />
+        <p>Modern Furnica — sculptural pieces, handmade to order for everyday living.</p>
+      </div>
+      <div><h4>Shop</h4><ul><li><a href="store.html">Seating</a></li><li><a href="store.html">Tables</a></li><li><a href="store.html">Decor</a></li><li><a href="store.html">Lighting</a></li></ul></div>
+      <div><h4>Studio</h4><ul><li><a href="index.html">About</a></li><li><a href="#">Craft</a></li><li><a href="#">Sustainability</a></li><li><a href="#">Trade</a></li></ul></div>
+      <div><h4>Support</h4><ul><li><a href="#">Delivery</a></li><li><a href="#">Returns</a></li><li><a href="#">Warranty</a></li><li><a href="#">Contact</a></li></ul></div>
+    </div>
+    <div class="wrap site-footer__bar">
+      <span>© 2026 Oakly® Modern Furnica</span>
+      <a class="ig" href="https://www.instagram.com/oakly_furnica/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.4"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>@oakly_furnica</a>
+    </div>
+  </footer>
+
+  <!-- ===== Sticky mobile buy bar ===== -->
+  <div class="sticky-buy">
+    <div class="sticky-buy__price"><b>$1,290</b><small>The Oak Lounge</small></div>
+    <button class="btn" data-add="main"><span>Add to Cart</span></button>
+  </div>
+
+  <!-- ===== Toast ===== -->
+  <div class="toast" role="status" aria-live="polite">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4 10-10"/></svg>
+    <span class="toast__msg">Added to cart</span>
+  </div>
+
+  <script src="shop.js"></script>
+</body>
+</html>

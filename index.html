@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oakly® — Modern Furnica</title>
+  <meta name="description" content="Oakly® — Modern Furnica. One home, one story. Furniture crafted for everyday living." />
+  <link rel="preload" href="assets/fonts/poppins-500.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="fonts.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Intro curtain -->
+  <div class="curtain" aria-hidden="true">
+    <div class="curtain__panel curtain__panel--left"></div>
+    <div class="curtain__panel curtain__panel--right"></div>
+  </div>
+
+  <!-- Custom cursor (fine pointers only) -->
+  <div class="cursor" aria-hidden="true">
+    <div class="cursor__dot"></div>
+    <div class="cursor__ring"></div>
+  </div>
+
+  <header class="hero">
+
+    <!-- Background -->
+    <div class="hero__bg" data-depth="0.030">
+      <img src="assets/hero-bg.jpg" alt="" fetchpriority="high" />
+    </div>
+    <div class="hero__scrim" aria-hidden="true"></div>
+    <div class="hero__grain" aria-hidden="true"></div>
+
+    <!-- Top bar -->
+    <nav class="nav">
+      <a class="nav__brand" href="index.html" data-magnetic aria-label="Oakly home">
+        <img class="nav__logo" src="logo.svg" alt="Oakly — Modern Furnica" />
+      </a>
+
+      <ul class="nav__links">
+        <li class="nav__item" style="--i:0"><a href="store.html" data-hover>Shop</a><span class="nav__comma">,</span></li>
+        <li class="nav__item" style="--i:1"><a href="store.html" data-hover>Collections</a><span class="nav__comma">,</span></li>
+        <li class="nav__item" style="--i:2"><a href="product.html" data-hover>The Oak Series</a><span class="nav__comma">,</span></li>
+        <li class="nav__item" style="--i:3"><a href="index.html" data-hover aria-current="page">About</a></li>
+      </ul>
+    </nav>
+
+    <!-- Bottom ticker -->
+    <div class="ticker">
+      <div class="ticker__bar">
+        <span class="ticker__label">Next&nbsp;Drop<span class="ticker__caret"></span></span>
+        <span class="ticker__icon" aria-hidden="true">
+          <svg viewBox="0 0 28 18" fill="currentColor">
+            <rect x="0"  y="0"  width="4" height="4"/><rect x="8"  y="0"  width="4" height="4"/><rect x="16" y="0"  width="4" height="4"/><rect x="24" y="0" width="4" height="4"/>
+            <rect x="4"  y="4"  width="4" height="4"/><rect x="12" y="4"  width="4" height="4"/><rect x="20" y="4"  width="4" height="4"/>
+            <rect x="0"  y="8"  width="4" height="4"/><rect x="8"  y="8"  width="4" height="4"/><rect x="16" y="8"  width="4" height="4"/><rect x="24" y="8" width="4" height="4"/>
+            <rect x="4"  y="12" width="4" height="4"/><rect x="12" y="12" width="4" height="4"/><rect x="20" y="12" width="4" height="4"/>
+          </svg>
+        </span>
+        <span class="ticker__event">The&nbsp;Oak&nbsp;Series</span>
+        <span class="ticker__date">24.07.</span>
+      </div>
+      <a class="ticker__cta" href="product.html" data-magnetic data-hover>
+        <span class="ticker__cta-fill" aria-hidden="true"></span>
+        <span class="ticker__cta-text">Explore the Drop</span>
+      </a>
+    </div>
+
+  </header>
+
+  <script src="script.js"></script>
+</body>
+</html>
