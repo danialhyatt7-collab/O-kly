@@ -39,7 +39,11 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
 
 body {
   font-family: var(--font);
@@ -245,6 +249,13 @@ ul { list-style: none; }
   .nav-toggle { display: grid; }
   .header-tools { margin-left: auto; }
   .cursor { display: none; }
+
+  .site-footer__grid { grid-template-columns: repeat(2, 1fr); gap: 2rem 1.4rem; }
+  .site-footer__brand { grid-column: 1 / -1; }
+}
+
+@media (max-width: 480px) {
+  .site-footer__grid { grid-template-columns: 1fr; gap: 1.8rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
