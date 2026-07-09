@@ -250,7 +250,8 @@ a { color: inherit; text-decoration: none; }
 
 .nav__item a:hover { letter-spacing: 0.045em; }
 
-.nav__item a:hover::after {
+.nav__item a:hover::after,
+.nav__item a[aria-current="page"]::after {
   transform: scaleX(1);
   transform-origin: left;
 }
