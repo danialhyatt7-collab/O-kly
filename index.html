@@ -21,6 +21,7 @@
     <div class="curtain__panel curtain__panel--right"></div>
   </div>
 
+  <div class="hero-stage">
   <header class="hero">
 
     <!-- Background -->
@@ -43,45 +44,77 @@
 
       <div class="nav__menu" id="nav-menu">
         <ul class="nav__links">
-          <li class="nav__item" style="--i:0"><a href="store.html">Shop</a></li>
+          <li class="nav__item" style="--i:0"><a href="index.html" aria-current="page">Home</a></li>
           <li class="nav__dot" aria-hidden="true"></li>
-          <li class="nav__item" style="--i:1"><a href="store.html">Collections</a></li>
+          <li class="nav__item" style="--i:1"><a href="#about">About</a></li>
           <li class="nav__dot" aria-hidden="true"></li>
-          <li class="nav__item" style="--i:2"><a href="#about">About</a></li>
+          <li class="nav__item" style="--i:2"><a href="product.html">The Oak Series</a></li>
           <li class="nav__dot" aria-hidden="true"></li>
-          <li class="nav__item" style="--i:3"><a href="product.html">The Oak Series</a></li>
+          <li class="nav__item" style="--i:3"><a href="store.html">Shop</a></li>
         </ul>
 
         <a class="nav__cta" href="store.html" style="--i:4">Shop Now</a>
       </div>
     </nav>
 
-    <!-- Hero copy -->
-    <div class="hero__content">
-      <h1 class="hero__title">
-        <span class="line"><span class="dim">Where</span> Comfort</span>
-        <span class="line"><span class="dim">Meets</span> Craft</span>
-      </h1>
-      <p class="hero__sub">We make furniture that combines comfort, quality, and function — pieces that look good and live well.</p>
-      <a class="hero__cta" href="store.html">
-        <span>Shop the Collection</span>
-        <svg class="hero__cta-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Slide counter -->
+    <div class="hero__counter" aria-hidden="true">
+      <span class="hero__counter-current">01</span>
+      <span class="hero__counter-total">/ 03</span>
+    </div>
+
+    <!-- Right rail: material tags -->
+    <ul class="hero__tags" aria-hidden="true">
+      <li>Oak</li>
+      <li>Ash</li>
+      <li>Walnut</li>
+      <li>Brass</li>
+    </ul>
+
+    <!-- Left rail: dot pagination + scroll cue -->
+    <div class="hero__rail">
+      <ul class="hero__dots" aria-hidden="true">
+        <li class="is-active"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+      <a class="hero__scroll" href="#about" data-hover>
+        <span>Scroll</span>
+        <svg viewBox="0 0 12 20" fill="none" aria-hidden="true">
+          <path d="M6 1v17M1 13l5 5 5-5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </a>
     </div>
 
-    <!-- Bottom row: tagline + stats -->
-    <div class="hero__foot">
-      <p class="hero__tagline">Sculptural pieces made to order for real homes, with a focus on how you actually live.</p>
-      <div class="hero__stats">
-        <div class="stat"><b>24+</b><span>Pieces in the Series</span></div>
-        <div class="stat"><b>1.2k+</b><span>Pieces Delivered</span></div>
-        <div class="stat"><b>4.9★</b><span>Average Rating</span></div>
-      </div>
+    <!-- Hero copy -->
+    <div class="hero__content">
+      <h1 class="hero__title">Comfort,<br>Meets Craft.</h1>
+      <p class="hero__sub">Solid oak furniture, shaped by hand in small batches for homes built to last.</p>
+      <a class="hero__cta" href="store.html">
+        <span>Shop Now</span>
+        <span class="hero__cta-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
     </div>
 
+    <!-- Video preview card -->
+    <a class="hero__video" href="#about" data-hover>
+      <span class="hero__video-text">
+        <b>How it's made</b>
+        <span>Watch the process</span>
+      </span>
+      <span class="hero__video-thumb">
+        <img src="assets/chair.jpg" alt="" />
+        <span class="hero__video-play" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </span>
+      </span>
+    </a>
+
   </header>
+  </div>
 
   <main>
 
