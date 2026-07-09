@@ -17,6 +17,7 @@
 
   --font-sans:   "Poppins", system-ui, -apple-system, sans-serif;
   --font-mono:   "Space Mono", ui-monospace, monospace;
+  --font-serif:  "Playfair Display", "Georgia", serif;
 
   --pad-x: clamp(1.4rem, 3.2vw, 3.2rem);
 }
@@ -89,14 +90,16 @@ a { color: inherit; text-decoration: none; }
   object-position: center 60%;
 }
 
-/* Darken the bright interior so white type reads like the reference */
+/* Darken the bright interior so white type reads like the reference.
+   Directional: strong dark ground on the left third (where the hero
+   copy sits), fading to near-transparent by center so the photo shows. */
 .hero__scrim {
   position: absolute;
   inset: 0;
   z-index: 1;
   background:
-    linear-gradient(to bottom, rgba(12, 10, 9, 0.52) 0%, rgba(12, 10, 9, 0.30) 30%, rgba(12, 10, 9, 0.32) 70%, rgba(12, 10, 9, 0.58) 100%),
-    radial-gradient(130% 100% at 70% 40%, rgba(12, 10, 9, 0) 40%, rgba(12, 10, 9, 0.30) 100%);
+    linear-gradient(to bottom, rgba(12, 10, 9, 0.48) 0%, rgba(12, 10, 9, 0.16) 26%, rgba(12, 10, 9, 0.2) 72%, rgba(12, 10, 9, 0.56) 100%),
+    linear-gradient(to right, rgba(10, 8, 7, 0.8) 0%, rgba(10, 8, 7, 0.5) 24%, rgba(10, 8, 7, 0.14) 50%, rgba(10, 8, 7, 0) 66%);
   pointer-events: none;
 }
 
@@ -136,6 +139,12 @@ a { color: inherit; text-decoration: none; }
   filter: invert(1) brightness(1.6);
 }
 
+/* Wrapper around links + CTA. On desktop it's transparent to layout
+   (display: contents) so existing flex rules on .nav still apply. */
+.nav__menu {
+  display: contents;
+}
+
 .nav__links {
   margin-left: auto;
   display: flex;
@@ -148,6 +157,36 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: 0.12em;
 }
 
+/* -- Mobile hamburger -------------------------------------------- */
+
+.nav__burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 5px;
+  margin-left: auto;
+  width: 34px;
+  height: 34px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.nav__burger-bar {
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  background: var(--white);
+  transition: transform 0.35s var(--ease-out), opacity 0.25s var(--ease-out), width 0.25s var(--ease-out);
+}
+
+.nav__burger-bar:nth-child(2) { width: 70%; }
+
+.nav.is-menu-open .nav__burger-bar:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav.is-menu-open .nav__burger-bar:nth-child(2) { opacity: 0; }
+.nav.is-menu-open .nav__burger-bar:nth-child(3) { width: 100%; transform: translateY(-6.5px) rotate(-45deg); }
+
 .nav__dot {
   width: 4px;
   height: 4px;
@@ -157,14 +196,6 @@ a { color: inherit; text-decoration: none; }
 
 .nav__item a { color: var(--white-dim); transition: color 0.3s var(--ease-out); }
 .nav__item a:hover { color: var(--white); }
-
-.nav__item--bright a {
-  color: var(--white);
-  text-transform: none;
-  letter-spacing: 0.02em;
-  font-size: clamp(0.95rem, 1.15vw, 1.1rem);
-  font-weight: 500;
-}
 
 .nav__item {
   opacity: 0;
@@ -178,6 +209,37 @@ a { color: inherit; text-decoration: none; }
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Primary nav action — the one bright, filled slot in the bar.
+   A real CTA, not a product name, so the eye lands on the intended action. */
+.nav__cta {
+  display: inline-flex;
+  align-items: center;
+  margin-left: clamp(1.2rem, 2.4vw, 2rem);
+  padding: 0.6em 1.3em;
+  background: var(--white);
+  color: var(--btn);
+  font-weight: 500;
+  font-size: clamp(0.82rem, 0.95vw, 0.94rem);
+  text-transform: none;
+  letter-spacing: 0.02em;
+  border-radius: 5px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(-16px);
+  transition: background-color 0.3s var(--ease-out);
+}
+
+.is-loaded .nav__cta {
+  transition:
+    opacity 0.7s var(--ease-out) calc(0.72s + var(--i) * 0.09s),
+    transform 0.7s var(--ease-out) calc(0.72s + var(--i) * 0.09s),
+    background-color 0.3s var(--ease-out);
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nav__cta:hover { background: #efe9df; }
 
 /* ============================================================
    Hero content
@@ -193,17 +255,18 @@ a { color: inherit; text-decoration: none; }
 }
 
 .hero__title {
-  font-weight: 400;
-  font-size: clamp(2.4rem, 5.4vw, 4.6rem);
-  line-height: 1.12;
-  letter-spacing: -0.01em;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: clamp(2.6rem, 5.8vw, 5rem);
+  line-height: 1.04;
+  letter-spacing: -0.005em;
   color: var(--white);
   opacity: 0;
   transform: translateY(24px);
 }
 
 .hero__title .line { display: block; }
-.hero__title .dim { font-weight: 300; color: rgba(255, 255, 255, 0.62); }
+.hero__title .dim { font-weight: 600; color: rgba(255, 255, 255, 0.5); }
 
 .is-loaded .hero__title {
   transition: opacity 0.9s var(--ease-out) 0.9s, transform 0.9s var(--ease-out) 0.9s;
@@ -229,7 +292,9 @@ a { color: inherit; text-decoration: none; }
 }
 
 .hero__cta {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
   margin-top: 1.7rem;
   padding: 0.9rem 1.7rem;
   background: var(--white);
@@ -242,6 +307,15 @@ a { color: inherit; text-decoration: none; }
   transform: translateY(20px);
   transition: background-color 0.3s var(--ease-out);
 }
+
+.hero__cta-arrow {
+  width: 1.05em;
+  height: 1.05em;
+  flex: none;
+  transition: transform 0.3s var(--ease-out);
+}
+
+.hero__cta:hover .hero__cta-arrow { transform: translateX(3px); }
 
 .is-loaded .hero__cta {
   transition:
@@ -287,14 +361,18 @@ a { color: inherit; text-decoration: none; }
 
 .hero__stats {
   display: flex;
-  gap: clamp(1.6rem, 4vw, 4.5rem);
 }
 
 .stat {
   text-align: left;
+  padding-left: clamp(1.4rem, 3vw, 2.6rem);
+  margin-left: clamp(1.4rem, 3vw, 2.6rem);
+  border-left: 1px solid rgba(255, 255, 255, 0.22);
   opacity: 0;
   transform: translateY(16px);
 }
+
+.stat:first-child { padding-left: 0; margin-left: 0; border-left: none; }
 
 .is-loaded .stat {
   transition: opacity 0.9s var(--ease-out) 1.85s, transform 0.9s var(--ease-out) 1.85s;
@@ -343,9 +421,49 @@ a { color: inherit; text-decoration: none; }
 }
 
 @media (max-width: 720px) {
-  .nav { flex-wrap: wrap; gap: 0.9rem 1rem; }
-  .nav__links { flex-wrap: wrap; gap: 0.7em 0.9em; margin-left: 0; }
+  .nav { position: relative; }
+
+  .nav__burger { display: flex; }
+
+  .nav__menu {
+    display: block;
+    position: absolute;
+    top: calc(100% + 0.6rem);
+    left: 0;
+    right: 0;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    background: rgba(17, 15, 14, 0.96);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    transition: max-height 0.4s var(--ease-out), opacity 0.3s var(--ease-out);
+  }
+
+  .nav.is-menu-open .nav__menu {
+    max-height: 70vh;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav__links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.1rem;
+    margin-left: 0;
+    padding: 1.6rem var(--pad-x) 0.4rem;
+    font-size: 0.95rem;
+  }
+
   .nav__dot { display: none; }
+
+  .nav__cta {
+    display: flex;
+    justify-content: center;
+    margin: 1.2rem var(--pad-x) 1.6rem;
+  }
 
   .hero { min-height: 700px; }
   .hero__content { top: 19%; }

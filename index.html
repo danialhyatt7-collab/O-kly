@@ -6,6 +6,7 @@
   <title>Oakly® — Modern Furnica</title>
   <meta name="description" content="Oakly® — Modern Furnica. One home, one story. Furniture crafted for everyday living." />
   <link rel="preload" href="assets/fonts/poppins-500.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/playfair-600.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="fonts.css" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="shop.css" />
@@ -34,15 +35,25 @@
         <img class="nav__logo" src="logo.svg" alt="Oakly — Modern Furnica" />
       </a>
 
-      <ul class="nav__links">
-        <li class="nav__item" style="--i:0"><a href="store.html">Shop</a></li>
-        <li class="nav__dot" aria-hidden="true"></li>
-        <li class="nav__item" style="--i:1"><a href="store.html">Collections</a></li>
-        <li class="nav__dot" aria-hidden="true"></li>
-        <li class="nav__item" style="--i:2"><a href="#about">About</a></li>
-        <li class="nav__dot" aria-hidden="true"></li>
-        <li class="nav__item nav__item--bright" style="--i:3"><a href="product.html">The Oak Series</a></li>
-      </ul>
+      <button class="nav__burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
+        <span class="nav__burger-bar"></span>
+        <span class="nav__burger-bar"></span>
+        <span class="nav__burger-bar"></span>
+      </button>
+
+      <div class="nav__menu" id="nav-menu">
+        <ul class="nav__links">
+          <li class="nav__item" style="--i:0"><a href="store.html">Shop</a></li>
+          <li class="nav__dot" aria-hidden="true"></li>
+          <li class="nav__item" style="--i:1"><a href="store.html">Collections</a></li>
+          <li class="nav__dot" aria-hidden="true"></li>
+          <li class="nav__item" style="--i:2"><a href="#about">About</a></li>
+          <li class="nav__dot" aria-hidden="true"></li>
+          <li class="nav__item" style="--i:3"><a href="product.html">The Oak Series</a></li>
+        </ul>
+
+        <a class="nav__cta" href="store.html" style="--i:4">Shop Now</a>
+      </div>
     </nav>
 
     <!-- Hero copy -->
@@ -52,7 +63,12 @@
         <span class="line"><span class="dim">Meets</span> Craft</span>
       </h1>
       <p class="hero__sub">We make furniture that combines comfort, quality, and function — pieces that look good and live well.</p>
-      <a class="hero__cta" href="store.html">Shop the Collection</a>
+      <a class="hero__cta" href="store.html">
+        <span>Shop the Collection</span>
+        <svg class="hero__cta-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
     </div>
 
     <!-- Bottom row: tagline + stats -->
