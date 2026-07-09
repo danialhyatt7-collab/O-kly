@@ -1,27 +1,51 @@
-/* Self-hosted fonts (latin subsets, variable where available) */
+/* Self-hosted fonts (latin subsets) */
 
 @font-face {
-  font-family: "Manrope";
-  font-style: normal;
-  font-weight: 400 800;
-  font-display: swap;
-  src: url("assets/fonts/manrope.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Caveat";
-  font-style: normal;
-  font-weight: 400 700;
-  font-display: swap;
-  src: url("assets/fonts/caveat.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Space Mono";
+  font-family: "Poppins";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("assets/fonts/space-mono-400.woff2") format("woff2");
+  src: url("assets/fonts/poppins-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/fonts/poppins-500.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("assets/fonts/poppins-600.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("assets/fonts/poppins-700.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Quicksand";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("assets/fonts/quicksand-700.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Mr Dafoe";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/mr-dafoe-400.woff2") format("woff2");
 }
 
 @font-face {
