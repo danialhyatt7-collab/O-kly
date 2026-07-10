@@ -220,9 +220,10 @@
   text-overflow: ellipsis;
 }
 .hcard__price {
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  color: var(--ink);
+  color: var(--ink-soft);
+  margin-top: 2px;
   white-space: nowrap;
 }
 
