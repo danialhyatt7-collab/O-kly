@@ -3,7 +3,7 @@
    ============================================================ */
 
 :root {
-  --white:       #ffffff;
+  --white:       #201a14;
   --white-soft:  rgba(255, 255, 255, 0.82);
   --white-dim:   rgba(255, 255, 255, 0.55);
   --bar:         rgba(70, 64, 58, 0.46);
@@ -11,6 +11,7 @@
   --btn:         #131110;
   --dark:        #131110;
   --oak:         #131110;
+  --hero-bg:     #f3ede4;
 
   --ease-out:   cubic-bezier(0.22, 1, 0.36, 1);
   --ease-soft:  cubic-bezier(0.45, 0, 0.15, 1);
@@ -86,50 +87,16 @@ a { color: inherit; text-decoration: none; }
   border-radius: clamp(14px, 1.6vw, 22px);
   overflow: hidden;
   box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.4);
+  background: var(--hero-bg);
 }
 
-/* -- Background ------------------------------------------------ */
+/* -- Background --------------------------------------------------
+   Solid color, matching the section right below the hero. */
 
-.hero__bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-
-.hero__bg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 60%;
-  transform: scale(1.08);
-  animation: hero-kenburns 26s var(--ease-soft) infinite alternate;
-}
-
-@keyframes hero-kenburns {
-  0%   { transform: scale(1.08) translate3d(0, 0, 0); }
-  100% { transform: scale(1.16) translate3d(-1.2%, -1%, 0); }
-}
-
-/* Full-bleed dark wash so centered white type always reads,
-   whatever the photo underneath. */
-.hero__scrim {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background:
-    linear-gradient(to bottom, rgba(10, 8, 7, 0.62) 0%, rgba(10, 8, 7, 0.38) 30%, rgba(10, 8, 7, 0.46) 62%, rgba(10, 8, 7, 0.74) 100%);
-  pointer-events: none;
-}
-
-/* Soft drifting light orbs, warm oak tones instead of the cold blue
-   glow in the reference — pure ambience, no interaction. */
+.hero__bg,
+.hero__scrim,
 .hero__glow {
-  position: absolute;
-  z-index: 1;
-  border-radius: 50%;
-  filter: blur(60px);
-  pointer-events: none;
-  opacity: 0.55;
+  display: none;
 }
 
 .hero__glow--a {
@@ -207,12 +174,10 @@ a { color: inherit; text-decoration: none; }
   transform: translateY(0);
 }
 
-/* logo.svg is near-black — invert it to white over the dark hero */
 .nav__logo {
   height: clamp(30px, 3.2vw, 44px);
   width: auto;
   display: block;
-  filter: invert(1) brightness(1.6);
 }
 
 /* Wrapper around links + CTA. On desktop it's transparent to layout
@@ -267,7 +232,7 @@ a { color: inherit; text-decoration: none; }
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.45);
+  background: rgba(32, 26, 20, 0.35);
 }
 
 .nav__item a { position: relative; padding-bottom: 0.3em; color: var(--white); opacity: 0.75; transition: opacity 0.3s var(--ease-out); }
@@ -433,8 +398,8 @@ a { color: inherit; text-decoration: none; }
   margin-top: 1.9rem;
   padding: 0.35rem 0.35rem 0.35rem 1.3rem;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(32, 26, 20, 0.06);
+  border: 1px solid rgba(32, 26, 20, 0.18);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   box-shadow: 0 24px 60px -26px rgba(0, 0, 0, 0.65);
@@ -453,7 +418,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 .hero__capture:focus-within {
-  border-color: rgba(255, 255, 255, 0.5);
+  border-color: rgba(32, 26, 20, 0.4);
   box-shadow: 0 24px 60px -26px rgba(0, 0, 0, 0.65), 0 0 0 3px rgba(199, 154, 91, 0.25);
 }
 
@@ -485,7 +450,7 @@ a { color: inherit; text-decoration: none; }
   padding: 0.6rem 0;
 }
 
-.hero__capture input::placeholder { color: rgba(255, 255, 255, 0.62); }
+.hero__capture input::placeholder { color: rgba(32, 26, 20, 0.5); }
 
 .hero__capture button {
   position: relative;
@@ -498,7 +463,7 @@ a { color: inherit; text-decoration: none; }
   border: none;
   border-radius: 50%;
   background: var(--white);
-  color: #1c1916;
+  color: var(--hero-bg);
   cursor: pointer;
   transition: transform 0.3s var(--ease-out), background-color 0.3s var(--ease-out);
 }
@@ -506,7 +471,7 @@ a { color: inherit; text-decoration: none; }
 .hero__capture button svg { width: 1.1em; height: 1.1em; }
 .hero__capture button:hover { transform: scale(1.06); }
 
-.hero__capture.is-sent button { background: var(--oak); color: var(--white); }
+.hero__capture.is-sent button { background: var(--oak); color: var(--hero-bg); }
 .hero__capture.is-sent { border-color: rgba(199, 154, 91, 0.6); animation: capture-pulse 1.2s var(--ease-out); }
 
 @keyframes capture-pulse {
