@@ -72,34 +72,73 @@
    Marquee ribbon
    ============================================================ */
 
+/* Frosted glass capsule — the exact treatment as the hero email pill:
+   translucent white fill, heavy blur, light border, soft shadow, and a
+   slow diagonal shimmer sweeping across it. */
 .ribbon {
-  background: var(--dark);
-  color: rgba(243, 237, 228, 0.85);
+  position: relative;
+  z-index: 5;
+  max-width: min(1180px, calc(100% - 2 * var(--pad-x)));
+  margin: clamp(-2rem, -3vw, -1rem) auto 0;
+  padding-block: 0.95rem;
+  border-radius: 999px;
   overflow: hidden;
-  padding-block: 0.85rem;
-  mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(18px) saturate(1.3);
+  -webkit-backdrop-filter: blur(18px) saturate(1.3);
+  box-shadow: 0 24px 60px -30px rgba(40, 28, 16, 0.5);
+}
+
+/* Slow diagonal shimmer — same sweep as .hero__capture-shine */
+.ribbon__shine {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(115deg, transparent 32%, rgba(255, 255, 255, 0.4) 48%, transparent 64%);
+  transform: translateX(-120%);
+  animation: ribbon-shine 5.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes ribbon-shine {
+  0%, 30%   { transform: translateX(-120%); }
+  70%, 100% { transform: translateX(120%); }
 }
 
 .ribbon__track {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   width: max-content;
-  animation: ribbon-scroll 28s linear infinite;
+  /* 24 unique phrases per group scrolled over ~2 min, so no line
+     comes back around for two full minutes. */
+  animation: ribbon-scroll 120s linear infinite;
 }
 .ribbon:hover .ribbon__track { animation-play-state: paused; }
 
-.ribbon__track span {
-  font-size: 0.78rem;
-  letter-spacing: 0.18em;
+.ribbon__group {
+  display: flex;
+  align-items: center;
+  flex: none;
+}
+
+.ribbon__group span {
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
+  color: var(--ink);
   white-space: nowrap;
 }
-.ribbon__track i {
+.ribbon__group i {
   font-style: normal;
-  font-size: 0.7rem;
-  margin-inline: 1.6rem;
-  color: rgba(243, 237, 228, 0.45);
+  font-size: 0.66rem;
+  margin-inline: clamp(1.4rem, 3vw, 2.2rem);
+  color: var(--oak-deep);
+  opacity: 0.55;
 }
 
 @keyframes ribbon-scroll {
@@ -814,7 +853,7 @@
    ============================================================ */
 
 @media (prefers-reduced-motion: reduce) {
-  .ribbon__track, .tmarquee__track, .chip, .cta__glow { animation: none !important; }
+  .ribbon__track, .ribbon__shine, .tmarquee__track, .chip, .cta__glow { animation: none !important; }
   .statement__text .w { opacity: 1; transform: none; filter: none; }
   .progress { display: none; }
 }
