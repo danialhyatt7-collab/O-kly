@@ -195,6 +195,12 @@ ul { list-style: none; }
   pointer-events: none;
 }
 
+/* When the CTA shares the shell, the photo spans from the top of the
+   shell (behind the CTA) down through the footer, instead of bleeding up
+   into the section above. */
+.footer-shell--cta { margin-top: clamp(2rem, 5vw, 3.5rem); }
+.footer-shell--cta .footer-shell__img { top: 0; }
+
 .site-footer {
   position: relative;
   z-index: 1;
