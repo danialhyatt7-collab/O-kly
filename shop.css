@@ -365,11 +365,11 @@ ul { list-style: none; }
 
 .cart-drawer__checkout {
   margin-top: 1rem;
-  background: #25d366;
+  background: #000;
   gap: 0.6rem;
 }
 
-.cart-drawer__checkout::before { background: #1da851; }
+.cart-drawer__checkout::before { background: #222; }
 .cart-drawer__checkout svg { width: 20px; height: 20px; }
 
 /* ============================================================
