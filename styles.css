@@ -15,7 +15,7 @@
   --ease-out:   cubic-bezier(0.22, 1, 0.36, 1);
   --ease-soft:  cubic-bezier(0.45, 0, 0.15, 1);
 
-  --font-sans:   "Poppins", system-ui, -apple-system, sans-serif;
+  --font-sans:   "General Sans", "Poppins", system-ui, -apple-system, sans-serif;
   --font-mono:   "Space Mono", ui-monospace, monospace;
 
   --pad-x: clamp(1.4rem, 3.2vw, 3.2rem);

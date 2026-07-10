@@ -31,7 +31,7 @@
   --ease-out:  cubic-bezier(0.22, 1, 0.36, 1);
   --ease-soft: cubic-bezier(0.45, 0, 0.15, 1);
 
-  --font: "Poppins", system-ui, -apple-system, sans-serif;
+  --font: "General Sans", "Poppins", system-ui, -apple-system, sans-serif;
 
   --pad: clamp(1.1rem, 4vw, 4rem);
   --maxw: 1180px;
