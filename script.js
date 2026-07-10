@@ -19,12 +19,17 @@
 
   /* ---------- Sticky frosted header on scroll ---------- */
   (function () {
-    var THRESHOLD = 40;
+    var heroEl = document.querySelector(".hero");
+    function threshold() {
+      if (!heroEl) return 40;
+      return heroEl.getBoundingClientRect().bottom + window.scrollY;
+    }
     function syncScrolled() {
-      document.body.classList.toggle("is-scrolled", window.scrollY > THRESHOLD);
+      document.body.classList.toggle("is-scrolled", window.scrollY >= threshold());
     }
     syncScrolled();
     window.addEventListener("scroll", syncScrolled, { passive: true });
+    window.addEventListener("resize", syncScrolled);
   })();
 
   /* ---------- Mobile hamburger menu ---------- */
