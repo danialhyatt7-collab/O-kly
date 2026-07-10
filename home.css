@@ -80,7 +80,7 @@
 .manifesto__stats .s span { font-size: 0.78rem; color: var(--ink-faint); }
 
 .manifesto__art {
-  aspect-ratio: 4 / 3.2;
+  aspect-ratio: 3 / 4;
   border-radius: var(--r-lg);
   overflow: hidden;
 }
@@ -376,7 +376,7 @@
 
 @media (max-width: 900px) {
   .manifesto { grid-template-columns: 1fr; }
-  .manifesto__art { order: -1; aspect-ratio: 16 / 9; }
+  .manifesto__art { order: -1; aspect-ratio: 4 / 5; }
   .collection-grid { grid-template-columns: repeat(2, 1fr); }
   .process { grid-template-columns: 1fr; gap: 2rem; }
   .testimonials { grid-template-columns: 1fr; }
