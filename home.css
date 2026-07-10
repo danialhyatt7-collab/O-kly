@@ -193,14 +193,15 @@
 }
 
 .compare__col--them {
-  background: #ecdfc7;
+  background: var(--paper);
   border: 1px solid var(--line);
   color: var(--ink-faint);
 }
 
 .compare__col--us {
-  background: var(--dark);
-  color: var(--on-dark);
+  background: #ecdfc7;
+  border: 1px solid var(--line);
+  color: var(--ink);
 }
 
 .compare__head {
@@ -208,8 +209,6 @@
   padding-bottom: 1.1rem;
   border-bottom: 1px solid rgba(32, 26, 20, 0.1);
 }
-
-.compare__col--us .compare__head { border-bottom-color: rgba(255, 255, 255, 0.16); }
 
 .compare__col--them .compare__head span {
   font-size: 0.9rem;
@@ -219,7 +218,7 @@
   color: var(--ink-soft);
 }
 
-.compare__logo { height: 20px; width: auto; filter: invert(1) brightness(1.6); }
+.compare__logo { height: 20px; width: auto; }
 
 .compare__col ul { display: grid; gap: 0.85rem; }
 
@@ -234,8 +233,8 @@
 .compare__col li svg { width: 16px; height: 16px; flex: none; margin-top: 0.15em; }
 
 .compare__col--them li svg { color: var(--ink-faint); }
-.compare__col--us li svg { color: #c79a5b; }
-.compare__col--us li { color: var(--on-dark); }
+.compare__col--us li svg { color: var(--oak-deep); }
+.compare__col--us li { color: var(--ink); }
 
 /* ============================================================
    Testimonials
@@ -252,7 +251,7 @@
   flex-direction: column;
   gap: 1rem;
   padding: clamp(1.4rem, 3vw, 1.9rem);
-  background: #ecdfc7;
+  background: var(--paper);
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
   min-width: 0;
