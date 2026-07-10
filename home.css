@@ -136,6 +136,46 @@
 .process__item p { color: var(--ink-soft); font-size: 0.94rem; }
 
 /* ============================================================
+   Timeline
+   ============================================================ */
+
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.6rem, 4vw, 2.6rem);
+  counter-reset: timeline;
+  list-style: none;
+}
+
+.timeline__step {
+  position: relative;
+  padding-top: clamp(1.6rem, 3vw, 2rem);
+}
+
+.timeline__step::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--line);
+}
+
+.timeline__step:first-child::before { left: 0; }
+
+.timeline__num {
+  display: block;
+  font-family: var(--font-mono, "Space Mono", monospace);
+  font-size: 0.85rem;
+  color: var(--oak-deep);
+  margin-bottom: 0.8rem;
+}
+
+.timeline__step h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 0.5rem; }
+.timeline__step p { color: var(--ink-soft); font-size: 0.94rem; }
+
+/* ============================================================
    Comparison strip
    ============================================================ */
 
@@ -325,6 +365,7 @@
   .process { grid-template-columns: 1fr; gap: 2rem; }
   .testimonials { grid-template-columns: 1fr; }
   .compare { grid-template-columns: 1fr; }
+  .timeline { grid-template-columns: 1fr; gap: 2rem; }
   .lookbook-grid { grid-template-columns: repeat(3, 1fr); }
   .newsletter { grid-template-columns: 1fr; text-align: left; }
 }
