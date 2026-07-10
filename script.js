@@ -122,11 +122,10 @@
     }
   }
 
-  /* ---------- Hero email capture ---------- */
-  var emailForm = document.querySelector("[data-email-form]");
-  if (emailForm) {
+  /* ---------- Email capture (hero + footer) ---------- */
+  document.querySelectorAll("[data-email-form]").forEach(function (emailForm) {
     var emailInput = emailForm.querySelector("[data-email-input]");
-    var emailNote = document.querySelector("[data-email-note]");
+    var emailNote = emailForm.parentElement ? emailForm.parentElement.querySelector("[data-email-note]") : null;
     var emailBtn = emailForm.querySelector("[data-email-submit]");
 
     emailForm.addEventListener("submit", function (e) {
@@ -140,5 +139,9 @@
       }
       if (emailNote) emailNote.textContent = "You're on the list — check your inbox for the code.";
     });
-  }
+  });
+
+  /* ---------- Footer year ---------- */
+  var yearEl = document.querySelector("[data-year]");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 })();
