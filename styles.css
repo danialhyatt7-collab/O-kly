@@ -347,25 +347,20 @@ a { color: inherit; text-decoration: none; }
 .hero__avatar {
   width: 30px;
   height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
+  flex: none;
   border-radius: 50%;
   margin-left: -9px;
+  overflow: hidden;
   border: 1.5px solid rgba(10, 8, 7, 0.7);
-  background: linear-gradient(160deg, rgba(199, 154, 91, 0.9), rgba(120, 90, 55, 0.9));
-  color: var(--white);
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  font-weight: 700;
+  background: #3a3128;
   animation: avatar-bob 3.6s var(--ease-soft) infinite;
   animation-delay: calc(var(--i, 0) * 0.25s);
 }
 
+.hero__avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
 .hero__avatar:first-child { margin-left: 0; }
-.hero__avatar:nth-child(2) { background: linear-gradient(160deg, rgba(160, 168, 150, 0.9), rgba(90, 98, 80, 0.9)); }
-.hero__avatar:nth-child(3) { background: linear-gradient(160deg, rgba(180, 150, 130, 0.9), rgba(110, 85, 70, 0.9)); }
-.hero__avatar:nth-child(4) { background: linear-gradient(160deg, rgba(150, 140, 160, 0.9), rgba(85, 78, 95, 0.9)); }
 
 @keyframes avatar-bob {
   0%, 100% { transform: translateY(0); }
@@ -606,10 +601,13 @@ a { color: inherit; text-decoration: none; }
   gap: 1rem;
   max-width: 1100px;
   margin: 0 auto;
+  padding: 0.2rem clamp(0.5rem, 2vw, 1.5rem) 0.4rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, black 28px, black calc(100% - 28px), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, black 28px, black calc(100% - 28px), transparent 100%);
 }
 
 .hero__reviews-track::-webkit-scrollbar { display: none; }
@@ -650,16 +648,13 @@ a { color: inherit; text-decoration: none; }
   width: 26px;
   height: 26px;
   flex: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
   border-radius: 50%;
+  overflow: hidden;
   background: rgba(255, 255, 255, 0.14);
-  color: var(--white);
-  font-family: var(--font-mono);
-  font-size: 0.52rem;
-  font-weight: 700;
 }
+
+.review-card__avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 .review-card__who { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
 .review-card__who b { font-size: 0.78rem; font-weight: 600; color: var(--white); }
