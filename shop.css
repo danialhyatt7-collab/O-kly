@@ -190,32 +190,31 @@ ul { list-style: none; }
   inset: 0;
   z-index: 0;
   background:
-    linear-gradient(to bottom, rgba(19, 15, 10, 0.9) 0%, rgba(19, 15, 10, 0.82) 45%, rgba(19, 15, 10, 0.9) 100%),
+    linear-gradient(to bottom, rgba(17, 13, 9, 0.94) 0%, rgba(17, 13, 9, 0.9) 45%, rgba(17, 13, 9, 0.95) 100%),
     url("assets/footer-bg.jpg") center 30% / cover no-repeat;
   pointer-events: none;
 }
 
-/* Soft warm ambient glows pooling at the base — echoing the reference
-   footer's ambient light, kept in Oakly's oak/beige tones. */
-.site-footer__glow {
+/* Colorful aurora bloom, screen-blended over the dark panel — the
+   reference footer's signature ambient light (blue, teal, warm amber,
+   soft lavender) pooling toward the lower half. */
+.site-footer::after {
+  content: "";
   position: absolute;
-  border-radius: 50%;
-  filter: blur(90px);
-  pointer-events: none;
+  inset: 0;
   z-index: 0;
+  background:
+    radial-gradient(46% 60% at 70% 14%, rgba(233, 128, 74, 0.55), transparent 62%),
+    radial-gradient(48% 65% at 90% 58%, rgba(70, 150, 205, 0.5), transparent 64%),
+    radial-gradient(46% 62% at 52% 100%, rgba(72, 196, 184, 0.46), transparent 62%),
+    radial-gradient(42% 55% at 24% 90%, rgba(150, 122, 214, 0.4), transparent 64%),
+    radial-gradient(40% 55% at 8% 30%, rgba(90, 130, 190, 0.32), transparent 66%);
+  filter: blur(14px);
+  mix-blend-mode: screen;
+  pointer-events: none;
 }
-.site-footer__glow--a {
-  width: 46vw; height: 46vw;
-  min-width: 340px; min-height: 340px;
-  bottom: -32%; left: 4%;
-  background: rgba(199, 154, 91, 0.26);
-}
-.site-footer__glow--b {
-  width: 40vw; height: 40vw;
-  min-width: 300px; min-height: 300px;
-  bottom: -36%; right: 4%;
-  background: rgba(150, 158, 168, 0.2);
-}
+
+.site-footer__glow { display: none; }
 
 .site-footer__grid,
 .site-footer__bar { position: relative; z-index: 1; }
