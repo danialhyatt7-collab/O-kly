@@ -174,31 +174,97 @@ ul { list-style: none; }
    ============================================================ */
 
 .site-footer {
+  position: relative;
   margin-top: clamp(3rem, 8vw, 7rem);
   background: var(--dark);
   color: var(--on-dark);
+  overflow: hidden;
+  isolation: isolate;
 }
+
+/* Soft warm ambient glows pooling at the base — echoing the reference
+   footer's ambient light, kept in Oakly's oak/beige tones. */
+.site-footer__glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+}
+.site-footer__glow--a {
+  width: 46vw; height: 46vw;
+  min-width: 340px; min-height: 340px;
+  bottom: -32%; left: 4%;
+  background: rgba(199, 154, 91, 0.26);
+}
+.site-footer__glow--b {
+  width: 40vw; height: 40vw;
+  min-width: 300px; min-height: 300px;
+  bottom: -36%; right: 4%;
+  background: rgba(150, 158, 168, 0.2);
+}
+
+.site-footer__grid,
+.site-footer__bar { position: relative; z-index: 1; }
+
 .site-footer__grid {
   display: grid;
-  grid-template-columns: 1.4fr repeat(3, 1fr);
-  gap: 2rem;
-  padding-block: clamp(2.5rem, 6vw, 4.5rem);
+  grid-template-columns: 1.7fr repeat(3, 1fr);
+  gap: clamp(2rem, 4vw, 3rem);
+  padding-block: clamp(3rem, 6vw, 5rem);
 }
-.site-footer h4 { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--on-dark-dim); margin-bottom: 1rem; font-weight: 600; }
-.site-footer ul { display: grid; gap: 0.6rem; }
-.site-footer li a { color: var(--on-dark-dim); font-size: 0.94rem; transition: color .25s; }
-.site-footer li a:hover { color: var(--on-dark); }
-.site-footer__brand img { height: 30px; filter: invert(1) brightness(1.6); margin-bottom: 0.9rem; }
-.site-footer__brand p { color: var(--on-dark-dim); font-size: 0.92rem; max-width: 30ch; }
+
+.site-footer__brand img { height: 30px; filter: invert(1) brightness(1.6); margin-bottom: 1.1rem; }
+.site-footer__brand p { color: var(--on-dark-dim); font-size: 0.94rem; line-height: 1.55; max-width: 36ch; }
+
+.site-footer__social { display: flex; gap: 0.6rem; margin-top: 1.5rem; }
+.site-footer__social a {
+  width: 38px; height: 38px;
+  display: grid; place-items: center;
+  border-radius: 11px;
+  color: var(--on-dark-dim);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: transform .3s var(--ease-out), background-color .3s, color .3s, border-color .3s;
+}
+.site-footer__social a:hover {
+  color: var(--on-dark);
+  background: rgba(255, 255, 255, 0.13);
+  border-color: rgba(255, 255, 255, 0.26);
+  transform: translateY(-3px);
+}
+.site-footer__social svg { width: 17px; height: 17px; }
+
+.site-footer h4 { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--on-dark-dim); margin-bottom: 1.1rem; font-weight: 600; }
+.site-footer ul { display: grid; gap: 0.7rem; list-style: none; }
+.site-footer li a {
+  position: relative;
+  display: inline-block;
+  color: var(--on-dark-dim);
+  font-size: 0.94rem;
+  transition: color .25s, transform .25s var(--ease-out);
+}
+.site-footer li a:hover { color: var(--on-dark); transform: translateX(3px); }
+
 .site-footer__bar {
-  border-top: 1px solid rgba(255,255,255,0.09);
-  padding-block: 1.4rem;
-  display: flex; flex-wrap: wrap; gap: 0.6rem 1.4rem; align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+  padding-block: 1.5rem;
+  display: flex; flex-wrap: wrap; gap: 0.6rem 1.6rem; align-items: center;
   font-size: 0.84rem; color: var(--on-dark-dim);
 }
-.site-footer__bar .ig { margin-left: auto; display: inline-flex; align-items: center; gap: 0.5rem; }
-.site-footer__bar .ig:hover { color: var(--on-dark); }
-.site-footer__bar svg { width: 17px; height: 17px; }
+.site-footer__legal { margin-left: auto; display: flex; flex-wrap: wrap; gap: 0.6rem 1.6rem; }
+.site-footer__legal a { transition: color .25s; }
+.site-footer__legal a:hover { color: var(--on-dark); }
+
+@media (max-width: 820px) {
+  .site-footer__grid { grid-template-columns: 1fr 1fr; }
+  .site-footer__brand { grid-column: 1 / -1; }
+}
+@media (max-width: 480px) {
+  .site-footer__grid { grid-template-columns: 1fr; }
+  .site-footer__bar { flex-direction: column; align-items: flex-start; }
+  .site-footer__legal { margin-left: 0; }
+}
 
 /* ============================================================
    Toast (add-to-cart feedback)
