@@ -3,7 +3,7 @@
    ============================================================ */
 
 :root {
-  --white:       #201a14;
+  --white:       #ffffff;
   --white-soft:  rgba(255, 255, 255, 0.82);
   --white-dim:   rgba(255, 255, 255, 0.55);
   --bar:         rgba(70, 64, 58, 0.46);
@@ -202,10 +202,12 @@ a { color: inherit; text-decoration: none; }
   transform: translateY(0);
 }
 
+/* logo.svg is near-black — invert it to white over the hero photo */
 .nav__logo {
   height: clamp(30px, 3.2vw, 44px);
   width: auto;
   display: block;
+  filter: invert(1) brightness(1.6);
 }
 
 /* Wrapper around links + CTA. On desktop it's transparent to layout
@@ -260,7 +262,7 @@ a { color: inherit; text-decoration: none; }
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: rgba(32, 26, 20, 0.35);
+  background: rgba(255, 255, 255, 0.45);
 }
 
 .nav__item a { position: relative; padding-bottom: 0.3em; color: var(--white); opacity: 0.75; transition: opacity 0.3s var(--ease-out); }
@@ -426,8 +428,8 @@ a { color: inherit; text-decoration: none; }
   margin-top: 1.9rem;
   padding: 0.35rem 0.35rem 0.35rem 1.3rem;
   border-radius: 999px;
-  background: rgba(32, 26, 20, 0.06);
-  border: 1px solid rgba(32, 26, 20, 0.18);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   box-shadow: 0 24px 60px -26px rgba(0, 0, 0, 0.65);
@@ -446,7 +448,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 .hero__capture:focus-within {
-  border-color: rgba(32, 26, 20, 0.4);
+  border-color: rgba(255, 255, 255, 0.5);
   box-shadow: 0 24px 60px -26px rgba(0, 0, 0, 0.65), 0 0 0 3px rgba(199, 154, 91, 0.25);
 }
 
@@ -478,7 +480,7 @@ a { color: inherit; text-decoration: none; }
   padding: 0.6rem 0;
 }
 
-.hero__capture input::placeholder { color: rgba(32, 26, 20, 0.5); }
+.hero__capture input::placeholder { color: rgba(255, 255, 255, 0.62); }
 
 .hero__capture button {
   position: relative;
@@ -491,7 +493,7 @@ a { color: inherit; text-decoration: none; }
   border: none;
   border-radius: 50%;
   background: var(--white);
-  color: var(--hero-bg);
+  color: #1c1916;
   cursor: pointer;
   transition: transform 0.3s var(--ease-out), background-color 0.3s var(--ease-out);
 }
@@ -499,7 +501,7 @@ a { color: inherit; text-decoration: none; }
 .hero__capture button svg { width: 1.1em; height: 1.1em; }
 .hero__capture button:hover { transform: scale(1.06); }
 
-.hero__capture.is-sent button { background: var(--oak); color: var(--hero-bg); }
+.hero__capture.is-sent button { background: var(--oak); color: var(--white); }
 .hero__capture.is-sent { border-color: rgba(199, 154, 91, 0.6); animation: capture-pulse 1.2s var(--ease-out); }
 
 @keyframes capture-pulse {
