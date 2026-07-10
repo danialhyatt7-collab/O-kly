@@ -28,6 +28,9 @@
       <img src="assets/hero-bg.jpg" alt="" fetchpriority="high" />
     </div>
     <div class="hero__scrim" aria-hidden="true"></div>
+    <div class="hero__glow hero__glow--a" aria-hidden="true"></div>
+    <div class="hero__glow hero__glow--b" aria-hidden="true"></div>
+    <div class="hero__grain" aria-hidden="true"></div>
 
     <!-- Top bar -->
     <nav class="nav">
@@ -49,56 +52,105 @@
           <li class="nav__dot" aria-hidden="true"></li>
           <li class="nav__item" style="--i:2"><a href="product.html">The Oak Series</a></li>
           <li class="nav__dot" aria-hidden="true"></li>
-          <li class="nav__item" style="--i:3"><a href="store.html">Shop</a></li>
+          <li class="nav__item" style="--i:3"><a href="chairs.html">Perfect Chairs</a></li>
+          <li class="nav__dot" aria-hidden="true"></li>
+          <li class="nav__item" style="--i:4"><a href="store.html">Shop</a></li>
         </ul>
-
-        <a class="nav__cta" href="store.html" style="--i:4">Shop Now</a>
       </div>
     </nav>
 
-    <!-- Right rail: material tags -->
-    <ul class="hero__tags" aria-hidden="true">
-      <li>Oak</li>
-      <li>Ash</li>
-      <li>Walnut</li>
-      <li>Brass</li>
-    </ul>
-
-    <!-- Left rail: scroll cue -->
-    <div class="hero__rail">
-      <a class="hero__scroll" href="#about" data-hover>
-        <span>Scroll</span>
-        <svg viewBox="0 0 12 20" fill="none" aria-hidden="true">
-          <path d="M6 1v17M1 13l5 5 5-5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-    </div>
-
-    <!-- Hero copy -->
+    <!-- Centered hero copy -->
     <div class="hero__content">
-      <h1 class="hero__title">Comfort,<br>Meets Craft.</h1>
-      <p class="hero__sub">Solid oak furniture, shaped by hand in small batches for homes built to last.</p>
-      <a class="hero__cta" href="store.html">
-        <span>Shop Now</span>
-        <span class="hero__cta-arrow" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+
+      <div class="hero__social">
+        <span class="hero__avatars" aria-hidden="true">
+          <span class="hero__avatar" style="--i:0">AK</span>
+          <span class="hero__avatar" style="--i:1">BR</span>
+          <span class="hero__avatar" style="--i:2">SM</span>
+          <span class="hero__avatar" style="--i:3">HT</span>
         </span>
-      </a>
+        <span class="hero__social-text"><b>500+</b> homes furnished across Pakistan</span>
+      </div>
+
+      <h1 class="hero__title">
+        <span class="hero__title-line">Furniture that</span>
+        <span class="hero__title-line">feels like home.</span>
+      </h1>
+      <p class="hero__sub">Solid oak, hand-shaped in small batches, delivered white-glove to homes across Pakistan.</p>
+
+      <form class="hero__capture" data-email-form>
+        <span class="hero__capture-shine" aria-hidden="true"></span>
+        <input type="email" required placeholder="Get PKR 5,000 off your first order" aria-label="Email address" data-email-input />
+        <button type="submit" aria-label="Join the list" data-email-submit>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </form>
+      <p class="hero__capture-note" data-email-note>Join the list — new drops first, no spam.</p>
     </div>
 
-    <!-- Video preview card -->
-    <a class="hero__video" href="#about" data-hover>
-      <span class="hero__video-text">
-        <b>How it's made</b>
-        <span>Watch the process</span>
-      </span>
-      <span class="hero__video-thumb">
-        <img src="assets/chair.jpg" alt="" />
-        <span class="hero__video-play" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        </span>
-      </span>
-    </a>
+    <!-- Testimonial carousel -->
+    <div class="hero__reviews">
+      <div class="hero__reviews-head">
+        <span class="hero__reviews-title"><span class="hero__reviews-quote">&ldquo;</span>What Pakistan is saying</span>
+        <div class="hero__reviews-nav">
+          <button type="button" data-review-prev aria-label="Previous reviews">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button type="button" data-review-next aria-label="Next reviews">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="hero__reviews-track" data-review-track>
+        <article class="review-card">
+          <p class="review-card__text">"The Cocoon Chair changed our whole living room. Worth every rupee."</p>
+          <div class="review-card__foot">
+            <span class="review-card__avatar">AK</span>
+            <span class="review-card__who"><b>Ayesha Khan</b><span>Lahore</span></span>
+            <span class="review-card__rating">5.0 <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.8 5.9 20.8 7.1 14l-5-4.8 6.9-.9z"/></svg></span>
+          </div>
+        </article>
+
+        <article class="review-card">
+          <p class="review-card__text">"White-glove delivery, exactly as promised. Stunning craftsmanship."</p>
+          <div class="review-card__foot">
+            <span class="review-card__avatar">BR</span>
+            <span class="review-card__who"><b>Bilal Raza</b><span>Karachi</span></span>
+            <span class="review-card__rating">4.8 <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.8 5.9 20.8 7.1 14l-5-4.8 6.9-.9z"/></svg></span>
+          </div>
+        </article>
+
+        <article class="review-card">
+          <p class="review-card__text">"The Cloud Sofa feels like a five-star hotel lobby, in our own home."</p>
+          <div class="review-card__foot">
+            <span class="review-card__avatar">SM</span>
+            <span class="review-card__who"><b>Sana Malik</b><span>Islamabad</span></span>
+            <span class="review-card__rating">5.0 <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.8 5.9 20.8 7.1 14l-5-4.8 6.9-.9z"/></svg></span>
+          </div>
+        </article>
+
+        <article class="review-card">
+          <p class="review-card__text">"Handmade quality you can actually feel. Best purchase this year."</p>
+          <div class="review-card__foot">
+            <span class="review-card__avatar">HT</span>
+            <span class="review-card__who"><b>Hamza Tariq</b><span>Faisalabad</span></span>
+            <span class="review-card__rating">4.7 <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.8 5.9 20.8 7.1 14l-5-4.8 6.9-.9z"/></svg></span>
+          </div>
+        </article>
+
+        <article class="review-card">
+          <p class="review-card__text">"Ordered the Barrel Chair — arrived faster than expected, immaculate finish."</p>
+          <div class="review-card__foot">
+            <span class="review-card__avatar">MA</span>
+            <span class="review-card__who"><b>Mahnoor Ali</b><span>Rawalpindi</span></span>
+            <span class="review-card__rating">4.9 <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.8 5.9 20.8 7.1 14l-5-4.8 6.9-.9z"/></svg></span>
+          </div>
+        </article>
+      </div>
+
+      <div class="hero__reviews-dots" data-review-dots aria-hidden="true"></div>
+    </div>
 
   </header>
   </div>

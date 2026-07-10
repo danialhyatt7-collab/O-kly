@@ -44,4 +44,86 @@
       }
     });
   }
+
+  /* ---------- Hero testimonial carousel ---------- */
+  var track = document.querySelector("[data-review-track]");
+  if (track) {
+    var prevBtn = document.querySelector("[data-review-prev]");
+    var nextBtn = document.querySelector("[data-review-next]");
+    var dotsWrap = document.querySelector("[data-review-dots]");
+    var cards = Array.prototype.slice.call(track.children);
+    var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    cards.forEach(function (_, i) {
+      var dot = document.createElement("button");
+      dot.type = "button";
+      dot.setAttribute("aria-label", "Go to review " + (i + 1));
+      if (i === 0) dot.classList.add("is-active");
+      dot.addEventListener("click", function () {
+        cards[i].scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+      });
+      dotsWrap.appendChild(dot);
+    });
+    var dots = Array.prototype.slice.call(dotsWrap.children);
+
+    function step(dir) {
+      var cardWidth = cards[0].getBoundingClientRect().width + 16;
+      track.scrollBy({ left: dir * cardWidth, behavior: "smooth" });
+    }
+
+    if (prevBtn) prevBtn.addEventListener("click", function () { step(-1); });
+    if (nextBtn) nextBtn.addEventListener("click", function () { step(1); });
+
+    function syncDots() {
+      var trackRect = track.getBoundingClientRect();
+      var closest = 0;
+      var closestDist = Infinity;
+      cards.forEach(function (card, i) {
+        var dist = Math.abs(card.getBoundingClientRect().left - trackRect.left);
+        if (dist < closestDist) { closestDist = dist; closest = i; }
+      });
+      dots.forEach(function (d, i) { d.classList.toggle("is-active", i === closest); });
+    }
+
+    var scrollTimer;
+    track.addEventListener("scroll", function () {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(syncDots, 100);
+    }, { passive: true });
+
+    /* Auto-advance, pausing on hover/touch and respecting reduced motion */
+    if (!reduceMotion) {
+      var autoTimer = setInterval(function () {
+        var atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+        if (atEnd) {
+          track.scrollTo({ left: 0, behavior: "smooth" });
+        } else {
+          step(1);
+        }
+      }, 4500);
+
+      track.addEventListener("mouseenter", function () { clearInterval(autoTimer); });
+      track.addEventListener("touchstart", function () { clearInterval(autoTimer); }, { passive: true });
+    }
+  }
+
+  /* ---------- Hero email capture ---------- */
+  var emailForm = document.querySelector("[data-email-form]");
+  if (emailForm) {
+    var emailInput = emailForm.querySelector("[data-email-input]");
+    var emailNote = document.querySelector("[data-email-note]");
+    var emailBtn = emailForm.querySelector("[data-email-submit]");
+
+    emailForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!emailInput.checkValidity() || emailForm.classList.contains("is-sent")) return;
+
+      emailForm.classList.add("is-sent");
+      emailInput.disabled = true;
+      if (emailBtn) {
+        emailBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12 4 4 10-10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      }
+      if (emailNote) emailNote.textContent = "You're on the list — check your inbox for the code.";
+    });
+  }
 })();
