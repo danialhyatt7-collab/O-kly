@@ -670,7 +670,16 @@ a { color: inherit; text-decoration: none; }
   white-space: nowrap;
 }
 
-.review-card__rating svg { width: 12px; height: 12px; color: var(--oak); }
+.review-card__rating svg {
+  width: 12px; height: 12px;
+  color: #c8cacd;
+  animation: star-shimmer 2.2s ease-in-out infinite;
+}
+
+@keyframes star-shimmer {
+  0%, 100% { color: #9a9ea3; filter: brightness(0.9); }
+  50%      { color: #f4f6f8; filter: brightness(1.6) drop-shadow(0 0 3px rgba(255,255,255,0.7)); }
+}
 
 .hero__reviews-dots {
   display: flex;
