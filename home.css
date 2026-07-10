@@ -553,8 +553,14 @@
 .tmarquee__track {
   display: flex;
   width: max-content;
-  animation: tmarquee-scroll 42s linear infinite;
+  animation: tmarquee-scroll 84s linear infinite;
+  /* Stay paused until the section has actually revealed — otherwise the
+     track keeps scrolling while off-screen and behind the fade-in, so it
+     can snap to a jarring mid-loop position the moment it comes into
+     view, reading as a skip or a blank frame. */
+  animation-play-state: paused;
 }
+.tmarquee.is-in .tmarquee__track { animation-play-state: running; }
 .tmarquee:hover .tmarquee__track { animation-play-state: paused; }
 
 /* Two identical, equally-sized groups back to back — translateX(-50%)
