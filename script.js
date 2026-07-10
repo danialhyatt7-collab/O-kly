@@ -141,4 +141,20 @@
       if (emailNote) emailNote.textContent = "You're on the list — check your inbox for the code.";
     });
   }
+
+  /* ---------- Trade / custom enquiry form ---------- */
+  var tradeForm = document.querySelector("[data-trade-form]");
+  if (tradeForm) {
+    var tradeInput = tradeForm.querySelector("[data-trade-input]");
+    var tradeLabel = tradeForm.querySelector("[data-trade-label]");
+
+    tradeForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!tradeInput.checkValidity() || tradeForm.classList.contains("is-sent")) return;
+
+      tradeForm.classList.add("is-sent");
+      tradeInput.disabled = true;
+      if (tradeLabel) tradeLabel.textContent = "Thanks — we'll be in touch";
+    });
+  }
 })();
