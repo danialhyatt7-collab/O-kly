@@ -287,6 +287,23 @@
 .t-card figcaption span { font-size: 0.78rem; color: var(--ink-faint); }
 
 /* ============================================================
+   FAQ / Accordion
+   ============================================================ */
+
+.accordion { border-top: 1px solid var(--line); margin-top: 1.4rem; max-width: 720px; margin-inline: auto; }
+.acc { border-bottom: 1px solid var(--line); }
+.acc__head {
+  width: 100%; display: flex; justify-content: space-between; align-items: center;
+  padding: 1.15rem 0; font-size: 1rem; font-weight: 500; text-align: left;
+}
+.acc__head svg { width: 20px; height: 20px; transition: transform .35s var(--ease-out, ease); color: var(--ink-soft); flex: none; }
+.acc.is-open .acc__head svg { transform: rotate(45deg); }
+.acc__body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s var(--ease-out, ease); }
+.acc.is-open .acc__body { grid-template-rows: 1fr; }
+.acc__inner { overflow: hidden; }
+.acc__inner p { padding-bottom: 1.15rem; color: var(--ink-soft); font-size: 0.94rem; }
+
+/* ============================================================
    Lookbook / social
    ============================================================ */
 
