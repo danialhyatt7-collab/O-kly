@@ -17,6 +17,16 @@
     reveal();
   }
 
+  /* ---------- Sticky frosted header on scroll ---------- */
+  (function () {
+    var THRESHOLD = 40;
+    function syncScrolled() {
+      document.body.classList.toggle("is-scrolled", window.scrollY > THRESHOLD);
+    }
+    syncScrolled();
+    window.addEventListener("scroll", syncScrolled, { passive: true });
+  })();
+
   /* ---------- Mobile hamburger menu ---------- */
   var nav = document.querySelector(".nav");
   var burger = document.querySelector(".nav__burger");
