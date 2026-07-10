@@ -5,15 +5,6 @@
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var fine   = window.matchMedia("(pointer: fine)").matches;
 
-  /* ---------- Cart state ---------- */
-  var count = 0;
-  var countEl = document.querySelector(".cart-count");
-  function addToCart(n) {
-    count += (n || 1);
-    if (countEl) { countEl.textContent = count; countEl.classList.add("is-on"); }
-    showToast("Added to cart");
-  }
-
   /* ---------- Toast ---------- */
   var toast = document.querySelector(".toast");
   var toastTimer;
@@ -25,12 +16,218 @@
     toastTimer = setTimeout(function () { toast.classList.remove("is-on"); }, 2200);
   }
 
+  /* ============================================================
+     Cart — persisted to localStorage, shared across every page
+     ============================================================ */
+
+  var WHATSAPP_NUMBER = "923005926262";
+  var CART_KEY = "oakly_cart_v1";
+
+  function money(n) { return "PKR " + Math.round(n).toLocaleString("en-US"); }
+
+  function getCart() {
+    try {
+      var raw = localStorage.getItem(CART_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch (e) { return []; }
+  }
+
+  function setCart(cart) {
+    try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (e) {}
+    renderCart();
+  }
+
+  function cartCount(cart) {
+    return cart.reduce(function (sum, item) { return sum + item.qty; }, 0);
+  }
+
+  function cartTotal(cart) {
+    return cart.reduce(function (sum, item) { return sum + item.qty * item.price; }, 0);
+  }
+
+  function addToCart(item, qty) {
+    qty = qty || 1;
+    var cart = getCart();
+    var existing = cart.filter(function (i) { return i.name === item.name; })[0];
+    if (existing) {
+      existing.qty += qty;
+    } else {
+      cart.push({ name: item.name, price: item.price, img: item.img, href: item.href, qty: qty });
+    }
+    setCart(cart);
+    showToast("Added to cart");
+  }
+
+  function removeFromCart(name) {
+    setCart(getCart().filter(function (i) { return i.name !== name; }));
+  }
+
+  function setQty(name, qty) {
+    var cart = getCart();
+    var item = cart.filter(function (i) { return i.name === name; })[0];
+    if (!item) return;
+    if (qty < 1) {
+      cart = cart.filter(function (i) { return i.name !== name; });
+    } else {
+      item.qty = Math.min(99, qty);
+    }
+    setCart(cart);
+  }
+
+  /* ---------- Cart drawer: built once, reused on every page ---------- */
+
+  var drawer = null;
+  var itemsEl = null;
+  var emptyEl = null;
+  var subtotalEl = null;
+  var footEl = null;
+  var countEl = document.querySelector(".cart-count");
+
+  function buildDrawer() {
+    if (drawer || !document.querySelector(".cart-btn")) return;
+
+    drawer = document.createElement("div");
+    drawer.className = "cart-drawer";
+    drawer.setAttribute("data-cart-drawer", "");
+    drawer.innerHTML =
+      '<div class="cart-drawer__backdrop" data-cart-close></div>' +
+      '<aside class="cart-drawer__panel" role="dialog" aria-label="Shopping cart">' +
+        '<div class="cart-drawer__head">' +
+          '<h3>Your Cart</h3>' +
+          '<button class="cart-drawer__close" data-cart-close aria-label="Close cart">' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>' +
+          '</button>' +
+        '</div>' +
+        '<div class="cart-drawer__items" data-cart-items></div>' +
+        '<p class="cart-drawer__empty" data-cart-empty>Your cart is empty. Start adding pieces you love.</p>' +
+        '<div class="cart-drawer__foot" data-cart-foot>' +
+          '<div class="cart-drawer__row"><span>Subtotal</span><b data-cart-subtotal></b></div>' +
+          '<p class="cart-drawer__note">Free white-glove delivery, ships in 3 weeks. Final total confirmed over WhatsApp.</p>' +
+          '<button class="btn btn--full cart-drawer__checkout" data-cart-checkout type="button">' +
+            '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.33A9.93 9.93 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2Zm0 18.2c-1.7 0-3.28-.5-4.61-1.36l-.33-.2-3 .79.8-2.93-.22-.34A8.18 8.18 0 0 1 3.8 12 8.2 8.2 0 1 1 12 20.2Zm4.5-6.13c-.25-.12-1.45-.72-1.68-.8-.22-.08-.39-.12-.55.13-.16.24-.63.8-.78.96-.14.16-.29.18-.53.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.24-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.24-.42.08-.16.04-.31-.02-.43-.06-.12-.55-1.33-.76-1.82-.2-.48-.4-.42-.55-.42h-.47c-.16 0-.43.06-.65.31-.22.24-.86.84-.86 2.04 0 1.2.88 2.36 1 2.53.12.16 1.73 2.64 4.19 3.7.59.25 1.04.4 1.4.51.59.19 1.12.16 1.55.1.47-.07 1.45-.59 1.65-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.47-.28Z"/></svg>' +
+            '<span>Checkout via WhatsApp</span>' +
+          '</button>' +
+        '</div>' +
+      '</aside>';
+    document.body.appendChild(drawer);
+
+    itemsEl = drawer.querySelector("[data-cart-items]");
+    emptyEl = drawer.querySelector("[data-cart-empty]");
+    subtotalEl = drawer.querySelector("[data-cart-subtotal]");
+    footEl = drawer.querySelector("[data-cart-foot]");
+
+    drawer.querySelectorAll("[data-cart-close]").forEach(function (el) {
+      el.addEventListener("click", closeCart);
+    });
+
+    drawer.querySelector("[data-cart-checkout]").addEventListener("click", checkoutViaWhatsApp);
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && drawer.classList.contains("is-open")) closeCart();
+    });
+
+    var trigger = document.querySelector(".cart-btn");
+    if (trigger) {
+      trigger.addEventListener("click", function (e) {
+        e.preventDefault();
+        openCart();
+      });
+    }
+  }
+
+  function openCart() { if (drawer) { renderCart(); drawer.classList.add("is-open"); } }
+  function closeCart() { if (drawer) drawer.classList.remove("is-open"); }
+
+  function itemRowHTML(item) {
+    return (
+      '<div class="cart-item" data-cart-item="' + item.name.replace(/"/g, "&quot;") + '">' +
+        '<img class="cart-item__img" src="' + item.img + '" alt="" />' +
+        '<div class="cart-item__body">' +
+          '<p class="cart-item__name">' + item.name + '</p>' +
+          '<p class="cart-item__price">' + money(item.price) + '</p>' +
+          '<div class="cart-item__qty">' +
+            '<button type="button" data-cart-qty="down" aria-label="Decrease quantity">−</button>' +
+            '<span>' + item.qty + '</span>' +
+            '<button type="button" data-cart-qty="up" aria-label="Increase quantity">+</button>' +
+          '</div>' +
+        '</div>' +
+        '<button type="button" class="cart-item__remove" data-cart-remove aria-label="Remove ' + item.name + '">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>' +
+        '</button>' +
+      '</div>'
+    );
+  }
+
+  function renderCart() {
+    var cart = getCart();
+    var n = cartCount(cart);
+
+    if (countEl) {
+      countEl.textContent = n;
+      countEl.classList.toggle("is-on", n > 0);
+    }
+
+    if (!drawer) return;
+
+    itemsEl.innerHTML = cart.map(itemRowHTML).join("");
+    emptyEl.style.display = cart.length ? "none" : "block";
+    footEl.style.display = cart.length ? "block" : "none";
+    subtotalEl.textContent = money(cartTotal(cart));
+
+    itemsEl.querySelectorAll("[data-cart-item]").forEach(function (row) {
+      var name = row.getAttribute("data-cart-item");
+      row.querySelector('[data-cart-qty="up"]').addEventListener("click", function () {
+        var item = cart.filter(function (i) { return i.name === name; })[0];
+        setQty(name, item.qty + 1);
+      });
+      row.querySelector('[data-cart-qty="down"]').addEventListener("click", function () {
+        var item = cart.filter(function (i) { return i.name === name; })[0];
+        setQty(name, item.qty - 1);
+      });
+      row.querySelector("[data-cart-remove]").addEventListener("click", function () {
+        removeFromCart(name);
+      });
+    });
+  }
+
+  function absoluteUrl(href) {
+    try { return new URL(href, window.location.href).href; } catch (e) { return href; }
+  }
+
+  function checkoutViaWhatsApp() {
+    var cart = getCart();
+    if (!cart.length) return;
+
+    var lines = ["Hi Oakly! I'd like to order:", ""];
+    cart.forEach(function (item, i) {
+      lines.push((i + 1) + ". " + item.name + " × " + item.qty + " — " + money(item.price * item.qty));
+      if (item.href) lines.push(absoluteUrl(item.href));
+      lines.push("");
+    });
+    lines.push("Subtotal: " + money(cartTotal(cart)));
+    lines.push("Delivery: Free white-glove (ships in 3 weeks)");
+    lines.push("Total: " + money(cartTotal(cart)));
+    lines.push("");
+    lines.push("Please confirm availability. Thank you!");
+
+    var url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(lines.join("\n"));
+    window.open(url, "_blank", "noopener");
+  }
+
+  buildDrawer();
+  renderCart();
+
   document.querySelectorAll("[data-add]").forEach(function (btn) {
     btn.addEventListener("click", function () {
       var q = 1;
       var qEl = document.querySelector("[data-qty-input]");
       if (btn.dataset.add === "main" && qEl) q = parseInt(qEl.value, 10) || 1;
-      addToCart(q);
+
+      var name = btn.dataset.name;
+      var price = parseFloat(btn.dataset.price);
+      if (!name || !price) return; // button not wired with product data — nothing to add
+
+      addToCart({ name: name, price: price, img: btn.dataset.img || "", href: btn.dataset.href || "" }, q);
     });
   });
 
