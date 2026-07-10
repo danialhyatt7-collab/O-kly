@@ -14,6 +14,9 @@
 </head>
 <body>
 
+  <!-- Scroll progress -->
+  <div class="progress" aria-hidden="true"><span data-progress></span></div>
+
   <!-- Intro curtain -->
   <div class="curtain" aria-hidden="true">
     <div class="curtain__panel curtain__panel--left"></div>
@@ -83,6 +86,20 @@
 
   <main>
 
+    <!-- ===== Marquee ribbon ===== -->
+    <div class="ribbon" aria-hidden="true">
+      <div class="ribbon__track">
+        <span>Handmade in Lahore</span><i>✦</i>
+        <span>Solid Oak, No Veneer</span><i>✦</i>
+        <span>White-Glove Delivery</span><i>✦</i>
+        <span>Built to Be Repaired, Not Replaced</span><i>✦</i>
+        <span>Handmade in Lahore</span><i>✦</i>
+        <span>Solid Oak, No Veneer</span><i>✦</i>
+        <span>White-Glove Delivery</span><i>✦</i>
+        <span>Built to Be Repaired, Not Replaced</span><i>✦</i>
+      </div>
+    </div>
+
     <!-- ===== Perfect Chair Collection ===== -->
     <section class="section" id="about">
       <div class="wrap">
@@ -92,54 +109,98 @@
           <p>Ten sculptural silhouettes in bouclé, leather, and solid wood — find your perfect chair.</p>
         </div>
 
-        <div class="collection-grid">
-          <article class="pcard reveal">
-            <div class="pcard__media">
-              <img src="assets/chairs/cocoon-chair.jpg" alt="Cocoon Chair" />
-            </div>
-            <div class="pcard__body">
-              <p class="pcard__cat">Seating</p>
-              <h3 class="pcard__name"><a href="cocoon-chair.html">Cocoon Chair</a></h3>
-              <div class="pcard__foot"><span class="pcard__price"><b>PKR 145,000</b></span></div>
-            </div>
+        <div class="hgrid">
+          <article class="hcard reveal">
+            <a class="hcard__link" data-tilt href="cocoon-chair.html">
+              <div class="hcard__media"><img src="assets/chairs/cocoon-chair.jpg" alt="Cocoon Chair" loading="lazy" /></div>
+              <div class="hcard__bar">
+                <div class="hcard__info">
+                  <p class="hcard__cat">Seating</p>
+                  <h3 class="hcard__name">Cocoon Chair</h3>
+                </div>
+                <span class="hcard__price">PKR 145,000</span>
+                <span class="hcard__go"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </div>
+            </a>
           </article>
 
-          <article class="pcard reveal">
-            <div class="pcard__media">
-              <img src="assets/chairs/cloud-sofa.jpg" alt="Cloud Sofa" />
-            </div>
-            <div class="pcard__body">
-              <p class="pcard__cat">Seating</p>
-              <h3 class="pcard__name"><a href="cloud-sofa.html">Cloud Sofa</a></h3>
-              <div class="pcard__foot"><span class="pcard__price"><b>PKR 295,000</b></span></div>
-            </div>
+          <article class="hcard reveal">
+            <a class="hcard__link" data-tilt href="cloud-sofa.html">
+              <div class="hcard__media"><img src="assets/chairs/cloud-sofa.jpg" alt="Cloud Sofa" loading="lazy" /></div>
+              <div class="hcard__bar">
+                <div class="hcard__info">
+                  <p class="hcard__cat">Seating</p>
+                  <h3 class="hcard__name">Cloud Sofa</h3>
+                </div>
+                <span class="hcard__price">PKR 295,000</span>
+                <span class="hcard__go"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </div>
+            </a>
           </article>
 
-          <article class="pcard reveal">
-            <div class="pcard__media">
-              <img src="assets/chairs/sling-chair.jpg" alt="Sling Chair" />
-            </div>
-            <div class="pcard__body">
-              <p class="pcard__cat">Seating</p>
-              <h3 class="pcard__name"><a href="sling-chair.html">Sling Chair</a></h3>
-              <div class="pcard__foot"><span class="pcard__price"><b>PKR 118,000</b></span></div>
-            </div>
+          <article class="hcard reveal">
+            <a class="hcard__link" data-tilt href="sling-chair.html">
+              <div class="hcard__media"><img src="assets/chairs/sling-chair.jpg" alt="Sling Chair" loading="lazy" /></div>
+              <div class="hcard__bar">
+                <div class="hcard__info">
+                  <p class="hcard__cat">Seating</p>
+                  <h3 class="hcard__name">Sling Chair</h3>
+                </div>
+                <span class="hcard__price">PKR 118,000</span>
+                <span class="hcard__go"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </div>
+            </a>
           </article>
 
-          <article class="pcard reveal">
-            <div class="pcard__media">
-              <img src="assets/chairs/sculpt-chair.jpg" alt="Sculpt Chair" />
-            </div>
-            <div class="pcard__body">
-              <p class="pcard__cat">Seating</p>
-              <h3 class="pcard__name"><a href="sculpt-chair.html">Sculpt Chair</a></h3>
-              <div class="pcard__foot"><span class="pcard__price"><b>PKR 212,000</b></span></div>
-            </div>
+          <article class="hcard reveal">
+            <a class="hcard__link" data-tilt href="sculpt-chair.html">
+              <div class="hcard__media"><img src="assets/chairs/sculpt-chair.jpg" alt="Sculpt Chair" loading="lazy" /></div>
+              <div class="hcard__bar">
+                <div class="hcard__info">
+                  <p class="hcard__cat">Seating</p>
+                  <h3 class="hcard__name">Sculpt Chair</h3>
+                </div>
+                <span class="hcard__price">PKR 212,000</span>
+                <span class="hcard__go"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </div>
+            </a>
           </article>
         </div>
 
         <div class="section-cta reveal">
-          <a class="btn btn--ghost" href="chairs.html"><span>View the Perfect Chair Collection</span></a>
+          <a class="btn btn--ghost" data-magnetic href="chairs.html"><span>View the Perfect Chair Collection</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Editorial statement ===== -->
+    <section class="statement">
+      <div class="wrap">
+        <span class="eyebrow reveal">The Oakly Way</span>
+        <h2 class="statement__text" data-words>Most furniture is built to be replaced. Ours is built to be passed down.</h2>
+      </div>
+    </section>
+
+    <!-- ===== Craft / Materials ===== -->
+    <section class="section">
+      <div class="wrap manifesto">
+        <div class="manifesto__copy reveal">
+          <span class="eyebrow">The Craft</span>
+          <h2 class="manifesto__title">Timeless design, made to last.</h2>
+          <div class="manifesto__body">
+            <p>Every piece is designed around quiet, lasting silhouettes rather than passing trends — chosen materials, joined by hand, and finished with care so the details hold up to a closer look.</p>
+            <p>It's why an Oakly piece can be lived with, sanded down, and refinished for decades instead of thrown out — built to be repaired, not replaced.</p>
+          </div>
+          <div class="manifesto__stats">
+            <div class="s"><b><span data-count="4.9" data-decimals="1">0</span></b><span>Average rating</span></div>
+            <div class="s"><b><span data-count="21">0</span> days</b><span>Order to build</span></div>
+            <div class="s"><b><span data-count="100">0</span>%</b><span>Handmade</span></div>
+          </div>
+        </div>
+        <div class="manifesto__art reveal">
+          <img src="assets/craft.jpg" alt="Detail of a sculptural solid-wood table base with a glass top" />
+          <span class="chip chip--a">Hand-rubbed oil finish</span>
+          <span class="chip chip--b">Solid oak, no veneer</span>
         </div>
       </div>
     </section>
@@ -172,30 +233,8 @@
       </div>
     </section>
 
-    <!-- ===== Materials ===== -->
-    <section class="section">
-      <div class="wrap manifesto">
-        <div class="manifesto__copy reveal">
-          <span class="eyebrow">The Craft</span>
-          <h2 class="manifesto__title">Timeless design, made to last.</h2>
-          <div class="manifesto__body">
-            <p>Every piece is designed around quiet, lasting silhouettes rather than passing trends — chosen materials, joined by hand, and finished with care so the details hold up to a closer look.</p>
-            <p>It's why an Oakly piece can be lived with, sanded down, and refinished for decades instead of thrown out — built to be repaired, not replaced.</p>
-          </div>
-          <div class="manifesto__stats">
-            <div class="s"><b>Timeless</b><span>Design</span></div>
-            <div class="s"><b>Handmade</b><span>In Lahore</span></div>
-            <div class="s"><b>Hand-rubbed</b><span>Oil finish</span></div>
-          </div>
-        </div>
-        <div class="manifesto__art reveal">
-          <img src="assets/craft.jpg" alt="Detail of a sculptural solid-wood table base with a glass top" />
-        </div>
-      </div>
-    </section>
-
     <!-- ===== Comparison ===== -->
-    <section class="section section--tight section--paper">
+    <section class="section section--tight">
       <div class="wrap">
         <div class="section-head--center reveal">
           <span class="eyebrow">The Difference</span>
@@ -233,16 +272,20 @@
     </section>
 
     <!-- ===== Testimonials ===== -->
-    <section class="section section--paper">
+    <section class="section band">
+      <div class="band__glow band__glow--a" aria-hidden="true"></div>
+      <div class="band__glow band__glow--b" aria-hidden="true"></div>
       <div class="wrap">
         <div class="section-head--center reveal">
           <span class="eyebrow">Reviews</span>
           <h2>Loved by homes across Pakistan</h2>
           <p>4.9 out of 5 from customers who've lived with their Oakly piece for years, not weeks.</p>
         </div>
+      </div>
 
-        <div class="testimonials">
-          <figure class="t-card reveal">
+      <div class="tmarquee reveal">
+        <div class="tmarquee__track">
+          <figure class="t-card">
             <div class="t-card__rating" aria-label="5 out of 5 stars">
               <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.5 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6-4.5-4.1 6-.7z"/></svg>
               <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.5 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6-4.5-4.1 6-.7z"/></svg>
@@ -251,12 +294,10 @@
               <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.5 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6-4.5-4.1 6-.7z"/></svg>
             </div>
             <blockquote>"Three years in and the oak has only gotten better with age. Ordered the Cocoon Chair for our lounge and it's the first thing guests ask about."</blockquote>
-            <figcaption>
-              <div><b>Ayesha K.</b><span>Lahore</span></div>
-            </figcaption>
+            <figcaption><div><b>Ayesha K.</b><span>Lahore</span></div></figcaption>
           </figure>
 
-          <figure class="t-card reveal">
+          <figure class="t-card">
             <div class="t-card__rating" aria-label="5 out of 5 stars">
               <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.5 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6-4.5-4.1 6-.7z"/></svg>
               <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.5 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6-4.5-4.1 6-.7z"/></svg>
@@ -265,12 +306,10 @@
               <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.5 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6-4.5-4.1 6-.7z"/></svg>
             </div>
             <blockquote>"White-glove delivery was worth it on its own — they assembled the Cloud Sofa and took every scrap of packaging with them. Zero hassle."</blockquote>
-            <figcaption>
-              <div><b>Bilal R.</b><span>Karachi</span></div>
-            </figcaption>
+            <figcaption><div><b>Bilal R.</b><span>Karachi</span></div></figcaption>
           </figure>
 
-          <figure class="t-card reveal">
+          <figure class="t-card">
             <div class="t-card__rating" aria-label="5 out of 5 stars">
               <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.5 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6-4.5-4.1 6-.7z"/></svg>
               <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.5 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6-4.5-4.1 6-.7z"/></svg>
@@ -279,16 +318,50 @@
               <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.5 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6-4.5-4.1 6-.7z"/></svg>
             </div>
             <blockquote>"You can feel the difference in the joinery compared to flat-pack furniture. This is the kind of piece you pass down, not throw out."</blockquote>
-            <figcaption>
-              <div><b>Mahnoor S.</b><span>Islamabad</span></div>
-            </figcaption>
+            <figcaption><div><b>Mahnoor S.</b><span>Islamabad</span></div></figcaption>
+          </figure>
+
+          <figure class="t-card" aria-hidden="true">
+            <div class="t-card__rating">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.5 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6-4.5-4.1 6-.7z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.5 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6-4.5-4.1 6-.7z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.5 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6-4.5-4.1 6-.7z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.5 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6-4.5-4.1 6-.7z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.5 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6-4.5-4.1 6-.7z"/></svg>
+            </div>
+            <blockquote>"Three years in and the oak has only gotten better with age. Ordered the Cocoon Chair for our lounge and it's the first thing guests ask about."</blockquote>
+            <figcaption><div><b>Ayesha K.</b><span>Lahore</span></div></figcaption>
+          </figure>
+
+          <figure class="t-card" aria-hidden="true">
+            <div class="t-card__rating">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.5 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6-4.5-4.1 6-.7z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.5 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6-4.5-4.1 6-.7z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.5 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6-4.5-4.1 6-.7z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.5 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6-4.5-4.1 6-.7z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.5 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6-4.5-4.1 6-.7z"/></svg>
+            </div>
+            <blockquote>"White-glove delivery was worth it on its own — they assembled the Cloud Sofa and took every scrap of packaging with them. Zero hassle."</blockquote>
+            <figcaption><div><b>Bilal R.</b><span>Karachi</span></div></figcaption>
+          </figure>
+
+          <figure class="t-card" aria-hidden="true">
+            <div class="t-card__rating">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.5 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6-4.5-4.1 6-.7z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.5 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6-4.5-4.1 6-.7z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.5 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6-4.5-4.1 6-.7z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.5 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6-4.5-4.1 6-.7z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.5 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6-4.5-4.1 6-.7z"/></svg>
+            </div>
+            <blockquote>"You can feel the difference in the joinery compared to flat-pack furniture. This is the kind of piece you pass down, not throw out."</blockquote>
+            <figcaption><div><b>Mahnoor S.</b><span>Islamabad</span></div></figcaption>
           </figure>
         </div>
       </div>
     </section>
 
     <!-- ===== Care Guide ===== -->
-    <section class="section section--tight section--paper">
+    <section class="section section--tight">
       <div class="wrap">
         <div class="section-head--center reveal">
           <span class="eyebrow">Care Guide</span>
@@ -333,18 +406,18 @@
         </div>
 
         <div class="lookbook-grid">
-          <a class="lookbook-tile reveal" href="chairs.html"><img src="assets/chairs/cocoon-chair.jpg" alt="Cocoon Chair styled in a living room" /></a>
-          <a class="lookbook-tile reveal" href="chairs.html"><img src="assets/chairs/cloud-sofa.jpg" alt="Cloud Sofa in a sunlit room" /></a>
-          <a class="lookbook-tile reveal" href="chairs.html"><img src="assets/chairs/sling-chair.jpg" alt="Sling Chair detail" /></a>
-          <a class="lookbook-tile reveal" href="chairs.html"><img src="assets/chairs/lounge-nest.jpg" alt="Lounge Nest chair" /></a>
-          <a class="lookbook-tile reveal" href="chairs.html"><img src="assets/chairs/sculpt-chair.jpg" alt="Sculpt Chair in natural light" /></a>
-          <a class="lookbook-tile reveal" href="chairs.html"><img src="assets/chairs/barrel-chair.jpg" alt="Barrel Chair" /></a>
+          <a class="lookbook-tile reveal" href="cocoon-chair.html"><img src="assets/chairs/cocoon-chair.jpg" alt="Cocoon Chair styled in a living room" loading="lazy" /><span class="lookbook-tile__chip">Cocoon Chair</span></a>
+          <a class="lookbook-tile reveal" href="cloud-sofa.html"><img src="assets/chairs/cloud-sofa.jpg" alt="Cloud Sofa in a sunlit room" loading="lazy" /><span class="lookbook-tile__chip">Cloud Sofa</span></a>
+          <a class="lookbook-tile reveal" href="sling-chair.html"><img src="assets/chairs/sling-chair.jpg" alt="Sling Chair detail" loading="lazy" /><span class="lookbook-tile__chip">Sling Chair</span></a>
+          <a class="lookbook-tile reveal" href="lounge-nest.html"><img src="assets/chairs/lounge-nest.jpg" alt="Lounge Nest chair" loading="lazy" /><span class="lookbook-tile__chip">Lounge Nest</span></a>
+          <a class="lookbook-tile reveal" href="sculpt-chair.html"><img src="assets/chairs/sculpt-chair.jpg" alt="Sculpt Chair in natural light" loading="lazy" /><span class="lookbook-tile__chip">Sculpt Chair</span></a>
+          <a class="lookbook-tile reveal" href="barrel-chair.html"><img src="assets/chairs/barrel-chair.jpg" alt="Barrel Chair" loading="lazy" /><span class="lookbook-tile__chip">Barrel Chair</span></a>
         </div>
       </div>
     </section>
 
     <!-- ===== FAQ ===== -->
-    <section class="section section--tight section--paper">
+    <section class="section section--tight">
       <div class="wrap">
         <div class="section-head--center reveal">
           <span class="eyebrow">FAQ</span>
@@ -371,14 +444,17 @@
     <!-- ===== Trade / Custom orders ===== -->
     <section class="section section--tight">
       <div class="wrap">
-        <div class="newsletter">
-          <div class="newsletter__body">
-            <h2 class="newsletter__title">Designing for a project?</h2>
+        <div class="cta reveal">
+          <div class="cta__glow cta__glow--a" aria-hidden="true"></div>
+          <div class="cta__glow cta__glow--b" aria-hidden="true"></div>
+          <div class="cta__grain" aria-hidden="true"></div>
+          <div class="cta__body">
+            <h2 class="cta__title">Designing for a project?</h2>
             <p>Every piece is made to order, so custom sizing, fabrics, and finishes are always on the table. We also work with interior designers, architects, and hotels on trade and bulk orders.</p>
           </div>
-          <form class="newsletter__form" data-trade-form>
+          <form class="cta__form" data-trade-form>
             <input type="email" required placeholder="Your work email" aria-label="Work email address" data-trade-input />
-            <button class="btn" type="submit"><span data-trade-label>Enquire</span></button>
+            <button class="btn btn--light" data-magnetic type="submit"><span data-trade-label>Enquire</span></button>
           </form>
         </div>
       </div>
@@ -405,5 +481,6 @@
 
   <script src="script.js"></script>
   <script src="shop.js"></script>
+  <script src="home.js"></script>
 </body>
 </html>
