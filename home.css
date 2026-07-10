@@ -188,11 +188,14 @@
   border-radius: var(--r-lg);
 }
 
+/* Media on top, info bar below — never overlaps the product photo. */
 .hcard__link {
   position: relative;
-  display: block;
+  display: flex;
+  flex-direction: column;
   border-radius: var(--r-lg);
   overflow: hidden;
+  background: var(--paper);
   box-shadow: 0 18px 45px -30px rgba(40, 28, 16, 0.35);
   will-change: transform;
   transition: box-shadow 0.5s var(--ease-out), transform 0.5s var(--ease-out);
@@ -200,7 +203,8 @@
 .hcard:hover .hcard__link { box-shadow: 0 40px 80px -36px rgba(40, 28, 16, 0.55); }
 
 .hcard__media {
-  aspect-ratio: 4 / 5;
+  position: relative;
+  aspect-ratio: 4 / 4.6;
   background: var(--beige-mid);
   overflow: hidden;
 }
@@ -209,28 +213,36 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 1.1s var(--ease-out), filter 1.1s var(--ease-out);
+  transition: transform 1.1s var(--ease-out);
 }
 .hcard:hover .hcard__media img { transform: scale(1.07); }
 
-/* Frosted info bar floating over the photo */
-.hcard__bar {
+/* Soft gradient at the base of the photo, so the frosted bar below
+   still reads as one continuous surface with the image. */
+.hcard__media::after {
+  content: "";
   position: absolute;
-  left: 10px; right: 10px; bottom: 10px;
+  inset: auto 0 0 0;
+  height: 46%;
+  background: linear-gradient(to top, rgba(19, 15, 10, 0.16), rgba(19, 15, 10, 0));
+  pointer-events: none;
+}
+
+/* Frosted info bar, sitting flush below the photo */
+.hcard__bar {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  padding: 0.8rem 0.95rem;
-  border-radius: 16px;
+  padding: 0.85rem 1rem;
   background: var(--frost);
   backdrop-filter: blur(16px) saturate(1.25);
   -webkit-backdrop-filter: blur(16px) saturate(1.25);
-  border: 1px solid var(--frost-line);
-  box-shadow: 0 10px 30px -18px rgba(40, 28, 16, 0.4);
-  transition: transform 0.5s var(--ease-out), background-color 0.4s var(--ease-out);
+  border-top: 1px solid var(--frost-line);
   overflow: hidden;
+  transition: background-color 0.4s var(--ease-out);
 }
-.hcard:hover .hcard__bar { transform: translateY(-4px); background: rgba(251, 248, 243, 0.82); }
+.hcard:hover .hcard__bar { background: rgba(251, 248, 243, 0.94); }
 
 /* Sheen sweep across the frosted bar on hover */
 .hcard__bar::after {
@@ -239,7 +251,7 @@
   top: 0; bottom: 0;
   left: -70%;
   width: 55%;
-  background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+  background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.7), transparent);
   transform: skewX(-18deg);
   transition: left 0.9s var(--ease-out);
   pointer-events: none;
@@ -260,7 +272,10 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  transition: color 0.35s var(--ease-out);
 }
+.hcard:hover .hcard__name { color: var(--oak-deep); }
+
 .hcard__price {
   font-size: 0.8rem;
   font-weight: 600;
@@ -277,10 +292,10 @@
   border-radius: 50%;
   background: var(--ink);
   color: var(--cream);
-  transition: transform 0.45s var(--ease-out);
+  transition: transform 0.45s var(--ease-out), background-color 0.4s var(--ease-out);
 }
 .hcard__go svg { width: 15px; height: 15px; transition: transform 0.45s var(--ease-out); }
-.hcard:hover .hcard__go { transform: scale(1.1); }
+.hcard:hover .hcard__go { transform: scale(1.1); background: var(--oak-deep); }
 .hcard:hover .hcard__go svg { transform: translateX(2px); }
 
 /* ============================================================
@@ -393,6 +408,137 @@
   0%, 100% { transform: translateY(0); }
   50%      { transform: translateY(-9px); }
 }
+
+/* ============================================================
+   Bento CTA — beige-framed, oak card with a frosted pill button
+   ============================================================ */
+
+.bento { display: flex; justify-content: center; }
+
+.bento__card {
+  position: relative;
+  width: min(720px, 100%);
+  aspect-ratio: 4 / 5;
+  max-height: 640px;
+  border-radius: calc(var(--r-lg) + 14px);
+  overflow: hidden;
+  isolation: isolate;
+  padding: 14px;
+  background: var(--paper);
+  border: 1px solid var(--frost-line);
+  box-shadow: 0 40px 90px -40px rgba(40, 28, 16, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+  transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
+}
+.bento__card:hover { transform: translateY(-6px); box-shadow: 0 55px 110px -42px rgba(40, 28, 16, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.6); }
+
+.bento__img {
+  position: absolute;
+  inset: 14px;
+  z-index: 0;
+  width: calc(100% - 28px);
+  height: calc(100% - 28px);
+  object-fit: cover;
+  border-radius: var(--r-lg);
+  transition: transform 1.2s var(--ease-out);
+}
+.bento__card:hover .bento__img { transform: scale(1.05); }
+
+.bento__scrim {
+  position: absolute;
+  inset: 14px;
+  z-index: 1;
+  border-radius: var(--r-lg);
+  background: linear-gradient(to top, rgba(19, 15, 10, 0.88) 0%, rgba(19, 15, 10, 0.55) 38%, rgba(19, 15, 10, 0.15) 62%, rgba(19, 15, 10, 0.35) 100%);
+  pointer-events: none;
+}
+
+/* Same slow diagonal shimmer as the hero pill and the marquee */
+.bento__shine {
+  position: absolute;
+  inset: 14px;
+  z-index: 2;
+  border-radius: var(--r-lg);
+  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.22) 50%, transparent 65%);
+  transform: translateX(-120%);
+  animation: bento-shine 6.5s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes bento-shine {
+  0%, 35%   { transform: translateX(-120%); }
+  75%, 100% { transform: translateX(120%); }
+}
+
+.bento__content {
+  position: relative;
+  z-index: 3;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  text-align: center;
+  gap: 0.85rem;
+  padding: clamp(1.6rem, 4vw, 2.6rem) clamp(1.4rem, 4vw, 2.4rem) clamp(2rem, 5vw, 2.8rem);
+}
+
+.bento__badge {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--on-dark);
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform 0.5s var(--ease-out);
+}
+.bento__card:hover .bento__badge { transform: translateY(-3px) scale(1.06); }
+.bento__badge svg { width: 22px; height: 22px; }
+
+.bento__title {
+  font-size: clamp(1.7rem, 3.6vw, 2.4rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--on-dark);
+}
+.bento__title em {
+  font-style: italic;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 500;
+}
+
+.bento__sub {
+  max-width: 38ch;
+  color: var(--on-dark-dim);
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.bento__btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-top: 0.3rem;
+  padding: 0.85rem 1.7rem;
+  border-radius: var(--r-pill);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 14px 30px -14px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  transition: transform 0.4s var(--ease-out), background-color 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+}
+.bento__btn:hover {
+  background: #fff;
+  box-shadow: 0 20px 40px -16px rgba(0, 0, 0, 0.5);
+}
+.bento__btn:active { transform: scale(0.97); }
 
 /* ============================================================
    Timeline
@@ -849,7 +995,7 @@
    ============================================================ */
 
 @media (prefers-reduced-motion: reduce) {
-  .ribbon__track, .ribbon__shine, .tmarquee__track, .chip, .cta__glow { animation: none !important; }
+  .ribbon__track, .ribbon__shine, .tmarquee__track, .chip, .cta__glow, .bento__shine { animation: none !important; }
   .statement__text .w { opacity: 1; transform: none; filter: none; }
   .progress { display: none; }
 }
