@@ -181,8 +181,8 @@
   font-size: 0.95rem;
 }
 .newsletter__form input::placeholder { color: var(--on-dark-dim); }
-.newsletter__form input:focus { outline: 2px solid var(--oak); outline-offset: 2px; }
-.newsletter__form .btn { --bg: var(--oak); --fg: #1a140c; flex: none; }
+.newsletter__form input:focus { outline: 2px solid var(--on-dark); outline-offset: 2px; }
+.newsletter__form .btn { --bg: var(--on-dark); --fg: #1a140c; flex: none; }
 .newsletter__form .btn::before { background: var(--on-dark); }
 .newsletter__form .btn:hover { --fg: var(--dark); }
 
