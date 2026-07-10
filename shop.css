@@ -20,6 +20,15 @@
   --on-dark:   #f3ede4;
   --on-dark-dim: rgba(243, 237, 228, 0.6);
 
+  /* Ambient "reviews" wash — deeper beige lifted by two soft warm glows,
+     used as the site-wide page background. Kept as gradient layers only
+     (no trailing colour) so background-attachment: fixed applies to both
+     glows and every screenful carries the wash. */
+  --beige-deep: #e9ddc9;
+  --ambient-bg:
+    radial-gradient(58vw 55vw at 12% 6%, rgba(255, 250, 240, 0.92), rgba(255, 250, 240, 0) 60%),
+    radial-gradient(52vw 52vw at 88% 96%, rgba(198, 166, 119, 0.38), rgba(198, 166, 119, 0) 62%);
+
   --star:      #201a14;
   --ok:        #5c7a53;
 
@@ -48,7 +57,10 @@ html {
 body {
   font-family: var(--font);
   color: var(--ink);
-  background: var(--cream);
+  background-color: var(--beige-deep);
+  background-image: var(--ambient-bg);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   line-height: 1.5;
   overflow-x: hidden;
 }

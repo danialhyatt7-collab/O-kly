@@ -12,6 +12,10 @@
   --frost-line: rgba(255, 255, 255, 0.65);
 }
 
+/* Let the hero's surrounding canvas share the site-wide reviews wash so
+   there's no tone seam where the marquee floats at the hero's base. */
+.hero-stage { background: transparent; }
+
 /* ============================================================
    Scroll progress bar
    ============================================================ */
@@ -35,7 +39,7 @@
    Section scaffolding
    ============================================================ */
 
-.section { padding-block: clamp(3.5rem, 9vw, 7.5rem); background: var(--cream); position: relative; }
+.section { padding-block: clamp(3.5rem, 9vw, 7.5rem); background: transparent; position: relative; }
 .section--tight { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
 
 .eyebrow {
@@ -286,7 +290,7 @@
 
 .statement {
   padding-block: clamp(4rem, 11vw, 9rem);
-  background: var(--cream);
+  background: transparent;
   text-align: center;
 }
 
@@ -515,29 +519,14 @@
    Testimonials — frosted marquee over glow blobs
    ============================================================ */
 
+/* The site-wide ambient wash already carries the reviews look, so the
+   band no longer needs its own fill or glow blobs. */
 .band {
-  background: var(--beige-deep);
+  background: transparent;
   overflow: hidden;
 }
 
-.band__glow {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(70px);
-  pointer-events: none;
-}
-.band__glow--a {
-  width: 44vw; height: 44vw;
-  min-width: 340px; min-height: 340px;
-  top: -10%; left: -8%;
-  background: rgba(255, 249, 238, 0.9);
-}
-.band__glow--b {
-  width: 38vw; height: 38vw;
-  min-width: 300px; min-height: 300px;
-  bottom: -18%; right: -6%;
-  background: rgba(196, 164, 117, 0.5);
-}
+.band__glow { display: none; }
 
 .tmarquee {
   position: relative;
