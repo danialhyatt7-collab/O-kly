@@ -374,6 +374,35 @@
     });
   });
 
+  /* ---------- Horizontal rail (arrows + edge fades) ---------- */
+  document.querySelectorAll(".rail-wrap").forEach(function (wrap) {
+    var rail = wrap.querySelector(".rail");
+    var scope = wrap.previousElementSibling; // arrows live in the .section-head above the rail
+    var prev = (scope && scope.querySelector("[data-rail-prev]")) || wrap.querySelector("[data-rail-prev]");
+    var next = (scope && scope.querySelector("[data-rail-next]")) || wrap.querySelector("[data-rail-next]");
+    if (!rail) return;
+
+    function update() {
+      var max = rail.scrollWidth - rail.clientWidth - 1;
+      wrap.classList.toggle("is-scrolled", rail.scrollLeft > 0);
+      wrap.classList.toggle("can-scroll-more", rail.scrollLeft < max);
+      if (prev) prev.disabled = rail.scrollLeft <= 0;
+      if (next) next.disabled = rail.scrollLeft >= max;
+    }
+
+    function step(dir) {
+      var card = rail.querySelector(".pcard");
+      var amount = card ? card.getBoundingClientRect().width + 20 : rail.clientWidth * 0.8;
+      rail.scrollBy({ left: dir * amount, behavior: "smooth" });
+    }
+
+    if (prev) prev.addEventListener("click", function () { step(-1); });
+    if (next) next.addEventListener("click", function () { step(1); });
+    rail.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    update();
+  });
+
   /* ---------- Sticky mobile buy bar (product page) ---------- */
   var sticky = document.querySelector(".sticky-buy");
   var anchor = document.querySelector("[data-buy-anchor]");
