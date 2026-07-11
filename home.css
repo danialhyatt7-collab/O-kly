@@ -858,7 +858,7 @@
   display: block;
   position: relative;
   flex: none;
-  width: clamp(240px, 30vw, 400px);
+  width: clamp(190px, 20vw, 300px);
   aspect-ratio: 4 / 5;
   border-radius: var(--r-lg);
   overflow: hidden;
