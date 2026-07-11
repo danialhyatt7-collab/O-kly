@@ -40,7 +40,9 @@
   --ease-out:  cubic-bezier(0.22, 1, 0.36, 1);
   --ease-soft: cubic-bezier(0.45, 0, 0.15, 1);
 
-  --font: "General Sans", "Poppins", system-ui, -apple-system, sans-serif;
+  --font: "DM Sans", "General Sans", "Poppins", system-ui, -apple-system, sans-serif;
+  --font-head: "Sora", "DM Sans", "General Sans", sans-serif;
+  --font-eyebrow: "Manrope", "DM Sans", sans-serif;
 
   --pad: clamp(1.1rem, 4vw, 4rem);
   --maxw: 1180px;
@@ -69,6 +71,10 @@ a { color: inherit; text-decoration: none; }
 button { font-family: inherit; color: inherit; cursor: pointer; border: none; background: none; }
 img { display: block; max-width: 100%; }
 ul { list-style: none; }
+
+/* Display/heading typeface site-wide, matching scribehow.com's heading
+   font applied over its body font. */
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-head); }
 
 :focus-visible { outline: 2px solid var(--oak); outline-offset: 3px; border-radius: 4px; }
 

@@ -16,7 +16,9 @@
   --ease-out:   cubic-bezier(0.22, 1, 0.36, 1);
   --ease-soft:  cubic-bezier(0.45, 0, 0.15, 1);
 
-  --font-sans:   "General Sans", "Poppins", system-ui, -apple-system, sans-serif;
+  --font-sans:   "DM Sans", "General Sans", "Poppins", system-ui, -apple-system, sans-serif;
+  --font-head:   "Sora", "DM Sans", "General Sans", sans-serif;
+  --font-eyebrow: "Manrope", "DM Sans", sans-serif;
   --font-mono:   "Space Mono", ui-monospace, monospace;
 
   --pad-x: clamp(1.4rem, 3.2vw, 3.2rem);
@@ -412,7 +414,7 @@ body.is-scrolled .nav__dot { background: rgba(32, 26, 20, 0.35); }
 
 .hero__title {
   margin-top: 1.4rem;
-  font-family: var(--font-sans);
+  font-family: var(--font-head);
   font-weight: 700;
   font-size: clamp(2.3rem, 5.6vw, 4rem);
   line-height: 1.08;

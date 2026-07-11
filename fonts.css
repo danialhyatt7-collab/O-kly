@@ -1,5 +1,36 @@
 /* Self-hosted fonts (latin subsets) */
 
+/* Sora — display/heading typeface (matches scribehow.com's h1/heading font).
+   Variable font file covering 100–800; declared as a weight range so any
+   heading weight resolves to the correct instance from one file. */
+@font-face {
+  font-family: "Sora";
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url("assets/fonts/Sora-Variable.woff2") format("woff2");
+}
+
+/* DM Sans — body/UI typeface (matches scribehow.com's primary font).
+   Variable font file covering 100–1000. */
+@font-face {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 100 1000;
+  font-display: swap;
+  src: url("assets/fonts/DMSans-Variable.woff2") format("woff2");
+}
+
+/* Manrope — small-caption / eyebrow typeface (matches scribehow.com's
+   .small-caption labels). */
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("assets/fonts/Manrope-600.woff2") format("woff2");
+}
+
 @font-face {
   font-family: "Poppins";
   font-style: normal;
