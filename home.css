@@ -357,106 +357,77 @@
 }
 .manifesto__body p + p { margin-top: 1rem; }
 
-/* Stat row — crisp paper card with icon-topped, divided stats */
+/* Stat row — quiet typography, no card, no icons. Just confident
+   numbers separated by hairline rules. */
 .stats {
   position: relative;
   display: flex;
-  margin-top: clamp(1.8rem, 4vw, 2.6rem);
-  padding: clamp(1.5rem, 3vw, 2rem) clamp(1rem, 2.6vw, 1.6rem);
-  border-radius: var(--r-lg);
-  background: var(--paper);
-  border: 1px solid var(--line-soft);
-  box-shadow: 0 30px 65px -38px rgba(40, 28, 16, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  overflow: hidden;
+  margin-top: clamp(2rem, 4.5vw, 3rem);
+  padding-top: clamp(1.6rem, 3.5vw, 2.2rem);
+  border-top: 1px solid var(--line);
 }
 
-/* Thin oak accent bar along the top edge */
-.stats::before {
-  content: "";
+/* Drifting warm particles (wood-dust motes), rendered by Three.js and
+   lazy-loaded only once this section nears the viewport. Sits behind the
+   numbers, ignored entirely under reduced motion / touch / small
+   screens, where the canvas is simply never initialized. */
+.stats__canvas {
   position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(to right, var(--oak-deep), rgba(199, 154, 91, 0.55) 55%, transparent);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 1s var(--ease-out) var(--rd, 0s);
+  inset: -40px -20px -20px -20px;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.2s var(--ease-out);
 }
-.manifesto__copy.is-in .stats::before { transform: scaleX(1); }
+.stats__canvas.is-ready { opacity: 1; }
+
+.stat { position: relative; z-index: 1; }
 
 .stat {
-  position: relative;
   flex: 1;
   min-width: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.7rem;
-  padding-inline: clamp(0.8rem, 2.4vw, 1.4rem);
+  padding-inline: clamp(1.2rem, 3vw, 2rem);
   text-align: left;
 }
-.stat:first-child { padding-left: clamp(0.2rem, 1vw, 0.4rem); }
+.stat:first-child { padding-left: 0; }
 
-/* Vertical divider between stats */
-.stat + .stat::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 2px;
-  bottom: 2px;
-  width: 1px;
-  background: var(--line);
-}
-
-.stat__icon {
-  width: 38px;
-  height: 38px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  color: var(--cream);
-  background: var(--oak-deep);
-  box-shadow: 0 8px 16px -8px rgba(20, 16, 12, 0.5);
-  transition: transform 0.5s var(--ease-out), background-color 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
-}
-.stat__icon svg { width: 17px; height: 17px; }
-.stat:hover .stat__icon {
-  transform: translateY(-3px) scale(1.1) rotate(-6deg);
-  background: #ecdfc7;
-  color: var(--oak-deep);
-  box-shadow: 0 14px 26px -12px rgba(40, 28, 16, 0.45);
-}
+.stat + .stat { border-left: 1px solid var(--line); }
 
 .stat__num {
   display: flex;
   align-items: baseline;
-  gap: 0.28em;
-  font-size: clamp(1.9rem, 3.2vw, 2.4rem);
-  font-weight: 600;
+  gap: 0.26em;
+  font-family: var(--font-head);
+  font-size: clamp(2.3rem, 4vw, 3.1rem);
+  font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--ink);
   font-variant-numeric: tabular-nums;
-  transition: color 0.35s var(--ease-out);
+  line-height: 1;
 }
 .stat__num i {
+  font-family: var(--font-sans);
   font-style: normal;
-  font-size: 0.48em;
-  font-weight: 600;
+  font-size: 0.36em;
+  font-weight: 500;
   color: var(--ink-faint);
 }
-.stat:hover .stat__num { color: var(--oak-deep); }
 
 .stat__label {
-  font-size: 0.8rem;
-  letter-spacing: 0.02em;
-  color: var(--ink-soft);
+  display: block;
+  margin-top: 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
   line-height: 1.3;
 }
 
 @media (max-width: 560px) {
-  .stats { flex-direction: column; gap: 1.4rem; padding: 1.5rem 1.2rem; }
-  .stat + .stat::before { display: none; }
-  .stat + .stat { padding-top: 1.3rem; border-top: 1px solid var(--line); }
-  .stat:first-child { padding-left: clamp(0.8rem, 2.4vw, 1.4rem); }
+  .stats { flex-direction: column; gap: 1.2rem; }
+  .stat { padding-inline: 0; }
+  .stat + .stat { border-left: 0; padding-top: 1.2rem; border-top: 1px solid var(--line); }
 }
 
 .manifesto__art {
