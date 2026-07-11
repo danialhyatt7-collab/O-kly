@@ -249,13 +249,15 @@
     btn.addEventListener("click", function () {
       var q = 1;
       var qEl = document.querySelector("[data-qty-input]");
-      if (btn.dataset.add === "main" && qEl) q = parseInt(qEl.value, 10) || 1;
+      if ((btn.dataset.add === "main" || btn.dataset.add === "buynow") && qEl) q = parseInt(qEl.value, 10) || 1;
 
       var name = btn.dataset.name;
       var price = parseFloat(btn.dataset.price);
-      if (!name || !price) return; // button not wired with product data — nothing to add
+      if (!name || isNaN(price)) return; // button not wired with product data — nothing to add
 
       addToCart({ name: name, price: price, img: btn.dataset.img || "", href: btn.dataset.href || "" }, q);
+
+      if (btn.dataset.add === "buynow") checkoutViaWhatsApp();
     });
   });
 
@@ -289,9 +291,14 @@
   document.querySelectorAll("[data-select-group]").forEach(function (group) {
     var items = group.querySelectorAll("[data-select]");
     items.forEach(function (item) {
+      if (item.tagName === "BUTTON") item.setAttribute("aria-pressed", item.classList.contains("is-active"));
       item.addEventListener("click", function () {
-        items.forEach(function (i) { i.classList.remove("is-active"); });
+        items.forEach(function (i) {
+          i.classList.remove("is-active");
+          if (i.tagName === "BUTTON") i.setAttribute("aria-pressed", "false");
+        });
         item.classList.add("is-active");
+        if (item.tagName === "BUTTON") item.setAttribute("aria-pressed", "true");
         // gallery thumb -> swap main image
         if (item.dataset.img) {
           var main = document.querySelector("[data-gallery-main]");
@@ -322,19 +329,48 @@
       qInput.value = Math.max(1, Math.min(99, v));
     });
   });
+  if (qInput) {
+    var clampQty = function () {
+      var v = parseInt(qInput.value, 10);
+      if (isNaN(v)) v = 1;
+      qInput.value = Math.max(1, Math.min(99, v));
+    };
+    qInput.addEventListener("change", clampQty);
+    qInput.addEventListener("blur", clampQty);
+  }
 
   /* ---------- Accordion ---------- */
   document.querySelectorAll(".acc__head").forEach(function (head) {
+    head.setAttribute("aria-expanded", head.parentElement.classList.contains("is-open"));
     head.addEventListener("click", function () {
-      head.parentElement.classList.toggle("is-open");
+      var open = head.parentElement.classList.toggle("is-open");
+      head.setAttribute("aria-expanded", open);
     });
   });
 
-  /* ---------- Favorite toggle ---------- */
+  /* ---------- Favorite toggle (persisted) ---------- */
+  var FAV_KEY = "oakly_favs_v1";
+  function getFavs() {
+    try { return JSON.parse(localStorage.getItem(FAV_KEY)) || []; } catch (e) { return []; }
+  }
+  function setFavs(favs) {
+    try { localStorage.setItem(FAV_KEY, JSON.stringify(favs)); } catch (e) {}
+  }
   document.querySelectorAll("[data-fav]").forEach(function (btn) {
+    var card = btn.closest("[data-cat]");
+    var nameEl = card && card.querySelector(".pcard__name");
+    var key = btn.dataset.name || (nameEl ? nameEl.textContent.trim() : "");
+    var favs = getFavs();
+    if (key && favs.indexOf(key) !== -1) btn.classList.add("is-fav");
     btn.addEventListener("click", function (e) {
       e.preventDefault();
-      btn.classList.toggle("is-fav");
+      var isFav = btn.classList.toggle("is-fav");
+      if (!key) return;
+      var list = getFavs();
+      var idx = list.indexOf(key);
+      if (isFav && idx === -1) list.push(key);
+      if (!isFav && idx !== -1) list.splice(idx, 1);
+      setFavs(list);
     });
   });
 
