@@ -40,6 +40,12 @@
    ============================================================ */
 
 .section { padding-block: clamp(3.5rem, 9vw, 7.5rem); background: transparent; position: relative; }
+
+/* Anchor targets land clear of the sticky header — a CSS-level fallback
+   that works even without JS (Lenis already offsets its own smooth
+   scrollTo, but native "jump to #faq" URLs and browser find-in-page
+   still rely on this). */
+#about, #faq { scroll-margin-top: clamp(70px, 12vw, 100px); }
 .section--tight { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
 
 .eyebrow {
