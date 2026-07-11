@@ -32,7 +32,8 @@ body {
   font-family: var(--font-sans);
   color: var(--white);
   background: var(--dark);
-  overflow-x: hidden;
+  /* Not clipping overflow-x here — see shop.css's body rule for why
+     (breaks position:sticky descendants). <html> already clips it. */
 }
 
 a { color: inherit; text-decoration: none; }
