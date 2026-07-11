@@ -186,7 +186,7 @@
 
 .rail-wrap { position: relative; }
 .rail-wrap::before, .rail-wrap::after {
-  content: ""; position: absolute; top: 0; bottom: 1.6rem; width: clamp(28px, 5vw, 64px);
+  content: ""; position: absolute; top: 32px; bottom: 1.6rem; width: clamp(28px, 5vw, 64px);
   z-index: 2; pointer-events: none;
   opacity: 0; transition: opacity .3s var(--ease-out);
 }
@@ -197,7 +197,7 @@
 
 .rail {
   display: grid; grid-auto-flow: column; grid-auto-columns: minmax(250px, 1fr);
-  gap: 20px; overflow-x: auto; padding: 4px 4px 1.6rem;
+  gap: 20px; overflow-x: auto; padding: 32px 4px 1.6rem;
   scroll-snap-type: x mandatory;
   scrollbar-width: none; -ms-overflow-style: none;
 }
