@@ -382,12 +382,20 @@
     var next = (scope && scope.querySelector("[data-rail-next]")) || wrap.querySelector("[data-rail-next]");
     if (!rail) return;
 
+    // Some browsers land scroll-snap containers a few px off zero on load
+    // (to align the first snap point against the container's own padding),
+    // not because the user scrolled — ignore that noise so the left edge
+    // fade/disabled state don't falsely trigger at rest.
+    var SCROLL_EPSILON = 12;
+
     function update() {
       var max = rail.scrollWidth - rail.clientWidth - 1;
-      wrap.classList.toggle("is-scrolled", rail.scrollLeft > 0);
-      wrap.classList.toggle("can-scroll-more", rail.scrollLeft < max);
-      if (prev) prev.disabled = rail.scrollLeft <= 0;
-      if (next) next.disabled = rail.scrollLeft >= max;
+      var atStart = rail.scrollLeft <= SCROLL_EPSILON;
+      var atEnd = rail.scrollLeft >= max - SCROLL_EPSILON;
+      wrap.classList.toggle("is-scrolled", !atStart);
+      wrap.classList.toggle("can-scroll-more", !atEnd);
+      if (prev) prev.disabled = atStart;
+      if (next) next.disabled = atEnd;
     }
 
     function step(dir) {
