@@ -52,9 +52,15 @@
 
 html {
   -webkit-text-size-adjust: 100%;
-  scroll-behavior: smooth;
   overflow-x: hidden;
 }
+
+/* Lenis owns scroll smoothing once it's active — CSS scroll-behavior
+   would otherwise fight its eased scrollTo() calls. */
+html.lenis, html.lenis body { height: auto; }
+html.lenis-smooth { scroll-behavior: auto !important; }
+html.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+html.lenis.lenis-stopped { overflow: hidden; }
 
 body {
   font-family: var(--font);

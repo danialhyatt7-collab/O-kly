@@ -5,6 +5,34 @@
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var fine   = window.matchMedia("(pointer: fine)").matches;
 
+  /* ---------- Smooth scroll (Lenis) ---------- */
+  var lenis = null;
+  if (!reduce && typeof Lenis !== "undefined") {
+    lenis = new Lenis({
+      duration: 1.1,
+      easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+      smoothWheel: true,
+      autoRaf: true
+    });
+
+    /* Route same-page anchor links (nav links, "Home" underline, etc.)
+       through Lenis so they get the same eased scroll, offset clear of
+       the sticky header. */
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      var id = a.getAttribute("href");
+      if (!id || id.length < 2) return;
+      a.addEventListener("click", function (e) {
+        var target;
+        try { target = document.querySelector(id); } catch (err) { return; }
+        if (!target) return;
+        e.preventDefault();
+        var header = document.querySelector(".nav, .site-header");
+        var offset = header ? -(header.offsetHeight + 16) : -24;
+        lenis.scrollTo(target, { offset: offset, duration: 1.3 });
+      });
+    });
+  }
+
   /* ---------- Toast ---------- */
   var toast = document.querySelector(".toast");
   var toastTimer;
