@@ -2,19 +2,31 @@
 (function () {
   "use strict";
 
-  /* ---------- Entrance: flip the loaded switch ---------- */
-  function reveal() {
-    requestAnimationFrame(function () {
-      document.body.classList.add("is-loaded");
-    });
-  }
+  /* ---------- Entrance: flip the loaded switch ----------
+     The curtain only plays once per tab session — once someone's seen
+     it, navigating home → a product → back to home shouldn't replay a
+     1-2.5s animation every single time. */
+  var CURTAIN_KEY = "oakly_curtain_seen";
+  var seenCurtain = false;
+  try { seenCurtain = sessionStorage.getItem(CURTAIN_KEY) === "1"; } catch (e) {}
 
-  var bg = document.querySelector(".hero__bg img");
-  if (bg && !bg.complete) {
-    bg.addEventListener("load", reveal, { once: true });
-    setTimeout(reveal, 2500); /* don't hold the curtain hostage */
+  if (seenCurtain) {
+    document.body.classList.add("no-curtain", "is-loaded");
   } else {
-    reveal();
+    function reveal() {
+      requestAnimationFrame(function () {
+        document.body.classList.add("is-loaded");
+      });
+      try { sessionStorage.setItem(CURTAIN_KEY, "1"); } catch (e) {}
+    }
+
+    var bg = document.querySelector(".hero__bg img");
+    if (bg && !bg.complete) {
+      bg.addEventListener("load", reveal, { once: true });
+      setTimeout(reveal, 2500); /* don't hold the curtain hostage */
+    } else {
+      reveal();
+    }
   }
 
   /* ---------- Sticky frosted header on scroll ---------- */
@@ -122,6 +134,18 @@
     }
   }
 
+  /* ---------- Lead capture via WhatsApp ----------
+     No form backend exists, so both forms below open a pre-filled
+     WhatsApp chat to the same business number already used for cart
+     checkout — the lead lands somewhere a human actually sees it,
+     instead of vanishing into a form with nowhere to go. */
+  var WHATSAPP_NUMBER = "923005926262";
+
+  function openWhatsApp(text) {
+    var url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text);
+    window.open(url, "_blank", "noopener");
+  }
+
   /* ---------- Hero email capture ---------- */
   var emailForm = document.querySelector("[data-email-form]");
   if (emailForm) {
@@ -133,12 +157,16 @@
       e.preventDefault();
       if (!emailInput.checkValidity() || emailForm.classList.contains("is-sent")) return;
 
+      openWhatsApp(
+        "Hi Oakly! I'd like the PKR 5,000 off my first order — here's my email: " + emailInput.value
+      );
+
       emailForm.classList.add("is-sent");
       emailInput.disabled = true;
       if (emailBtn) {
         emailBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12 4 4 10-10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
       }
-      if (emailNote) emailNote.textContent = "You're on the list — check your inbox for the code.";
+      if (emailNote) emailNote.textContent = "Opening WhatsApp — send the message to lock in your code.";
     });
   }
 
@@ -152,9 +180,13 @@
       e.preventDefault();
       if (!tradeInput.checkValidity() || tradeForm.classList.contains("is-sent")) return;
 
+      openWhatsApp(
+        "Hi Oakly! I'm enquiring about a trade/bulk order — here's my work email: " + tradeInput.value
+      );
+
       tradeForm.classList.add("is-sent");
       tradeInput.disabled = true;
-      if (tradeLabel) tradeLabel.textContent = "Thanks — we'll be in touch";
+      if (tradeLabel) tradeLabel.textContent = "Opening WhatsApp…";
     });
   }
 })();
