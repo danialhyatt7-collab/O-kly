@@ -2,31 +2,19 @@
 (function () {
   "use strict";
 
-  /* ---------- Entrance: flip the loaded switch ----------
-     The curtain only plays once per tab session — once someone's seen
-     it, navigating home → a product → back to home shouldn't replay a
-     1-2.5s animation every single time. */
-  var CURTAIN_KEY = "oakly_curtain_seen";
-  var seenCurtain = false;
-  try { seenCurtain = sessionStorage.getItem(CURTAIN_KEY) === "1"; } catch (e) {}
+  /* ---------- Entrance: flip the loaded switch ---------- */
+  function reveal() {
+    requestAnimationFrame(function () {
+      document.body.classList.add("is-loaded");
+    });
+  }
 
-  if (seenCurtain) {
-    document.body.classList.add("no-curtain", "is-loaded");
+  var bg = document.querySelector(".hero__bg img");
+  if (bg && !bg.complete) {
+    bg.addEventListener("load", reveal, { once: true });
+    setTimeout(reveal, 2500); /* don't hold the curtain hostage */
   } else {
-    function reveal() {
-      requestAnimationFrame(function () {
-        document.body.classList.add("is-loaded");
-      });
-      try { sessionStorage.setItem(CURTAIN_KEY, "1"); } catch (e) {}
-    }
-
-    var bg = document.querySelector(".hero__bg img");
-    if (bg && !bg.complete) {
-      bg.addEventListener("load", reveal, { once: true });
-      setTimeout(reveal, 2500); /* don't hold the curtain hostage */
-    } else {
-      reveal();
-    }
+    reveal();
   }
 
   /* ---------- Sticky frosted header on scroll ---------- */
