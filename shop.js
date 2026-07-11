@@ -14,6 +14,11 @@
       smoothWheel: true,
       autoRaf: true
     });
+    /* Exposed so other scripts (e.g. the mobile menu lock) can pause
+       Lenis's own wheel-driven scroll — plain CSS overflow:hidden on
+       body doesn't stop it, since Lenis scrolls independently of native
+       overflow scrolling once active. */
+    window.__lenis = lenis;
 
     /* Route same-page anchor links (nav links, "Home" underline, etc.)
        through Lenis so they get the same eased scroll, offset clear of
