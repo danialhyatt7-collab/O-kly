@@ -162,20 +162,84 @@
 
 .section-head {
   display: flex; align-items: end; justify-content: space-between; gap: 1rem;
-  margin-top: clamp(3rem, 7vw, 6rem); margin-bottom: 1.6rem;
+  margin-top: clamp(3rem, 7vw, 6rem); margin-bottom: 1.8rem;
 }
 .section-head h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 600; letter-spacing: -0.01em; }
-.section-head a { font-size: 0.92rem; color: var(--oak-deep); font-weight: 500; }
-.section-head a:hover { text-decoration: underline; }
+.section-head a {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.9rem; color: var(--oak-deep); font-weight: 500;
+  transition: gap .25s var(--ease-out);
+}
+.section-head a:hover { gap: 10px; }
 
 .rail {
-  display: grid; grid-auto-flow: column; grid-auto-columns: minmax(220px, 1fr);
-  gap: 16px; overflow-x: auto; padding-bottom: 0.6rem;
+  display: grid; grid-auto-flow: column; grid-auto-columns: minmax(250px, 1fr);
+  gap: 20px; overflow-x: auto; padding: 4px 4px 1.6rem;
   scroll-snap-type: x mandatory;
   scrollbar-width: thin;
 }
-.rail::-webkit-scrollbar { height: 6px; }
-.rail::-webkit-scrollbar-thumb { background: var(--line); border-radius: 100px; }
+.rail::-webkit-scrollbar { height: 5px; }
+.rail::-webkit-scrollbar-track { background: var(--line-soft); border-radius: 100px; }
+.rail::-webkit-scrollbar-thumb { background: var(--ink-faint); border-radius: 100px; }
+
+.rail .pcard {
+  scroll-snap-align: start;
+  background: var(--paper);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  transition: transform .45s var(--ease-out), box-shadow .45s var(--ease-out), border-color .3s;
+}
+.rail .pcard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 34px 64px -30px rgba(40,28,16,0.42);
+  border-color: var(--line);
+}
+
+.rail .pcard__media { position: relative; aspect-ratio: 4 / 3.6; overflow: hidden; background: var(--cream); }
+.rail .pcard__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.1s var(--ease-out); }
+.rail .pcard:hover .pcard__media img { transform: scale(1.08); }
+.rail .pcard__media::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(20,15,10,0.28), rgba(20,15,10,0) 45%);
+  opacity: 0; transition: opacity .4s var(--ease-out);
+}
+.rail .pcard:hover .pcard__media::after { opacity: 1; }
+
+.rail .pcard__tag {
+  position: absolute; top: 12px; left: 12px; z-index: 1;
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.04em;
+  color: var(--ink); background: rgba(251,248,243,0.9);
+  padding: 5px 10px; border-radius: var(--r-pill);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
+
+.rail .pcard__body { padding: 1.1rem 1.15rem 1.2rem; }
+.rail .pcard__cat { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); }
+.rail .pcard__name {
+  font-size: 1.08rem; font-weight: 500; margin: 0.25rem 0 0.7rem;
+  letter-spacing: -0.005em;
+}
+.rail .pcard__name a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.rail .pcard__foot { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; }
+.rail .pcard__price b { font-weight: 600; font-size: 1.02rem; }
+
+.rail .pcard__add.pcard__add--rail {
+  width: auto; margin-top: 0;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 0.55rem 1.05rem; border-radius: var(--r-pill);
+  border: 1.5px solid var(--line); font-size: 0.85rem; font-weight: 500;
+  transition: background-color .25s, color .25s, border-color .25s, transform .25s var(--ease-out);
+}
+.rail .pcard__add--rail svg { width: 15px; height: 15px; }
+.rail .pcard__add--rail:hover {
+  background: var(--ink); border-color: var(--ink); color: var(--cream);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 640px) {
+  .rail { grid-auto-columns: minmax(200px, 1fr); gap: 14px; }
+}
 
 /* ============================================================
    Sticky mobile add-bar
