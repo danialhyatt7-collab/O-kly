@@ -5,14 +5,11 @@
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var fine   = window.matchMedia("(pointer: fine)").matches;
 
-  /* ---------- Stats particle field (Canvas2D, no dependency) ----------
+  /* ---------- Stats particle field (Three.js, lazy-loaded) ----------
      Warm drifting motes behind the craft stats, evoking sawdust catching
-     light in a workshop, with gentle cursor parallax. Previously used a
-     656KB Three.js/WebGL build for this — massive overkill for ~40 soft
-     dots, and it shipped a deprecated build (console warning). A plain
-     2D canvas gets an identical result with zero dependency and no
-     network fetch, so it only needs a fine-pointer/motion/width gate,
-     no lazy-load step. */
+     light in a workshop. Only loads the Three.js bundle (and only runs
+     the WebGL scene at all) on wide, fine-pointer, motion-allowed
+     viewports, once the section is about to scroll into view. */
   (function () {
     var host = document.querySelector("[data-stats-particles]");
     if (!host) return;
@@ -20,83 +17,131 @@
     if (!window.matchMedia("(min-width: 760px)").matches) return;
     if (!("IntersectionObserver" in window)) return;
 
-    var canvas = host.querySelector(".stats__canvas");
-    if (!canvas) return;
-    var ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    var started = false;
 
-    var COUNT = 40;
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    var w = 0, h = 0;
-    var particles = [];
-
-    function makeParticle() {
-      return {
-        x: Math.random(),
-        y: Math.random(),
-        r: 1 + Math.random() * 2.2,
-        a: 0.25 + Math.random() * 0.5,
-        speed: 0.008 + Math.random() * 0.014
-      };
+    function loadThree(cb) {
+      if (window.THREE) { cb(); return; }
+      var s = document.createElement("script");
+      s.src = "assets/vendor/three.min.js";
+      s.onload = cb;
+      s.onerror = function () {}; /* fail silent — canvas just stays empty */
+      document.body.appendChild(s);
     }
-    for (var i = 0; i < COUNT; i++) particles.push(makeParticle());
 
-    function resize() {
-      w = host.clientWidth;
-      h = host.clientHeight;
-      if (!w || !h) return;
-      canvas.width = w * dpr;
-      canvas.height = h * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
-    resize();
-    window.addEventListener("resize", resize);
+    function init() {
+      var canvas = host.querySelector(".stats__canvas");
+      if (!canvas || !window.THREE) return;
 
-    var mouseX = 0, mouseY = 0, parX = 0, parY = 0;
-    host.addEventListener("pointermove", function (e) {
-      var rect = host.getBoundingClientRect();
-      mouseX = (e.clientX - rect.left) / rect.width - 0.5;
-      mouseY = (e.clientY - rect.top) / rect.height - 0.5;
-    });
+      var THREE = window.THREE;
+      var renderer;
+      try {
+        renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+      } catch (e) { return; }
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 
-    var running = true;
-    var raf = null;
-    function tick() {
-      if (!running || !w || !h) { raf = null; return; }
-      raf = requestAnimationFrame(tick);
+      var scene = new THREE.Scene();
+      var camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+      camera.position.z = 20;
 
-      parX += (mouseX * 14 - parX) * 0.04;
-      parY += (mouseY * 10 - parY) * 0.04;
+      /* Soft round sprite, generated on a small canvas — no image asset. */
+      var spriteCanvas = document.createElement("canvas");
+      spriteCanvas.width = spriteCanvas.height = 64;
+      var sctx = spriteCanvas.getContext("2d");
+      var grad = sctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+      grad.addColorStop(0, "rgba(122,88,45,0.95)");
+      grad.addColorStop(0.5, "rgba(122,88,45,0.5)");
+      grad.addColorStop(1, "rgba(122,88,45,0)");
+      sctx.fillStyle = grad;
+      sctx.fillRect(0, 0, 64, 64);
+      var spriteTex = new THREE.CanvasTexture(spriteCanvas);
 
-      ctx.clearRect(0, 0, w, h);
-      for (var i = 0; i < particles.length; i++) {
-        var p = particles[i];
-        p.y -= p.speed * 0.016;
-        if (p.y < -0.05) { p.y = 1.05; p.x = Math.random(); }
-
-        var px = p.x * w + parX;
-        var py = p.y * h + parY;
-        var grad = ctx.createRadialGradient(px, py, 0, px, py, p.r * 3);
-        grad.addColorStop(0, "rgba(122,88,45," + p.a + ")");
-        grad.addColorStop(1, "rgba(122,88,45,0)");
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.arc(px, py, p.r * 3, 0, Math.PI * 2);
-        ctx.fill();
+      var COUNT = 46;
+      var positions = new Float32Array(COUNT * 3);
+      var speeds = new Float32Array(COUNT);
+      for (var i = 0; i < COUNT; i++) {
+        positions[i * 3] = (Math.random() - 0.5) * 26;
+        positions[i * 3 + 1] = (Math.random() - 0.5) * 10;
+        positions[i * 3 + 2] = (Math.random() - 0.5) * 12;
+        speeds[i] = 0.06 + Math.random() * 0.1;
       }
-    }
-    tick();
-
-    /* Pause the loop when the section is off-screen. */
-    var vio = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        running = e.isIntersecting;
-        if (running && !raf) tick();
+      var geo = new THREE.BufferGeometry();
+      geo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+      var mat = new THREE.PointsMaterial({
+        size: 0.9,
+        map: spriteTex,
+        transparent: true,
+        opacity: 0.75,
+        depthWrite: false
       });
-    }, { threshold: 0 });
-    vio.observe(host);
+      var points = new THREE.Points(geo, mat);
+      scene.add(points);
 
-    requestAnimationFrame(function () { canvas.classList.add("is-ready"); });
+      var mouseX = 0, mouseY = 0, targetRotX = 0, targetRotY = 0;
+      host.addEventListener("pointermove", function (e) {
+        var rect = host.getBoundingClientRect();
+        mouseX = (e.clientX - rect.left) / rect.width - 0.5;
+        mouseY = (e.clientY - rect.top) / rect.height - 0.5;
+      });
+
+      function resize() {
+        var w = host.clientWidth, h = host.clientHeight;
+        if (!w || !h) return;
+        renderer.setSize(w, h, false);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      }
+      resize();
+      window.addEventListener("resize", resize);
+
+      var clock = new THREE.Clock();
+      var raf;
+      function tick() {
+        raf = requestAnimationFrame(tick);
+        var dt = clock.getDelta();
+        var pos = geo.attributes.position;
+        for (var i = 0; i < COUNT; i++) {
+          var y = pos.getY(i) + speeds[i] * dt;
+          if (y > 5) y = -5;
+          pos.setY(i, y);
+        }
+        pos.needsUpdate = true;
+
+        targetRotX += (mouseY * 0.25 - targetRotX) * 0.04;
+        targetRotY += (mouseX * 0.3 - targetRotY) * 0.04;
+        points.rotation.x = targetRotX;
+        points.rotation.y = targetRotY;
+
+        renderer.render(scene, camera);
+      }
+      tick();
+
+      /* Pause the render loop when the section is off-screen, resume
+         when it's back — keeps this idle-cheap while scrolled past. */
+      var vio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            if (!raf) tick();
+          } else if (raf) {
+            cancelAnimationFrame(raf);
+            raf = null;
+          }
+        });
+      }, { threshold: 0 });
+      vio.observe(host);
+
+      requestAnimationFrame(function () { canvas.classList.add("is-ready"); });
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting && !started) {
+          started = true;
+          io.disconnect();
+          loadThree(init);
+        }
+      });
+    }, { rootMargin: "400px 0px" });
+    io.observe(host);
   })();
 
   /* ---------- Scroll progress bar ---------- */

@@ -49,29 +49,26 @@
   var burger = document.querySelector(".nav__burger");
 
   if (nav && burger) {
-    function setMenu(open) {
-      nav.classList.toggle("is-menu-open", open);
+    burger.addEventListener("click", function () {
+      var open = nav.classList.toggle("is-menu-open");
       burger.setAttribute("aria-expanded", open ? "true" : "false");
       burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-      /* Lock body scroll while the full-screen menu is open. CSS
-         overflow:hidden alone doesn't stop Lenis's own wheel-driven
-         scroll, so pause/resume the Lenis instance too when present. */
-      document.body.classList.toggle("nav-menu-open", open);
-      if (window.__lenis) {
-        if (open) window.__lenis.stop(); else window.__lenis.start();
-      }
-    }
-
-    burger.addEventListener("click", function () {
-      setMenu(!nav.classList.contains("is-menu-open"));
     });
 
     nav.querySelectorAll(".nav__menu a").forEach(function (link) {
-      link.addEventListener("click", function () { setMenu(false); });
+      link.addEventListener("click", function () {
+        nav.classList.remove("is-menu-open");
+        burger.setAttribute("aria-expanded", "false");
+        burger.setAttribute("aria-label", "Open menu");
+      });
     });
 
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && nav.classList.contains("is-menu-open")) setMenu(false);
+      if (e.key === "Escape" && nav.classList.contains("is-menu-open")) {
+        nav.classList.remove("is-menu-open");
+        burger.setAttribute("aria-expanded", "false");
+        burger.setAttribute("aria-label", "Open menu");
+      }
     });
   }
 
