@@ -108,6 +108,60 @@
     });
   });
 
+  /* ---------- Lookbook: pinned horizontal scroll ----------
+     Only upgrades to the pinned filmstrip on wide, fine-pointer,
+     motion-allowed viewports — CSS default is already a working
+     horizontally-scrollable filmstrip, so touch/mobile/narrow/reduced-
+     motion visitors get that unchanged. */
+  (function () {
+    var pin = document.querySelector("[data-lookbook-pin]");
+    var track = document.querySelector("[data-lookbook-track]");
+    var hint = document.querySelector("[data-lookbook-hint]");
+    if (!pin || !track) return;
+    if (!window.matchMedia("(min-width: 900px)").matches) return;
+
+    pin.classList.add("is-pinned");
+
+    var travel = 0;
+    function layout() {
+      travel = Math.max(0, track.scrollWidth - window.innerWidth);
+      pin.style.setProperty("--pin-h", (travel + window.innerHeight) + "px");
+    }
+
+    var ticking = false;
+    function onScroll() {
+      var total = pin.offsetHeight - window.innerHeight;
+      var progress = total > 0 ? -pin.getBoundingClientRect().top / total : 0;
+      progress = Math.min(1, Math.max(0, progress));
+      track.style.transform = "translateX(-" + (progress * travel) + "px)";
+      if (hint) {
+        if (progress > 0.02) hint.classList.add("is-done");
+      }
+      ticking = false;
+    }
+    window.addEventListener("scroll", function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+    }, { passive: true });
+
+    var resizeTimer;
+    window.addEventListener("resize", function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () { layout(); onScroll(); }, 150);
+    });
+
+    layout();
+    onScroll();
+
+    if (hint && "IntersectionObserver" in window) {
+      var hio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) hint.classList.add("is-shown");
+        });
+      }, { threshold: 0.4 });
+      hio.observe(pin);
+    }
+  })();
+
   /* ---------- Magnetic buttons ---------- */
   document.querySelectorAll("[data-magnetic]").forEach(function (btn) {
     btn.addEventListener("pointermove", function (e) {
