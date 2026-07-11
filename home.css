@@ -166,12 +166,6 @@
 .process__item:nth-child(2) { --rd: 0.1s; }
 .process__item:nth-child(3) { --rd: 0.2s; }
 
-.lookbook-grid > .lookbook-tile:nth-child(1) { --rd: 0s; }
-.lookbook-grid > .lookbook-tile:nth-child(2) { --rd: 0.06s; }
-.lookbook-grid > .lookbook-tile:nth-child(3) { --rd: 0.12s; }
-.lookbook-grid > .lookbook-tile:nth-child(4) { --rd: 0.18s; }
-.lookbook-grid > .lookbook-tile:nth-child(5) { --rd: 0.24s; }
-.lookbook-grid > .lookbook-tile:nth-child(6) { --rd: 0.3s; }
 
 /* ============================================================
    Collection — frosted product cards
@@ -794,28 +788,88 @@
 .acc__inner p { padding-bottom: 1.15rem; color: var(--ink-soft); font-size: 0.94rem; }
 
 /* ============================================================
-   Lookbook
+   Lookbook — pinned horizontal scroll (desktop) /
+   swipeable filmstrip (mobile, reduced motion, or JS-off)
    ============================================================ */
 
-.lookbook-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 10px;
+.lookbook-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.6rem;
+  font-size: 0.8rem;
+  color: var(--ink-faint);
+  opacity: 0;
+  transition: opacity 0.6s var(--ease-out);
 }
+.lookbook-hint::after {
+  content: "→";
+  display: inline-block;
+  animation: lookbook-hint-nudge 1.6s ease-in-out infinite;
+}
+.lookbook-hint.is-shown { opacity: 1; }
+.lookbook-hint.is-done { opacity: 0; }
+@keyframes lookbook-hint-nudge {
+  0%, 100% { transform: translateX(0); }
+  50%      { transform: translateX(5px); }
+}
+
+/* Default (progressive-enhancement base): a plain, always-works
+   horizontally-scrollable filmstrip with scroll-snap. Works with no JS,
+   on touch, and under reduced motion. */
+.lookbook-pin { position: relative; }
+
+.lookbook-pin__sticky { height: auto; }
+
+.lookbook-track {
+  display: flex;
+  gap: clamp(12px, 1.6vw, 20px);
+  padding-inline: var(--pad-x, clamp(1.4rem, 3.2vw, 3.2rem));
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  will-change: transform;
+}
+.lookbook-track::-webkit-scrollbar { display: none; }
+.lookbook-tile { scroll-snap-align: start; }
+
+/* Opt-in (desktop, fine pointer, motion allowed): JS adds .is-pinned and
+   sets --pin-h to give the sticky viewport room to traverse the full
+   track width, then drives the track's transform on scroll. */
+.lookbook-pin.is-pinned { height: var(--pin-h, auto); }
+
+.lookbook-pin.is-pinned .lookbook-pin__sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.lookbook-pin.is-pinned .lookbook-track {
+  overflow-x: visible;
+  scroll-snap-type: none;
+}
+.lookbook-pin.is-pinned .lookbook-tile { scroll-snap-align: none; }
 
 .lookbook-tile {
   display: block;
   position: relative;
-  aspect-ratio: 1;
-  border-radius: var(--r-sm);
+  flex: none;
+  width: clamp(240px, 30vw, 400px);
+  aspect-ratio: 4 / 5;
+  border-radius: var(--r-lg);
   overflow: hidden;
+  box-shadow: 0 24px 55px -36px rgba(40, 28, 16, 0.4);
 }
 
 .lookbook-tile::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(19, 17, 16, 0.45), rgba(19, 17, 16, 0) 55%);
+  background: linear-gradient(to top, rgba(19, 17, 16, 0.5), rgba(19, 17, 16, 0) 55%);
   opacity: 0;
   transition: opacity 0.45s var(--ease-out);
   pointer-events: none;
@@ -829,16 +883,16 @@
   display: block;
   transition: transform 0.7s var(--ease-out);
 }
-.lookbook-tile:hover img { transform: scale(1.09); }
+.lookbook-tile:hover img { transform: scale(1.07); }
 
 /* Frosted name chip that rises on hover */
 .lookbook-tile__chip {
   position: absolute;
-  left: 8px; right: 8px; bottom: 8px;
+  left: 10px; right: 10px; bottom: 10px;
   z-index: 1;
-  padding: 0.4rem 0.7rem;
+  padding: 0.5rem 0.85rem;
   border-radius: 100px;
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   font-weight: 600;
   text-align: center;
   color: var(--ink);
@@ -854,6 +908,10 @@
   text-overflow: ellipsis;
 }
 .lookbook-tile:hover .lookbook-tile__chip { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 640px) {
+  .lookbook-tile { width: clamp(200px, 72vw, 320px); }
+}
 
 /* ============================================================
    CTA — dark card with hero-style glows
@@ -940,7 +998,6 @@
   .process { grid-template-columns: 1fr; gap: 2rem; }
   .compare { grid-template-columns: 1fr; }
   .timeline { grid-template-columns: 1fr; gap: 2rem; }
-  .lookbook-grid { grid-template-columns: repeat(3, 1fr); }
   .cta { grid-template-columns: 1fr; text-align: left; }
 }
 
