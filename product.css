@@ -230,7 +230,7 @@
      to the full viewport width. clamp() keeps every card a predictable,
      content-appropriate size on any screen. */
   display: grid; grid-auto-flow: column; grid-auto-columns: clamp(230px, 26vw, 280px);
-  gap: 20px; overflow-x: auto; padding: 32px 4px 1.6rem;
+  gap: 20px; overflow-x: auto; padding: 32px 16px 64px;
   scroll-snap-type: x mandatory;
   scrollbar-width: none; -ms-overflow-style: none;
 }
