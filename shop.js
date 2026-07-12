@@ -374,7 +374,7 @@
     });
   });
 
-  /* ---------- Horizontal rail (arrows + edge fades) ---------- */
+  /* ---------- Horizontal rail (arrows) ---------- */
   document.querySelectorAll(".rail-wrap").forEach(function (wrap) {
     var rail = wrap.querySelector(".rail");
     var scope = wrap.previousElementSibling; // arrows live in the .section-head above the rail
@@ -384,16 +384,14 @@
 
     // Some browsers land scroll-snap containers a few px off zero on load
     // (to align the first snap point against the container's own padding),
-    // not because the user scrolled — ignore that noise so the left edge
-    // fade/disabled state don't falsely trigger at rest.
+    // not because the user scrolled — ignore that noise so the disabled
+    // state doesn't falsely trigger at rest.
     var SCROLL_EPSILON = 12;
 
     function update() {
       var max = rail.scrollWidth - rail.clientWidth - 1;
       var atStart = rail.scrollLeft <= SCROLL_EPSILON;
       var atEnd = rail.scrollLeft >= max - SCROLL_EPSILON;
-      wrap.classList.toggle("is-scrolled", !atStart);
-      wrap.classList.toggle("can-scroll-more", !atEnd);
       if (prev) prev.disabled = atStart;
       if (next) next.disabled = atEnd;
     }
