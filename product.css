@@ -319,4 +319,18 @@
 @media (max-width: 760px) {
   .sticky-buy { display: flex; }
   body { padding-bottom: 70px; }
+
+  /* The "Added to cart" toast sits at a fixed 26px from the bottom of the
+     viewport — same territory as the sticky add-to-cart bar on product
+     pages, so it landed on top of (and hid) the price/button instead of
+     floating above the bar. Clear the bar's height + safe-area.
+     (The hidden-state transform is redeclared in fixed px, not the base
+     rule's percentage-of-own-height — a % offset doesn't grow to match
+     a taller "bottom" anchor, so the toast would otherwise still peek
+     onscreen even while "hidden".) */
+  .toast {
+    bottom: calc(76px + env(safe-area-inset-bottom) + 14px);
+    transform: translate(-50%, 200px);
+  }
+  .toast.is-on { transform: translate(-50%, 0); }
 }
