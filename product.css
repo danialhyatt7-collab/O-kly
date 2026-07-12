@@ -196,7 +196,12 @@
 .rail-wrap.can-scroll-more::after { opacity: 1; }
 
 .rail {
-  display: grid; grid-auto-flow: column; grid-auto-columns: minmax(250px, 1fr);
+  /* Fixed/clamped track sizes, not minmax(_, 1fr) — 1fr tracks in an
+     auto-scrolling grid are sized off the scrollport rather than the
+     content, and mobile WebKit in particular can blow a lone track up
+     to the full viewport width. clamp() keeps every card a predictable,
+     content-appropriate size on any screen. */
+  display: grid; grid-auto-flow: column; grid-auto-columns: clamp(230px, 26vw, 280px);
   gap: 20px; overflow-x: auto; padding: 32px 4px 1.6rem;
   scroll-snap-type: x mandatory;
   scrollbar-width: none; -ms-overflow-style: none;
@@ -266,8 +271,28 @@
 }
 
 @media (max-width: 640px) {
-  .rail { grid-auto-columns: minmax(200px, 1fr); gap: 14px; }
+  /* Mobile is the primary surface here, not an afterthought: cards are
+     sized as a "peek" carousel (most of the viewport, a sliver of the
+     next card showing) so touch-swipe is the obvious interaction —
+     arrow buttons are desktop-only and hidden below. */
+  .section-head {
+    flex-direction: column; align-items: stretch; gap: 0.7rem;
+    margin-top: clamp(2.4rem, 12vw, 3.4rem); margin-bottom: 1.3rem;
+  }
+  .section-head__nav { justify-content: space-between; }
+
   .rail-arrows { display: none; }
+  .rail { grid-auto-columns: 78vw; gap: 12px; padding: 20px 4px 1.3rem; }
+  .rail-wrap::before, .rail-wrap::after { top: 20px; }
+
+  .rail .pcard__body { padding: 0.95rem 1rem 1.05rem; }
+  .rail .pcard__name { font-size: 1.02rem; margin-bottom: 0.55rem; }
+  .rail .pcard__foot { gap: 0.5rem; }
+  .rail .pcard__add--rail { padding: 0.5rem 0.9rem; font-size: 0.82rem; flex: none; }
+}
+
+@media (max-width: 380px) {
+  .rail { grid-auto-columns: 84vw; }
 }
 
 /* ============================================================
