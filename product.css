@@ -185,15 +185,6 @@
 .rail-arrow:disabled { opacity: 0.32; pointer-events: none; }
 
 .rail-wrap { position: relative; }
-.rail-wrap::before, .rail-wrap::after {
-  content: ""; position: absolute; top: 32px; bottom: 1.6rem; width: clamp(28px, 5vw, 64px);
-  z-index: 2; pointer-events: none;
-  opacity: 0; transition: opacity .3s var(--ease-out);
-}
-.rail-wrap::before { left: 0; background: linear-gradient(to right, var(--cream), transparent); }
-.rail-wrap::after { right: 0; background: linear-gradient(to left, var(--cream), transparent); }
-.rail-wrap.is-scrolled::before { opacity: 1; }
-.rail-wrap.can-scroll-more::after { opacity: 1; }
 
 .rail {
   /* Fixed/clamped track sizes, not minmax(_, 1fr) — 1fr tracks in an
@@ -283,7 +274,6 @@
 
   .rail-arrows { display: none; }
   .rail { grid-auto-columns: 78vw; gap: 12px; padding: 20px 4px 1.3rem; }
-  .rail-wrap::before, .rail-wrap::after { top: 20px; }
 
   .rail .pcard__body { padding: 0.95rem 1rem 1.05rem; }
   .rail .pcard__name { font-size: 1.02rem; margin-bottom: 0.55rem; }
