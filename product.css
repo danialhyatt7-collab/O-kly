@@ -91,10 +91,40 @@
    shrink below its content's natural width by default, which was
    splitting "PKR 152,000" into "PKR" / "152,000" on common phone
    widths (320–390px) instead of wrapping the row cleanly. */
-.price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 0.7rem; margin: 1.3rem 0; }
+.price { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 0.7rem; margin: 1.3rem 0; }
 .price__now { font-size: clamp(1.6rem, 3vw, 2rem); font-weight: 600; white-space: nowrap; }
-.price__was { font-size: 1.05rem; color: var(--ink-faint); text-decoration: line-through; white-space: nowrap; }
-.price__off { font-size: 0.76rem; font-weight: 600; color: var(--oak-deep); background: rgba(32,26,20,0.08); padding: 3px 9px; border-radius: var(--r-pill); white-space: nowrap; }
+
+.price__was {
+  position: relative;
+  font-size: 0.98rem; font-weight: 500; color: var(--ink-faint);
+  white-space: nowrap;
+}
+/* Hand-drawn-ish strike instead of the default text-decoration line —
+   sits a hair off-axis and tapers, reads less like a browser default
+   and more like a deliberate "crossed out" mark. */
+.price__was::after {
+  content: ""; position: absolute; left: -3%; right: -3%; top: 52%;
+  height: 1.5px; background: currentColor; opacity: 0.55;
+  transform: rotate(-2deg);
+}
+
+.price__off {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.74rem; font-weight: 700; letter-spacing: 0.01em;
+  color: var(--cream);
+  background: linear-gradient(135deg, var(--oak-deep), var(--oak) 130%);
+  padding: 5px 10px 5px 8px;
+  border-radius: var(--r-pill);
+  box-shadow: 0 6px 14px -6px rgba(32, 26, 20, 0.5);
+  white-space: nowrap;
+  animation: price-off-in .5s var(--ease-out) .1s both;
+}
+.price__off svg { width: 11px; height: 11px; flex: none; }
+
+@keyframes price-off-in {
+  from { opacity: 0; transform: scale(0.85) translateX(-2px); }
+  to   { opacity: 1; transform: scale(1) translateX(0); }
+}
 
 .opt { margin-bottom: 1.4rem; }
 .opt__label { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 0.6rem; }
