@@ -233,14 +233,21 @@
   buildDrawer();
   renderCart();
 
+  // Built once per button and left in the DOM (not re-injected via
+  // innerHTML on every click) so the swap is a pure CSS crossfade
+  // between the resting content and this label, rather than a hard cut.
   var ADD_LABEL_HTML =
     '<span class="add-label">' +
-      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg>' +
+      '<svg class="add-label__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4 10-10" pathLength="1"/></svg>' +
       '<span>Added to cart</span>' +
     '</span>';
 
   document.querySelectorAll("[data-add]").forEach(function (btn) {
-    var originalHTML = btn.innerHTML;
+    var label = document.createElement("span");
+    label.innerHTML = ADD_LABEL_HTML;
+    label = label.firstChild;
+    btn.appendChild(label);
+
     var revertTimer, leaveTimer;
 
     btn.addEventListener("click", function () {
@@ -254,22 +261,28 @@
 
       addToCart({ name: name, price: price, img: btn.dataset.img || "", href: btn.dataset.href || "" }, q);
 
-      // The button itself reports success — no separate toast. Swap its
-      // content to a label, keep the same background/border it already
-      // had (frosted circle, solid pill, outline chip — whatever it is),
-      // then hand it back after a beat. Fade the label out before
-      // swapping the content back, so it doesn't just vanish mid-shrink.
+      // The button itself reports success — no separate toast. Crossfade
+      // to the label, keep the same background/border it already had
+      // (frosted circle, solid pill, outline chip — whatever it is), then
+      // crossfade back after a beat.
       clearTimeout(revertTimer);
       clearTimeout(leaveTimer);
       btn.classList.remove("is-leaving");
+      // restart the checkmark's draw-in animation on repeat clicks
+      var check = label.querySelector(".add-label__check");
+      check.style.animation = "none";
+      void check.offsetWidth;
+      check.style.animation = "";
       btn.classList.add("is-added");
-      btn.innerHTML = ADD_LABEL_HTML;
 
-      leaveTimer = setTimeout(function () { btn.classList.add("is-leaving"); }, 1500);
+      // Fade the label out and bring the resting icon back at the same
+      // moment (is-leaving + dropping is-added together) so one crossfades
+      // into the other, instead of both being hidden for a beat in between.
       revertTimer = setTimeout(function () {
-        btn.classList.remove("is-added", "is-leaving");
-        btn.innerHTML = originalHTML;
-      }, 1680);
+        btn.classList.add("is-leaving");
+        btn.classList.remove("is-added");
+        leaveTimer = setTimeout(function () { btn.classList.remove("is-leaving"); }, 300);
+      }, 1500);
 
       if (btn.dataset.add === "buynow") checkoutViaWhatsApp();
     });
