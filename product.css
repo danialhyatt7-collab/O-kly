@@ -302,7 +302,7 @@
    submit button / marquee ribbon's rounded chips). */
 .sticky-buy {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 45;
-  display: none;
+  display: flex;
   padding: 0.9rem var(--pad);
   padding-bottom: max(0.9rem, env(safe-area-inset-bottom));
   background: rgba(243, 237, 228, 0.72);
@@ -315,7 +315,13 @@
 }
 .sticky-buy.is-on { transform: translateY(0); }
 
-.sticky-buy__capsule { display: flex; align-items: center; gap: 14px; width: 100%; }
+/* On wide screens the bar still spans edge-to-edge, but the content
+   inside lines up with the rest of the page instead of stretching the
+   price to one corner and the button to the other. */
+.sticky-buy__capsule {
+  display: flex; align-items: center; gap: 14px;
+  width: 100%; max-width: var(--maxw); margin: 0 auto;
+}
 
 .sticky-buy__price { line-height: 1.1; }
 .sticky-buy__price b { font-size: 1.1rem; font-weight: 600; }
@@ -361,6 +367,11 @@
 }
 .sticky-buy .btn .add-label { font-size: 0.9rem; font-weight: 500; }
 
+/* Reserve room at the bottom of every product page so the sticky bar
+   never sits over the footer/last section — shows on all sizes now,
+   not just mobile. */
+body { padding-bottom: 76px; }
+
 /* ============================================================
    Responsive
    ============================================================ */
@@ -371,9 +382,6 @@
 }
 
 @media (max-width: 760px) {
-  .sticky-buy { display: flex; }
-  body { padding-bottom: 70px; }
-
   /* The "Added to cart" toast sits at a fixed 26px from the bottom of the
      viewport — same territory as the sticky add-to-cart bar on product
      pages, so it landed on top of (and hid) the price/button instead of
