@@ -194,11 +194,14 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-head); }
 }
 .btn--ghost::before { background: var(--ink); }
 
-/* Hover-only fill/lift, gated to devices that actually have a mouse.
-   Without this, a tap on a touchscreen can leave :hover "stuck" until
-   the next unrelated tap — the ghost "Buy it now" button would turn
-   solid black on tap and never revert until you tapped elsewhere. */
-@media (hover: hover) and (pointer: fine) {
+/* Hover-only fill/lift, gated to devices that report real hover
+   support. Without this, a tap on a touchscreen can leave :hover
+   "stuck" until the next unrelated tap — the ghost "Buy it now"
+   button would turn solid black on tap and never revert. Gating on
+   hover alone (not also pointer:fine) matters: some hybrid devices
+   report pointer:coarse even with a mouse attached, which would have
+   blocked the hover text-color swap along with the tap-fill fix. */
+@media (hover: hover) {
   .btn:hover::before { transform: translateY(0); }
   .btn:hover { transform: translateY(-2px); }
   .btn--ghost:hover { --fg: var(--cream); }
