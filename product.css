@@ -297,9 +297,10 @@
 /* Same frosted-glass material as the sticky header (.nav in body.is-scrolled):
    light beige, heavy blur+saturate, a hairline highlight border and an
    inset top sheen, so the two "docked" surfaces read as one system —
-   but edge-to-edge like the header, not a floating capsule. Only the
-   button itself is pill-shaped (matching the hero email capture's
-   submit button / marquee ribbon's rounded chips). */
+   edge-to-edge on mobile (matches the request: flat bar, not a floating
+   pill). On wider screens the bar itself becomes a contained card
+   docked to the bottom, so it doesn't stretch a thin strip of glass
+   across a whole ultra-wide viewport with nothing in most of it. */
 .sticky-buy {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 45;
   display: flex;
@@ -315,12 +316,31 @@
 }
 .sticky-buy.is-on { transform: translateY(0); }
 
-/* On wide screens the bar still spans edge-to-edge, but the content
-   inside lines up with the rest of the page instead of stretching the
-   price to one corner and the button to the other. */
 .sticky-buy__capsule {
   display: flex; align-items: center; gap: 14px;
   width: 100%; max-width: var(--maxw); margin: 0 auto;
+}
+
+@media (min-width: 761px) {
+  /* Outer wrapper becomes an invisible positioning frame; the capsule
+     itself carries the frosted material, rounded top corners, and a
+     shadow on every side since it's no longer flush with the screen
+     edges. */
+  .sticky-buy {
+    background: none; border: none; box-shadow: none;
+    backdrop-filter: none; -webkit-backdrop-filter: none;
+    padding: 0 var(--pad) 1.1rem;
+    justify-content: center;
+  }
+  .sticky-buy__capsule {
+    padding: 1.1rem 1.4rem;
+    border-radius: 22px;
+    background: rgba(243, 237, 228, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(30px) saturate(1.15);
+    -webkit-backdrop-filter: blur(30px) saturate(1.15);
+    box-shadow: 0 24px 50px -20px rgba(40, 28, 16, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
 }
 
 .sticky-buy__price { line-height: 1.1; }
@@ -370,7 +390,7 @@
 /* Reserve room at the bottom of every product page so the sticky bar
    never sits over the footer/last section — shows on all sizes now,
    not just mobile. */
-body { padding-bottom: 76px; }
+body { padding-bottom: 100px; }
 
 /* ============================================================
    Responsive
