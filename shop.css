@@ -200,34 +200,68 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-head); }
 .btn--full { width: 100%; }
 
 /* ============================================================
-   Add-to-cart click feedback — the button's own content swaps to
-   "Added to cart" and back. No color/background change: it keeps
-   exactly the look it already had (frosted, solid, outlined, ...).
+   Add-to-cart click feedback — the button crossfades from its resting
+   content to an "Added to cart" label and back. No color/background
+   change: it keeps exactly the look it already had (frosted, solid,
+   outlined, ...), just a beat of extra lift + a drawn checkmark.
    ============================================================ */
 
+[data-add] { position: relative; transition: box-shadow .3s var(--ease-out); }
+
+/* Resting content (icon/text already in the markup) fades + drops out
+   as the label fades + rises in — a real crossfade, not a hard cut. */
+[data-add] > *:not(.add-label) {
+  transition: opacity .22s var(--ease-out), transform .22s var(--ease-out), filter .22s var(--ease-out);
+}
+[data-add].is-added > *:not(.add-label) {
+  opacity: 0; transform: scale(0.9) translateY(-3px); filter: blur(2px);
+  pointer-events: none;
+}
+
 [data-add] .add-label {
-  display: inline-flex; align-items: center; gap: 0.5em;
+  position: absolute; inset: 0;
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5em;
   white-space: nowrap;
-  animation: add-label-in .35s var(--ease-out);
+  opacity: 0; transform: scale(0.9) translateY(3px);
+  pointer-events: none;
+  transition: opacity .25s var(--ease-out) .08s, transform .3s var(--ease-out) .08s;
 }
-[data-add] .add-label svg {
-  width: 1em; height: 1em; flex: none;
-  animation: add-check-pop .4s var(--ease-out) .05s both;
+[data-add].is-added .add-label {
+  opacity: 1; transform: scale(1) translateY(0);
 }
-
 [data-add].is-leaving .add-label {
-  opacity: 0; transform: scale(0.92) translateY(2px);
-  transition: opacity .18s var(--ease-out), transform .18s var(--ease-out);
+  opacity: 0; transform: scale(0.94) translateY(-2px);
+  transition: opacity .2s var(--ease-out), transform .2s var(--ease-out);
 }
 
-@keyframes add-label-in {
-  from { opacity: 0; transform: translateY(3px); }
-  to   { opacity: 1; transform: translateY(0); }
+/* A checkmark that draws itself in, then settles with a soft pop. */
+[data-add] .add-label__check path {
+  stroke-dasharray: 1; stroke-dashoffset: 1;
+}
+[data-add].is-added .add-label__check path {
+  animation: add-check-draw .45s var(--ease-out) .22s forwards;
+}
+[data-add] .add-label__check {
+  transform-origin: center;
+}
+[data-add].is-added .add-label__check {
+  animation: add-check-settle .5s var(--ease-out) .22s both;
 }
 
-@keyframes add-check-pop {
-  0%   { transform: scale(0.4); opacity: 0; }
-  60%  { transform: scale(1.15); opacity: 1; }
+/* Subtle lift while the confirmation is showing, echoing the button's
+   own hover elevation instead of introducing a new material. */
+[data-add].is-added {
+  box-shadow: 0 10px 26px -14px rgba(32, 26, 20, 0.35);
+}
+
+@keyframes add-check-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes add-check-settle {
+  0%   { transform: scale(0.5); }
+  55%  { transform: scale(1.2); }
+  80%  { transform: scale(0.95); }
   100% { transform: scale(1); }
 }
 

@@ -253,9 +253,14 @@
   display: inline-flex; align-items: center; gap: 6px;
   padding: 0.55rem 1.05rem; border-radius: var(--r-pill);
   border: 1.5px solid var(--line); font-size: 0.85rem; font-weight: 500;
-  transition: background-color .25s, color .25s, border-color .25s, transform .25s var(--ease-out);
+  transition: background-color .25s, color .25s, border-color .25s, transform .25s var(--ease-out),
+    width .35s var(--ease-out);
 }
 .rail .pcard__add--rail svg { width: 15px; height: 15px; }
+/* Same reasoning as the sticky button: the label overlay is out of
+   flow, so this needs an explicit width once it's showing "Added to
+   cart" instead of "Add" — auto-sizing can't see it. */
+.rail .pcard__add--rail.is-added { width: 148px; }
 .rail .pcard__add--rail:hover {
   background: var(--ink); border-color: var(--ink); color: var(--cream);
   transform: translateY(-1px);
@@ -347,7 +352,11 @@
 .sticky-buy .btn:hover { transform: scale(1.045); }
 
 .sticky-buy .btn.is-added {
-  width: auto; height: 3rem; padding: 0 1.5rem;
+  /* Explicit width, not auto: the label is position:absolute (so it can
+     crossfade over the resting icon instead of hard-cutting to it),
+     which takes it out of flow and makes auto-sizing blind to its
+     content — the button would only ever measure the tiny icon. */
+  width: 176px; height: 3rem; padding: 0;
   border-radius: var(--r-pill);
 }
 .sticky-buy .btn .add-label { font-size: 0.9rem; font-weight: 500; }
