@@ -297,14 +297,14 @@
 /* Same frosted-glass material as the sticky header (.nav in body.is-scrolled):
    light beige, heavy blur+saturate, a hairline highlight border and an
    inset top sheen, so the two "docked" surfaces read as one system —
-   edge-to-edge on mobile (matches the request: flat bar, not a floating
-   pill). On wider screens the bar itself becomes a contained card
-   docked to the bottom, so it doesn't stretch a thin strip of glass
-   across a whole ultra-wide viewport with nothing in most of it. */
+   edge-to-edge, not a floating capsule. Content inside lines up with
+   the footer's own .wrap (same max-width + side padding vars), so the
+   price starts where "Oakly" starts and the button ends where the
+   footer's last column ends. */
 .sticky-buy {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 45;
   display: flex;
-  padding: 0.9rem var(--pad);
+  padding-block: 0.9rem;
   padding-bottom: max(0.9rem, env(safe-area-inset-bottom));
   background: rgba(243, 237, 228, 0.72);
   border-top: 1px solid rgba(255, 255, 255, 0.6);
@@ -316,32 +316,21 @@
 }
 .sticky-buy.is-on { transform: translateY(0); }
 
+/* Mirrors .wrap's exact box model (same max-width + padding-inline
+   vars, on one element) rather than nesting a second inset inside the
+   outer padding — that compounded into misalignment with the footer's
+   own .wrap instead of lining up with it. */
 .sticky-buy__capsule {
   display: flex; align-items: center; gap: 14px;
-  width: 100%; max-width: var(--maxw); margin: 0 auto;
+  width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--pad);
 }
 
-@media (min-width: 761px) {
-  /* Outer wrapper becomes an invisible positioning frame; the capsule
-     itself carries the frosted material, rounded top corners, and a
-     shadow on every side since it's no longer flush with the screen
-     edges. */
-  .sticky-buy {
-    background: none; border: none; box-shadow: none;
-    backdrop-filter: none; -webkit-backdrop-filter: none;
-    padding: 0 var(--pad) 1.1rem;
-    justify-content: center;
-  }
-  .sticky-buy__capsule {
-    padding: 1.1rem 1.4rem;
-    border-radius: 22px;
-    background: rgba(243, 237, 228, 0.82);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(30px) saturate(1.15);
-    -webkit-backdrop-filter: blur(30px) saturate(1.15);
-    box-shadow: 0 24px 50px -20px rgba(40, 28, 16, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  }
+.sticky-buy__thumb {
+  width: 44px; height: 44px; border-radius: 12px;
+  overflow: hidden; flex: none;
+  background: var(--cream);
 }
+.sticky-buy__thumb img { width: 100%; height: 100%; object-fit: cover; }
 
 .sticky-buy__price { line-height: 1.1; }
 .sticky-buy__price b { font-size: 1.1rem; font-weight: 600; }
@@ -390,7 +379,7 @@
 /* Reserve room at the bottom of every product page so the sticky bar
    never sits over the footer/last section — shows on all sizes now,
    not just mobile. */
-body { padding-bottom: 100px; }
+body { padding-bottom: 76px; }
 
 /* ============================================================
    Responsive
@@ -401,18 +390,3 @@ body { padding-bottom: 100px; }
   .gallery { position: static; }
 }
 
-@media (max-width: 760px) {
-  /* The "Added to cart" toast sits at a fixed 26px from the bottom of the
-     viewport — same territory as the sticky add-to-cart bar on product
-     pages, so it landed on top of (and hid) the price/button instead of
-     floating above the bar. Clear the bar's height + safe-area.
-     (The hidden-state transform is redeclared in fixed px, not the base
-     rule's percentage-of-own-height — a % offset doesn't grow to match
-     a taller "bottom" anchor, so the toast would otherwise still peek
-     onscreen even while "hidden".) */
-  .toast {
-    bottom: calc(76px + env(safe-area-inset-bottom) + 14px);
-    transform: translate(-50%, 200px);
-  }
-  .toast.is-on { transform: translate(-50%, 0); }
-}

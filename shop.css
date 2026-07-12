@@ -383,26 +383,6 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-head); }
 }
 
 /* ============================================================
-   Toast (add-to-cart feedback)
-   ============================================================ */
-
-.toast {
-  position: fixed;
-  left: 50%; bottom: 26px;
-  transform: translate(-50%, 140%);
-  z-index: 80;
-  display: inline-flex; align-items: center; gap: 0.6rem;
-  padding: 0.85rem 1.3rem;
-  background: var(--ink); color: var(--cream);
-  border-radius: var(--r-pill);
-  box-shadow: 0 20px 50px -18px rgba(0,0,0,0.5);
-  font-size: 0.92rem; font-weight: 500;
-  transition: transform .5s var(--ease-out);
-}
-.toast.is-on { transform: translate(-50%, 0); }
-.toast svg { width: 18px; height: 18px; color: var(--oak); }
-
-/* ============================================================
    Cart drawer
    ============================================================ */
 
