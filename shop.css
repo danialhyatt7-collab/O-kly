@@ -185,8 +185,6 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-head); }
   background: var(--oak); transform: translateY(101%);
   transition: transform .45s var(--ease-out); z-index: 0;
 }
-.btn:hover::before { transform: translateY(0); }
-.btn:hover { transform: translateY(-2px); }
 .btn:active { transform: scale(0.98); }
 .btn svg { width: 19px; height: 19px; }
 
@@ -195,7 +193,16 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-head); }
   border: 1.5px solid var(--line);
 }
 .btn--ghost::before { background: var(--ink); }
-.btn--ghost:hover { --fg: var(--cream); }
+
+/* Hover-only fill/lift, gated to devices that actually have a mouse.
+   Without this, a tap on a touchscreen can leave :hover "stuck" until
+   the next unrelated tap — the ghost "Buy it now" button would turn
+   solid black on tap and never revert until you tapped elsewhere. */
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover::before { transform: translateY(0); }
+  .btn:hover { transform: translateY(-2px); }
+  .btn--ghost:hover { --fg: var(--cream); }
+}
 
 .btn--full { width: 100%; }
 
