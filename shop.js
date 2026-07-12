@@ -233,9 +233,15 @@
   buildDrawer();
   renderCart();
 
+  var ADD_LABEL_HTML =
+    '<span class="add-label">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg>' +
+      '<span>Added to cart</span>' +
+    '</span>';
+
   document.querySelectorAll("[data-add]").forEach(function (btn) {
     var originalHTML = btn.innerHTML;
-    var revertTimer;
+    var revertTimer, leaveTimer;
 
     btn.addEventListener("click", function () {
       var q = 1;
@@ -251,14 +257,19 @@
       // The button itself reports success — no separate toast. Swap its
       // content to a label, keep the same background/border it already
       // had (frosted circle, solid pill, outline chip — whatever it is),
-      // then hand it back after a beat.
-      btn.classList.add("is-added");
-      btn.innerHTML = '<span class="add-label">Added to cart</span>';
+      // then hand it back after a beat. Fade the label out before
+      // swapping the content back, so it doesn't just vanish mid-shrink.
       clearTimeout(revertTimer);
+      clearTimeout(leaveTimer);
+      btn.classList.remove("is-leaving");
+      btn.classList.add("is-added");
+      btn.innerHTML = ADD_LABEL_HTML;
+
+      leaveTimer = setTimeout(function () { btn.classList.add("is-leaving"); }, 1500);
       revertTimer = setTimeout(function () {
-        btn.classList.remove("is-added");
+        btn.classList.remove("is-added", "is-leaving");
         btn.innerHTML = originalHTML;
-      }, 1600);
+      }, 1680);
 
       if (btn.dataset.add === "buynow") checkoutViaWhatsApp();
     });
