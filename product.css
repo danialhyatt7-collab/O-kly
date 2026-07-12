@@ -291,43 +291,46 @@
 
 /* Same frosted-glass material as the sticky header (.nav in body.is-scrolled):
    light beige, heavy blur+saturate, a hairline highlight border and an
-   inset top sheen, so the two "docked" surfaces read as one system. */
+   inset top sheen, so the two "docked" surfaces read as one system —
+   but edge-to-edge like the header, not a floating capsule. Only the
+   button itself is pill-shaped (matching the hero email capture's
+   submit button / marquee ribbon's rounded chips). */
 .sticky-buy {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 45;
   display: none;
-  justify-content: center;
   padding: 0.9rem var(--pad);
   padding-bottom: max(0.9rem, env(safe-area-inset-bottom));
+  background: rgba(243, 237, 228, 0.72);
+  border-top: 1px solid rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(30px) saturate(1.15);
+  -webkit-backdrop-filter: blur(30px) saturate(1.15);
+  box-shadow: 0 -12px 30px -22px rgba(40, 28, 16, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.55);
   transform: translateY(120%);
   transition: transform .4s var(--ease-out);
 }
 .sticky-buy.is-on { transform: translateY(0); }
 
-.sticky-buy__capsule {
-  display: flex; align-items: center; gap: 14px;
-  width: 100%; max-width: 560px;
-  padding: 0.5rem 0.5rem 0.5rem 1.3rem;
-  border-radius: var(--r-pill);
-  background: rgba(243, 237, 228, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(30px) saturate(1.15);
-  -webkit-backdrop-filter: blur(30px) saturate(1.15);
-  box-shadow: 0 18px 40px -20px rgba(40, 28, 16, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.55);
-}
+.sticky-buy__capsule { display: flex; align-items: center; gap: 14px; width: 100%; }
 
 .sticky-buy__price { line-height: 1.1; }
 .sticky-buy__price b { font-size: 1.1rem; font-weight: 600; }
 .sticky-buy__price small { display: block; font-size: 0.72rem; color: var(--ink-faint); }
 
-/* Solid pill button nested in the frosted capsule — same relationship as
-   the hero email capture's white circle inside its frosted bar. */
+/* Solid circular icon button — same relationship as the hero email
+   capture's white circle button inside its frosted bar. */
 .sticky-buy .btn {
   margin-left: auto; flex: none;
-  padding: 0.85rem 1.6rem;
-  border-radius: var(--r-pill);
-  background: var(--ink); color: var(--cream);
+  width: 3rem; height: 3rem; padding: 0;
+  border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--paper-2); color: var(--ink);
   border: none;
   transition: transform .3s var(--ease-out), background-color .3s var(--ease-out);
+}
+.sticky-buy .btn svg { width: 20px; height: 20px; }
+.sticky-buy .btn span {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
 }
 .sticky-buy .btn:hover { transform: scale(1.045); }
 
