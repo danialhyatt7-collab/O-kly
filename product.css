@@ -71,7 +71,7 @@
 
 .info { padding-top: 0.4rem; }
 
-.info__eyebrow { font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--oak-deep); font-weight: 600; }
+.info__eyebrow { font-family: var(--font-eyebrow); font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--oak-deep); font-weight: 600; }
 
 .info__title {
   font-size: clamp(2rem, 4vw, 3rem);
@@ -276,7 +276,7 @@
 }
 
 .rail .pcard__body { padding: 1.1rem 1.15rem 1.2rem; }
-.rail .pcard__cat { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); }
+.rail .pcard__cat { font-family: var(--font-eyebrow); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); }
 .rail .pcard__name {
   font-size: 1.08rem; font-weight: 500; margin: 0.25rem 0 0.7rem;
   letter-spacing: -0.005em;
