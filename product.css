@@ -317,22 +317,31 @@
 .sticky-buy__price small { display: block; font-size: 0.72rem; color: var(--ink-faint); }
 
 /* Solid circular icon button — same relationship as the hero email
-   capture's white circle button inside its frosted bar. */
+   capture's white circle button inside its frosted bar. On add, it
+   grows into a pill to show its own "Added to cart" label instead of
+   popping a separate toast — same background throughout, no color
+   inversion, just the shape and content changing. */
 .sticky-buy .btn {
+  position: relative;
   margin-left: auto; flex: none;
   width: 3rem; height: 3rem; padding: 0;
   border-radius: 50%;
   display: inline-flex; align-items: center; justify-content: center;
   background: var(--paper-2); color: var(--ink);
   border: none;
-  transition: transform .3s var(--ease-out), background-color .3s var(--ease-out);
+  transition: transform .3s var(--ease-out), width .35s var(--ease-out), padding .35s var(--ease-out);
 }
 .sticky-buy .btn svg { width: 20px; height: 20px; }
-.sticky-buy .btn span:not(.add-check) {
+.sticky-buy .btn span:not(.add-label) {
   position: absolute; width: 1px; height: 1px; overflow: hidden;
   clip: rect(0 0 0 0); white-space: nowrap;
 }
 .sticky-buy .btn:hover { transform: scale(1.045); }
+
+.sticky-buy .btn.is-added {
+  width: auto; padding: 0 1.4rem;
+}
+.sticky-buy .btn .add-label { font-size: 0.9rem; font-weight: 500; }
 
 /* ============================================================
    Responsive

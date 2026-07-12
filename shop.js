@@ -33,17 +33,6 @@
     });
   }
 
-  /* ---------- Toast ---------- */
-  var toast = document.querySelector(".toast");
-  var toastTimer;
-  function showToast(msg) {
-    if (!toast) return;
-    toast.querySelector(".toast__msg").textContent = msg;
-    toast.classList.add("is-on");
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(function () { toast.classList.remove("is-on"); }, 2200);
-  }
-
   /* ============================================================
      Cart — persisted to localStorage, shared across every page
      ============================================================ */
@@ -83,7 +72,6 @@
       cart.push({ name: item.name, price: item.price, img: item.img, href: item.href, qty: qty });
     }
     setCart(cart);
-    showToast("Added to cart");
   }
 
   function removeFromCart(name) {
@@ -245,17 +233,10 @@
   buildDrawer();
   renderCart();
 
-  var ADD_CHECK_SVG =
-    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4 10-10"/></svg>';
-
   document.querySelectorAll("[data-add]").forEach(function (btn) {
-    var check = document.createElement("span");
-    check.className = "add-check";
-    check.setAttribute("aria-hidden", "true");
-    check.innerHTML = ADD_CHECK_SVG;
-    btn.appendChild(check);
-
+    var originalHTML = btn.innerHTML;
     var revertTimer;
+
     btn.addEventListener("click", function () {
       var q = 1;
       var qEl = document.querySelector("[data-qty-input]");
@@ -267,9 +248,17 @@
 
       addToCart({ name: name, price: price, img: btn.dataset.img || "", href: btn.dataset.href || "" }, q);
 
+      // The button itself reports success — no separate toast. Swap its
+      // content to a label, keep the same background/border it already
+      // had (frosted circle, solid pill, outline chip — whatever it is),
+      // then hand it back after a beat.
       btn.classList.add("is-added");
+      btn.innerHTML = '<span class="add-label">Added to cart</span>';
       clearTimeout(revertTimer);
-      revertTimer = setTimeout(function () { btn.classList.remove("is-added"); }, 1600);
+      revertTimer = setTimeout(function () {
+        btn.classList.remove("is-added");
+        btn.innerHTML = originalHTML;
+      }, 1600);
 
       if (btn.dataset.add === "buynow") checkoutViaWhatsApp();
     });
