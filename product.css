@@ -99,13 +99,14 @@
   font-size: 0.98rem; font-weight: 500; color: var(--ink-faint);
   white-space: nowrap;
 }
-/* Hand-drawn-ish strike instead of the default text-decoration line —
-   sits a hair off-axis and tapers, reads less like a browser default
-   and more like a deliberate "crossed out" mark. */
+/* A cleaner strike than the default text-decoration line: dead
+   straight, centered on the x-height, tapered at both ends instead of
+   a flat hard-edged bar. */
 .price__was::after {
-  content: ""; position: absolute; left: -3%; right: -3%; top: 52%;
-  height: 1.5px; background: currentColor; opacity: 0.55;
-  transform: rotate(-2deg);
+  content: ""; position: absolute; left: -4%; right: -4%; top: 50%;
+  height: 1.5px; transform: translateY(-50%);
+  background: linear-gradient(to right, transparent, currentColor 18%, currentColor 82%, transparent);
+  opacity: 0.6;
 }
 
 .price__off {
