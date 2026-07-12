@@ -206,14 +206,29 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-head); }
    ============================================================ */
 
 [data-add] .add-label {
-  display: inline-block;
-  animation: add-label-in .3s var(--ease-out);
+  display: inline-flex; align-items: center; gap: 0.5em;
   white-space: nowrap;
+  animation: add-label-in .35s var(--ease-out);
+}
+[data-add] .add-label svg {
+  width: 1em; height: 1em; flex: none;
+  animation: add-check-pop .4s var(--ease-out) .05s both;
+}
+
+[data-add].is-leaving .add-label {
+  opacity: 0; transform: scale(0.92) translateY(2px);
+  transition: opacity .18s var(--ease-out), transform .18s var(--ease-out);
 }
 
 @keyframes add-label-in {
-  from { opacity: 0; transform: scale(0.9); }
-  to   { opacity: 1; transform: scale(1); }
+  from { opacity: 0; transform: translateY(3px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes add-check-pop {
+  0%   { transform: scale(0.4); opacity: 0; }
+  60%  { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); }
 }
 
 /* ============================================================
