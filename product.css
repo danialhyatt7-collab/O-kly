@@ -331,6 +331,13 @@
   border: none;
   transition: transform .3s var(--ease-out), width .35s var(--ease-out), padding .35s var(--ease-out);
 }
+/* Kill the base .btn hover sweep (a solid near-black fill sliding up
+   over the button) — this button should stay its plain white circle
+   always, no hover/press color inversion. On touch devices a tap can
+   leave :hover "stuck" until the next tap elsewhere, which is exactly
+   what made this look like a black oval appearing after clicking. */
+.sticky-buy .btn::before { content: none; }
+
 .sticky-buy .btn svg { width: 20px; height: 20px; }
 .sticky-buy .btn span:not(.add-label) {
   position: absolute; width: 1px; height: 1px; overflow: hidden;
