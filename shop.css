@@ -200,33 +200,20 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-head); }
 .btn--full { width: 100%; }
 
 /* ============================================================
-   Add-to-cart click feedback — button flashes solid ink with a
-   checkmark, then reverts, timed with the "Added to cart" toast.
+   Add-to-cart click feedback — the button's own content swaps to
+   "Added to cart" and back. No color/background change: it keeps
+   exactly the look it already had (frosted, solid, outlined, ...).
    ============================================================ */
 
-[data-add] { position: relative; }
-
-[data-add] .add-check {
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  opacity: 0; transform: scale(0.6);
-  transition: opacity .25s var(--ease-out), transform .25s var(--ease-out);
-  pointer-events: none;
-  z-index: 2;
+[data-add] .add-label {
+  display: inline-block;
+  animation: add-label-in .3s var(--ease-out);
+  white-space: nowrap;
 }
-[data-add] .add-check svg { width: 1.1em; height: 1.1em; }
 
-[data-add].is-added > *:not(.add-check) {
-  opacity: 0; transform: scale(0.85);
-  transition: opacity .2s var(--ease-out), transform .2s var(--ease-out);
-}
-[data-add].is-added .add-check { opacity: 1; transform: scale(1); }
-
-[data-add].is-added {
-  background: var(--ink) !important;
-  border-color: var(--ink) !important;
-  color: var(--cream) !important;
-  transition: background-color .2s var(--ease-out), border-color .2s var(--ease-out), color .2s var(--ease-out);
+@keyframes add-label-in {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
 /* ============================================================
