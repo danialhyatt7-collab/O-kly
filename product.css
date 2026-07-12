@@ -328,7 +328,7 @@
   transition: transform .3s var(--ease-out), background-color .3s var(--ease-out);
 }
 .sticky-buy .btn svg { width: 20px; height: 20px; }
-.sticky-buy .btn span {
+.sticky-buy .btn span:not(.add-check) {
   position: absolute; width: 1px; height: 1px; overflow: hidden;
   clip: rect(0 0 0 0); white-space: nowrap;
 }

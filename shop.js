@@ -245,7 +245,17 @@
   buildDrawer();
   renderCart();
 
+  var ADD_CHECK_SVG =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4 10-10"/></svg>';
+
   document.querySelectorAll("[data-add]").forEach(function (btn) {
+    var check = document.createElement("span");
+    check.className = "add-check";
+    check.setAttribute("aria-hidden", "true");
+    check.innerHTML = ADD_CHECK_SVG;
+    btn.appendChild(check);
+
+    var revertTimer;
     btn.addEventListener("click", function () {
       var q = 1;
       var qEl = document.querySelector("[data-qty-input]");
@@ -256,6 +266,10 @@
       if (!name || isNaN(price)) return; // button not wired with product data — nothing to add
 
       addToCart({ name: name, price: price, img: btn.dataset.img || "", href: btn.dataset.href || "" }, q);
+
+      btn.classList.add("is-added");
+      clearTimeout(revertTimer);
+      revertTimer = setTimeout(function () { btn.classList.remove("is-added"); }, 1600);
 
       if (btn.dataset.add === "buynow") checkoutViaWhatsApp();
     });
