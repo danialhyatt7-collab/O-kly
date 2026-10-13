@@ -1,12 +1,6 @@
 const { chromium } = require('playwright');
 const fs = require('fs');
-const sites = {
-  'grounded': 'https://www.grounded.design/',
-  'interarc': 'https://interarcqatar.com/',
-  'alhuzaifa': 'https://www.alhuzaifa.com/en/',
-  'reliable': 'https://thereliableinterior.ae/',
-  'mansion': 'https://mansionedition.ae/',
-};
+const sites = Object.fromEntries(fs.readFileSync('tools/urls.txt','utf8').trim().split('\n').filter(Boolean).map(l => l.trim().split(/\s+/)));
 (async () => {
   fs.mkdirSync('shots', { recursive: true });
   const browser = await chromium.launch();
